@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { API } from '../constants/api-url'
 
 export default class SignupForm extends React.Component {
 
@@ -9,22 +10,39 @@ export default class SignupForm extends React.Component {
     username: "",
     password: "",
     confirmPassword: "",
-    validPassword: null,
+    validPassword: false,
+    errorMsg: "",
     email: "",
     first_name: "",
     last_name: "",
-    location: ""
+    location: "",
+    validUsername: false,
+    userMsg: ""
   }
 
   handleSubmit = e => {
     e.preventDefault()
+    this.checkUsername()
     console.log('create the new user!')
     // TODO create POST reqest to server for User creation
+
+    fetch(API, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+      })
+    })
+
     this.setState({ password: "", confirmPassword: "" })
   }
 
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({ [e.target.name]: e.target.value }, () => setInterval(this.checkUsername, 1500))
   }
 
   matchPassword = e => {
@@ -34,14 +52,19 @@ export default class SignupForm extends React.Component {
 
   checkPW = () => {
     if (this.state.password === "" || this.state.confirmPassword === "") {
-      this.setState({ validPassword: null })
+      this.setState({ validPassword: false })
     } else if (this.state.password.length < this.passwordMin || this.state.confirmPassword < this.passwordMin) {
-      this.setState({ validPassword: 'Please pick a longer password' })
+      this.setState({ validPassword: false, errorMsg: 'Please pick a longer password' })
     } else if (this.state.password !== this.state.confirmPassword) {
-      this.setState({ validPassword: 'Passwords do not match' })
+      this.setState({ validPassword: false, errorMsg: 'Passwords do not match' })
     } else if (this.state.password === this.state.confirmPassword) {
-      this.setState({ validPassword: 'Passwords Match!' })
+      this.setState({ validPassword: true, errorMsg: '' })
     }
+  }
+
+  checkUsername = () => {
+    (this.state.username.length > 2 && this.state.username.length < 16)
+      ? this.setState({ validUsername: true, userMsg: "" }) : this.setState({ validUsername: false, userMsg: 'Username must be between 3-16 characters.' })
   }
 
   render() {
@@ -57,6 +80,9 @@ export default class SignupForm extends React.Component {
             onChange={this.handleChange}
           />
         </label>
+        <span>
+          {this.state.validUsername ? null : this.state.userMsg}
+        </span>
 
         <label>Select a Password (minimum {this.passwordMin} characters):
           <input
@@ -78,7 +104,7 @@ export default class SignupForm extends React.Component {
           />
 
           <span>
-            {this.state.validPassword ? this.state.validPassword : null}
+            {this.state.validPassword ? null : this.state.errorMsg}
           </span>
         </label>
 
@@ -96,6 +122,7 @@ export default class SignupForm extends React.Component {
           name="submit"
           type="submit"
           value="Create Account"
+          disabled={!(this.state.validUsername && this.state.validPassword)}
         />
 
         <Link to='/login'><input type="button" value="Already Have An Account?" /></Link>
