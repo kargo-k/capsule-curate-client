@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 export default class SignupForm extends React.Component {
 
+  passwordMin = 8
+
   state = {
     username: "",
     password: "",
@@ -31,10 +33,10 @@ export default class SignupForm extends React.Component {
   }
 
   checkPW = () => {
-    if (this.state.password === "") {
+    if (this.state.password === "" || this.state.confirmPassword === "") {
       this.setState({ validPassword: null })
-    } else if (this.state.password.length < 6) {
-      this.setState({ validPassword: 'Pick a longer password' })
+    } else if (this.state.password.length < this.passwordMin || this.state.confirmPassword < this.passwordMin) {
+      this.setState({ validPassword: 'Please pick a longer password' })
     } else if (this.state.password !== this.state.confirmPassword) {
       this.setState({ validPassword: 'Passwords do not match' })
     } else if (this.state.password === this.state.confirmPassword) {
@@ -56,7 +58,7 @@ export default class SignupForm extends React.Component {
           />
         </label>
 
-        <label>Select a Password (minimum 6 characters):
+        <label>Select a Password (minimum {this.passwordMin} characters):
           <input
             name="password"
             type="password"
@@ -75,9 +77,9 @@ export default class SignupForm extends React.Component {
             onChange={this.matchPassword}
           />
 
-          <div>
+          <span>
             {this.state.validPassword ? this.state.validPassword : null}
-          </div>
+          </span>
         </label>
 
         <label>Location:
@@ -96,7 +98,7 @@ export default class SignupForm extends React.Component {
           value="Create Account"
         />
 
-        <Link to='/login'><input type="button" value="Already Signed Up?" /></Link>
+        <Link to='/login'><input type="button" value="Already Have An Account?" /></Link>
 
       </form>
     )
