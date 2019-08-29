@@ -3,10 +3,10 @@ import SignupForm from '../components/SignupForm';
 
 const SignupContainer = props => {
   return (
-    <React.Fragment>
+    <div className='container'>
       <h1>Signup Container</h1>
       <SignupForm />
-    </React.Fragment>
+    </div>
   )
 }
 

@@ -3,7 +3,7 @@ import Landing from '../components/Landing';
 
 const LandingContainer = props => {
   return (
-    <div className='landing-container'>
+    <div className='container'>
       <h1>Landing Container</h1>
       <Landing />
     </div>
