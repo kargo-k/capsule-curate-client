@@ -1,10 +1,14 @@
-import React from 'react'
+import React from 'react';
+import CapsuleContainer from './CapsuleContainer';
+import DetailsContainer from './DetailsContainer';
 
 const MainContainer = props => {
   return (
-    <React.Fragment>
+    <div className='main container'>
       <h1>Main Container</h1>
-    </React.Fragment>
+      <CapsuleContainer />
+      <DetailsContainer />
+    </div>
   )
 }
 
