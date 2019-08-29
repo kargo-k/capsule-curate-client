@@ -17,7 +17,8 @@ export default class SignupForm extends React.Component {
     last_name: "",
     location: "",
     validUsername: false,
-    userMsg: ""
+    userMsg: "",
+    submitError: ""
   }
 
   handleSubmit = e => {
@@ -26,7 +27,7 @@ export default class SignupForm extends React.Component {
     console.log('create the new user!')
     // TODO create POST reqest to server for User creation
 
-    fetch(API, {
+    fetch(API + '/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -34,9 +35,19 @@ export default class SignupForm extends React.Component {
       },
       body: JSON.stringify({
         username: this.state.username,
-        password: this.state.password,
+        password_digest: this.state.password,
+        location: this.state.location
       })
     })
+      .then(res => res.json())
+      .then(json => {
+        if (json.error) {
+          this.setState({ submitError: json.error })
+          console.log('failed to create user')
+        } else {
+          console.log('successfully created user')
+        }
+      })
 
     this.setState({ password: "", confirmPassword: "" })
   }
@@ -80,11 +91,13 @@ export default class SignupForm extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        <span>
+
+        {/* shows the error message for username if invalid */}
+        <span className='error'>
           {this.state.validUsername ? null : this.state.userMsg}
         </span>
 
-        <label>Select a Password (minimum {this.passwordMin} characters):
+        <label>Select a Password:  (minimum {this.passwordMin} characters)
           <input
             name="password"
             type="password"
@@ -103,7 +116,8 @@ export default class SignupForm extends React.Component {
             onChange={this.matchPassword}
           />
 
-          <span>
+          {/* shows error for password if invalid */}
+          <span className='error'>
             {this.state.validPassword ? null : this.state.errorMsg}
           </span>
         </label>
@@ -126,6 +140,11 @@ export default class SignupForm extends React.Component {
         />
 
         <Link to='/login'><input type="button" value="Already Have An Account?" /></Link>
+
+        {/* shows error after submit if user cannot be created */}
+        <span className='error'>
+          {this.state.submitError ? this.state.submitError : null}
+        </span>
 
       </form>
     )
