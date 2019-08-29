@@ -1,33 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Mrs+Saint+Delafield|PT+Serif|Unica+One&display=swap');
+
+/* font-family: 'Unica One', cursive;
+font-family: 'Mrs Saint Delafield', cursive;
+font-family: 'PT Serif', serif; */
+
 .App {
   text-align: center;
-}
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
 }
-
-.App-header {
-  background-color: #282c34;
+.landing-container {
+  /* background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9'); */
+  position: absolute;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  width: 100%;
+  height: 100%;
+}
+.landing-header {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: calc(50px + 2vmin);
+  color: black;
+  font-family: 'Mrs Saint Delafield', cursive;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+a {
+  margin: 5px 20px;
 }
