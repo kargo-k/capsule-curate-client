@@ -7,7 +7,7 @@ export default class SignupForm extends React.Component {
     username: "",
     password: "",
     confirmPassword: "",
-    checkPassword: null,
+    validPassword: null,
     email: "",
     first_name: "",
     last_name: "",
@@ -17,6 +17,8 @@ export default class SignupForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     console.log('create the new user!')
+    // TODO create POST reqest to server for User creation
+    this.setState({ password: "", confirmPassword: "" })
   }
 
   handleChange = e => {
@@ -30,13 +32,13 @@ export default class SignupForm extends React.Component {
 
   checkPW = () => {
     if (this.state.password === "") {
-      this.setState({ checkPassword: null })
+      this.setState({ validPassword: null })
     } else if (this.state.password.length < 6) {
-      this.setState({ checkPassword: 'Pick a longer password' })
+      this.setState({ validPassword: 'Pick a longer password' })
     } else if (this.state.password !== this.state.confirmPassword) {
-      this.setState({ checkPassword: 'Passwords do not match' })
+      this.setState({ validPassword: 'Passwords do not match' })
     } else if (this.state.password === this.state.confirmPassword) {
-      this.setState({ checkPassword: 'Passwords Match!' })
+      this.setState({ validPassword: 'Passwords Match!' })
     }
   }
 
@@ -74,7 +76,7 @@ export default class SignupForm extends React.Component {
           />
 
           <div>
-            {this.state.checkPassword ? this.state.checkPassword : null}
+            {this.state.validPassword ? this.state.validPassword : null}
           </div>
         </label>
 
@@ -83,7 +85,7 @@ export default class SignupForm extends React.Component {
             name="location"
             type="text"
             placeholder="ZIP or City, State"
-            value={this.state.username}
+            value={this.state.location}
             onChange={this.handleChange}
           />
         </label>
