@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { API } from '../constants/api-url'
+import { API } from '../constants/api-url';
+import { withRouter } from 'react-router-dom';
 
-export default class SignupForm extends React.Component {
+class SignupForm extends React.Component {
 
   passwordMin = 8
 
@@ -23,10 +24,8 @@ export default class SignupForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.checkUsername()
-    console.log('create the new user!')
-    // TODO create POST reqest to server for User creation
 
+    // submits a POST request to create the user
     fetch(API + '/users', {
       method: 'POST',
       headers: {
@@ -34,9 +33,11 @@ export default class SignupForm extends React.Component {
         'Accept': 'application/json'
       },
       body: JSON.stringify({
-        username: this.state.username,
-        password_digest: this.state.password,
-        location: this.state.location
+        user: {
+          username: this.state.username,
+          password: this.state.password,
+          location: this.state.location
+        }
       })
     })
       .then(res => res.json())
@@ -46,19 +47,20 @@ export default class SignupForm extends React.Component {
           console.log('failed to create user')
         } else {
           console.log('successfully created user')
+          // this.setState({ password: "", confirmPassword: "" })
+          // update store to the current user and jwt token here
+          this.props.history.push('/main')
         }
       })
-
-    this.setState({ password: "", confirmPassword: "" })
   }
 
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value }, () => setInterval(this.checkUsername, 1500))
+    this.setState({ [e.target.name]: e.target.value, submitError: "" }, () => setInterval(this.checkUsername, 2000))
   }
 
   matchPassword = e => {
     this.setState({ [e.target.name]: e.target.value },
-      () => setInterval(this.checkPW, 1500))
+      () => setInterval(this.checkPW, 2000))
   }
 
   checkPW = () => {
@@ -150,3 +152,5 @@ export default class SignupForm extends React.Component {
     )
   }
 }
+
+export default withRouter(SignupForm)
