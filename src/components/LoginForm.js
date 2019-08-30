@@ -1,20 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logInUser, isLoggedIn } from '../actions';
 
-export default class LoginForm extends React.Component {
-
-  state = {
-    username: "",
-    password: ""
+const mapDispatchtoProps = dispatch => {
+  return {
+    logInUser: (credentials) => dispatch(logInUser(credentials)),
+    isLoggedIn: () => dispatch(isLoggedIn())
   }
+}
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+class LoginForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log('sign in! username: ', this.state.username, 'password: ', this.state.password)
+    let credentials = {
+      username: e.target.username.value,
+      password: e.target.password.value
+    }
+    console.log('sign in! username: ', credentials)
+
+    try {
+      this.props.logInUser(credentials)
+      this.props.isLoggedIn()
+      this.props.history.push('/main')
+    } catch (e) {
+      console.log(e.message)
+    }
   }
 
   redirectSignup = e => {
@@ -24,20 +36,17 @@ export default class LoginForm extends React.Component {
   render() {
     return (
       <form id='login' onSubmit={this.handleSubmit}>
+        <h1>Login Form</h1>
         <input
           name="username"
           type="text"
           placeholder="username"
-          value={this.state.username}
-          onChange={this.handleChange}
         />
 
         <input
           name="password"
           type="password"
           placeholder="password"
-          value={this.state.password}
-          onChange={this.handleChange}
         />
 
         <input
@@ -51,3 +60,5 @@ export default class LoginForm extends React.Component {
     )
   }
 }
+
+export default connect(null, mapDispatchtoProps)(LoginForm)

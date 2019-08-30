@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
 import LandingContainer from './containers/LandingContainer';
-import LoginContainer from './containers/LoginContainer';
-import SignupContainer from './containers/SignupContainer';
+import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
 import MainContainer from './containers/MainContainer';
 import Navbar from './components/Navbar';
 
@@ -15,10 +15,9 @@ function App() {
       <Router>
         <Navbar />
         <Route exact path='/' component={LandingContainer} />
-        <Route path='/login' component={LoginContainer} />
-        <Route path='/signup' component={SignupContainer} />
         <Route path='/main' component={MainContainer} />
-
+        <Route path='/login' component={LoginForm} />
+        <Route path='/signup' component={SignupForm} />
       </Router>
 
     </Provider>

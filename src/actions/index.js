@@ -1,5 +1,5 @@
-import { SHOW_CAPSULE, SHOW_USER } from '../constants/action-types';
-import { API } from '../constants/api-url'
+import { SHOW_CAPSULE, SHOW_USER, LOGGED_IN, LOG_IN } from '../constants/action-types';
+import { API } from '../constants/api-url';
 
 export const showCapsule = payload => {
   return { type: SHOW_CAPSULE, payload }
@@ -23,14 +23,38 @@ export const createUser = payload => {
           console.log('failed to create user...', json)
         } else {
           console.log('successfully created user', json)
-          // update store to the current user and jwt token here
-          // this.props.history.push('/main')
-          localStorage.setItem('user_token', json.jwt)
+          localStorage.setItem('token', json.jwt)
+          // window.history.forward('/main')
         }
+      })
+  }
+}
+
+export const logInUser = credentials => {
+  return (dispatch, getState) => {
+    fetch(API + '/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        user: credentials
+      })
+    })
+      .then(res => res.json())
+      .then(json => {
+        console.log('post request to login:', json)
+        localStorage.setItem('token', json.jwt)
+        // window.history.forward('/main')
       })
   }
 }
 
 export const showUser = payload => {
   return { type: SHOW_USER, payload }
+}
+
+export const isLoggedIn = () => {
+  return { type: LOGGED_IN }
 }

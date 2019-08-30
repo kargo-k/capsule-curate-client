@@ -1,11 +1,13 @@
 import React from 'react';
+import _ from 'lodash'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createUser } from '../actions';
+import { createUser, isLoggedIn } from '../actions';
 
 const mapDispatchToProps = dispatch => {
   return {
-    createUser: (user) => dispatch(createUser(user))
+    createUser: (user) => dispatch(createUser(user)),
+    isLoggedIn: () => dispatch(isLoggedIn())
   }
 }
 
@@ -35,20 +37,23 @@ class SignupForm extends React.Component {
       password: e.target.password.value,
       location: e.target.location.value
     }
-    this.setState({ password: "", confirmPassword: "" })
-    this.props.createUser(payload)
-
-    // TODO save JWT token for authentication and redirect to /main route
-
+    try {
+      this.props.createUser(payload)
+      this.props.isLoggedIn()
+      this.props.history.push('/main')
+    } catch (e) {
+      console.log(e.message)
+    }
   }
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value, submitError: "" }, () => setInterval(this.checkUsername, 2000))
+    // TODO change this to lodash _.debounce
   }
 
   matchPassword = e => {
     this.setState({ [e.target.name]: e.target.value },
-      () => setInterval(this.checkPW, 2000))
+      () => setInterval(this.checkPW, 1500))
   }
 
   checkPW = () => {
@@ -71,6 +76,7 @@ class SignupForm extends React.Component {
   render() {
     return (
       <form id="signup" onSubmit={this.handleSubmit}>
+        <h1>Signup Form</h1>
 
         <label>Select a Username:
           <input
@@ -140,5 +146,6 @@ class SignupForm extends React.Component {
     )
   }
 }
+
 
 export default connect(null, mapDispatchToProps)(SignupForm)
