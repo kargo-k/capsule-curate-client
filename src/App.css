@@ -30,3 +30,6 @@ font-family: 'PT Serif', serif; */
 a {
   margin: 5px 20px;
 }
+.error {
+  color: red;
+}
