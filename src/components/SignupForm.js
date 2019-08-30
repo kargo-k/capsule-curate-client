@@ -1,7 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { API } from '../constants/api-url';
-import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createUser } from '../actions';
+
+const mapDispatchToProps = dispatch => {
+  return {
+    createUser: (user) => dispatch(createUser(user))
+  }
+}
 
 class SignupForm extends React.Component {
 
@@ -24,34 +30,41 @@ class SignupForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    console.log('create a new user submit', e.target)
+    let payload = {
+      username: e.target.username.value,
+      password: e.target.password.value,
+      location: e.target.location.value
+    }
+    this.props.createUser(payload)
 
     // submits a POST request to create the user
-    fetch(API + '/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        user: {
-          username: this.state.username,
-          password: this.state.password,
-          location: this.state.location
-        }
-      })
-    })
-      .then(res => res.json())
-      .then(json => {
-        if (json.error) {
-          this.setState({ submitError: json.error })
-          console.log('failed to create user')
-        } else {
-          console.log('successfully created user')
-          // this.setState({ password: "", confirmPassword: "" })
-          // update store to the current user and jwt token here
-          this.props.history.push('/main')
-        }
-      })
+    // fetch(API + '/users', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     user: {
+    //       username: this.state.username,
+    //       password: this.state.password,
+    //       location: this.state.location
+    //     }
+    //   })
+    // })
+    //   .then(res => res.json())
+    //   .then(json => {
+    //     if (json.error) {
+    //       this.setState({ submitError: json.error })
+    //       console.log('failed to create user')
+    //     } else {
+    //       console.log('successfully created user')
+    //       // this.setState({ password: "", confirmPassword: "" })
+    //       // update store to the current user and jwt token here
+    //       this.props.history.push('/main')
+    //     }
+    //   })
   }
 
   handleChange = e => {
@@ -153,4 +166,4 @@ class SignupForm extends React.Component {
   }
 }
 
-export default withRouter(SignupForm)
+export default connect(null, mapDispatchToProps)(SignupForm)
