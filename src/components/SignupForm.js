@@ -36,6 +36,7 @@ class SignupForm extends React.Component {
       password: e.target.password.value,
       location: e.target.location.value
     }
+    this.setState({ password: "", confirmPassword: "" })
     this.props.createUser(payload)
 
     // submits a POST request to create the user
