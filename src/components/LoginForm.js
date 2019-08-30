@@ -23,7 +23,7 @@ class LoginForm extends React.Component {
       this.props.logInUser(credentials)
       this.props.history.push('/main')
     } catch (e) {
-      console.log(e.message)
+      console.log('frontend login post', e.message)
     }
   }
 

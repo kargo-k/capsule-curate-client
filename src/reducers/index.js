@@ -1,10 +1,11 @@
-import { SHOW_CAPSULE, SHOW_USER, LOGGED_IN, SET_CAPSULES } from '../constants/action-types';
+import { SHOW_CAPSULE, SHOW_USER, LOGGED_IN, SET_CAPSULES, SET_COLLECTION } from '../constants/action-types';
 
 const initialState = {
   show_capsule: null,
   show_user: null,
   logged_in: false,
-  capsules_list: []
+  capsules_list: [],
+  collection: []
 }
 
 function reducer(state = initialState, action) {
@@ -17,6 +18,8 @@ function reducer(state = initialState, action) {
       return { ...state, logged_in: true }
     case SET_CAPSULES:
       return { ...state, capsules_list: action.payload }
+    case SET_COLLECTION:
+      return { ...state, collection: action.payload }
     default:
       return state
   }

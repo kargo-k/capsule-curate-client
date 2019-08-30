@@ -14,7 +14,6 @@ const mapDispatchToProps = dispatch => {
 class CapsuleContainer extends React.Component {
 
   componentDidMount() {
-    console.log('inside component did mount')
     this.props.fetchCapsules()
   }
 

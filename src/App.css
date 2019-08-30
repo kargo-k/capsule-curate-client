@@ -33,3 +33,6 @@ a {
 .error {
   color: red;
 }
+img {
+  height: 100px;
+}

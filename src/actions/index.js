@@ -2,7 +2,8 @@ import {
   SHOW_CAPSULE,
   SHOW_USER,
   LOGGED_IN,
-  SET_CAPSULES
+  SET_CAPSULES,
+  SET_COLLECTION
 } from '../constants/action-types';
 
 import { API } from '../constants/api-url';
@@ -79,7 +80,6 @@ export const fetchCapsules = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log('in capsules fetch', data)
         dispatch(setCapsules(data))
       })
       .catch(e => console.log('error in get request', e))
@@ -89,3 +89,23 @@ export const fetchCapsules = () => {
 export const setCapsules = payload => {
   return { type: SET_CAPSULES, payload }
 }
+
+export const fetchCollection = () => {
+  return (dispatch, getState) => {
+    fetch(API + '/items', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(items => {
+        dispatch(setCollection(items))
+      })
+  }
+}
+
+export const setCollection = payload => {
+  return { type: SET_COLLECTION, payload }
+}
+

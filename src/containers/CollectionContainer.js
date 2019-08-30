@@ -1,20 +1,30 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { fetchCollection } from '../actions';
+import Item from '../components/Item';
 
 const mapStateToProps = state => {
-  return { items: state.items }
+  return { collection: state.collection }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    // showItem: (item) => dispatch(showItem(item))
-  }
+  return { fetchCollection: () => dispatch(fetchCollection()) }
 }
 
 class CollectionContainer extends React.Component {
+
+  componentDidMount() {
+    this.props.fetchCollection()
+  }
+
   render() {
     return (
-      <h1> Collection Container</h1 >
+      <React.Fragment>
+        <h1>Collection Container</h1>
+        {this.props.collection.map(item =>
+          <Item key={item.id} item={item} />
+        )}
+      </React.Fragment>
     )
   }
 }
