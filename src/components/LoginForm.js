@@ -18,11 +18,9 @@ class LoginForm extends React.Component {
       username: e.target.username.value,
       password: e.target.password.value
     }
-    console.log('sign in! username: ', credentials)
 
     try {
       this.props.logInUser(credentials)
-      this.props.isLoggedIn()
       this.props.history.push('/main')
     } catch (e) {
       console.log(e.message)

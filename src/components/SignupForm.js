@@ -39,7 +39,7 @@ class SignupForm extends React.Component {
     }
     try {
       this.props.createUser(payload)
-      this.props.isLoggedIn()
+      // this.props.isLoggedIn()
       this.props.history.push('/main')
     } catch (e) {
       console.log(e.message)

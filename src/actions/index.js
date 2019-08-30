@@ -24,7 +24,7 @@ export const createUser = payload => {
         } else {
           console.log('successfully created user', json)
           localStorage.setItem('token', json.jwt)
-          // window.history.forward('/main')
+          dispatch(isLoggedIn())
         }
       })
   }
@@ -44,9 +44,13 @@ export const logInUser = credentials => {
     })
       .then(res => res.json())
       .then(json => {
-        console.log('post request to login:', json)
-        localStorage.setItem('token', json.jwt)
-        // window.history.forward('/main')
+        if (json.error) {
+          console.log('post request to login - error', json)
+        } else {
+          console.log('post request to login:', json)
+          localStorage.setItem('token', json.jwt)
+          dispatch(isLoggedIn())
+        }
       })
   }
 }
