@@ -11,7 +11,7 @@ const mapDispatchToProps = dispatch => {
 
 class SignupForm extends React.Component {
 
-  passwordMin = 8
+  passwordMin = 4
 
   state = {
     username: "",
@@ -30,7 +30,6 @@ class SignupForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log('create a new user submit', e.target)
     let payload = {
       username: e.target.username.value,
       password: e.target.password.value,
@@ -39,33 +38,8 @@ class SignupForm extends React.Component {
     this.setState({ password: "", confirmPassword: "" })
     this.props.createUser(payload)
 
-    // submits a POST request to create the user
-    // fetch(API + '/users', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Accept': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     user: {
-    //       username: this.state.username,
-    //       password: this.state.password,
-    //       location: this.state.location
-    //     }
-    //   })
-    // })
-    //   .then(res => res.json())
-    //   .then(json => {
-    //     if (json.error) {
-    //       this.setState({ submitError: json.error })
-    //       console.log('failed to create user')
-    //     } else {
-    //       console.log('successfully created user')
-    //       // this.setState({ password: "", confirmPassword: "" })
-    //       // update store to the current user and jwt token here
-    //       this.props.history.push('/main')
-    //     }
-    //   })
+    // TODO save JWT token for authentication and redirect to /main route
+
   }
 
   handleChange = e => {

@@ -20,11 +20,12 @@ export const createUser = payload => {
       .then(res => res.json())
       .then(json => {
         if (json.error) {
-          console.log('failed to create user', json)
+          console.log('failed to create user...', json)
         } else {
           console.log('successfully created user', json)
           // update store to the current user and jwt token here
           // this.props.history.push('/main')
+          localStorage.setItem('user_token', json.jwt)
         }
       })
   }
