@@ -2,12 +2,11 @@ import React from 'react';
 import _ from 'lodash'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createUser, isLoggedIn } from '../actions';
+import { createUser } from '../actions';
 
 const mapDispatchToProps = dispatch => {
   return {
-    createUser: (user) => dispatch(createUser(user)),
-    isLoggedIn: () => dispatch(isLoggedIn())
+    createUser: (user) => dispatch(createUser(user))
   }
 }
 
@@ -39,7 +38,6 @@ class SignupForm extends React.Component {
     }
     try {
       this.props.createUser(payload)
-      // this.props.isLoggedIn()
       this.props.history.push('/main')
     } catch (e) {
       console.log(e.message)

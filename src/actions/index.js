@@ -1,4 +1,10 @@
-import { SHOW_CAPSULE, SHOW_USER, LOGGED_IN, LOG_IN } from '../constants/action-types';
+import {
+  SHOW_CAPSULE,
+  SHOW_USER,
+  LOGGED_IN,
+  SET_CAPSULES
+} from '../constants/action-types';
+
 import { API } from '../constants/api-url';
 
 export const showCapsule = payload => {
@@ -61,4 +67,25 @@ export const showUser = payload => {
 
 export const isLoggedIn = () => {
   return { type: LOGGED_IN }
+}
+
+export const fetchCapsules = () => {
+  return (dispatch, getState) => {
+    fetch(API + '/capsules', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log('in capsules fetch', data)
+        dispatch(setCapsules(data))
+      })
+      .catch(e => console.log('error in get request', e))
+  }
+}
+
+export const setCapsules = payload => {
+  return { type: SET_CAPSULES, payload }
 }
