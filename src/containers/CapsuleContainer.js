@@ -1,34 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCapsules } from '../actions';
-import CapsuleListItem from '../components/CapsuleListItem'
+import Item from '../components/Item';
 
 const mapStateToProps = state => {
-  return { capsules_list: state.capsules_list }
+  return { show_capsule: state.show_capsule }
 }
 
-const mapDispatchToProps = dispatch => {
-  return { fetchCapsules: () => dispatch(fetchCapsules()) }
-}
+const CapsuleContainer = ({ show_capsule }) => {
+  console.log('this is in the capsule container')
 
-class CapsuleContainer extends React.Component {
-
-  componentDidMount() {
-    this.props.fetchCapsules()
-  }
-
-  render() {
+  if (show_capsule) {
     return (
-      <div className='container' >
-        <h1>Capsule Container</h1>
-        {this.props.capsules_list
-          && this.props.capsules_list.map(capsule =>
-            <CapsuleListItem
-              key={capsule.id}
-              capsule={capsule} />)}
+      <div id='show-capsule'>
+        <h2>(Capsule Title) {show_capsule.title}</h2>
+        <h4>(Number of Items) {show_capsule.items.length}</h4>
+        {show_capsule.items.map(item => <Item key={item.id} item={item} />)}
       </div>
     )
+  } else {
+    return null
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CapsuleContainer);
+export default connect(mapStateToProps)(CapsuleContainer)

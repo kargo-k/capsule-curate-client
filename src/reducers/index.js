@@ -11,6 +11,7 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch (action.type) {
     case SHOW_CAPSULE:
+      console.log('show capsule reducer triggered', action)
       return { ...state, show_capsule: action.payload }
     case SHOW_USER:
       return { ...state, show_user: action.payload }
