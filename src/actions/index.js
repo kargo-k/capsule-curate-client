@@ -1,5 +1,12 @@
-import { SHOW_CAPSULE, SHOW_USER } from '../constants/action-types';
-import { API } from '../constants/api-url'
+import {
+  SHOW_CAPSULE,
+  SHOW_USER,
+  LOGGED_IN,
+  SET_CAPSULES,
+  SET_COLLECTION
+} from '../constants/action-types';
+
+import { API } from '../constants/api-url';
 
 export const showCapsule = payload => {
   return { type: SHOW_CAPSULE, payload }
@@ -23,9 +30,33 @@ export const createUser = payload => {
           console.log('failed to create user...', json)
         } else {
           console.log('successfully created user', json)
-          // update store to the current user and jwt token here
-          // this.props.history.push('/main')
-          localStorage.setItem('user_token', json.jwt)
+          localStorage.setItem('token', json.jwt)
+          dispatch(isLoggedIn())
+        }
+      })
+  }
+}
+
+export const logInUser = credentials => {
+  return (dispatch, getState) => {
+    fetch(API + '/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        user: credentials
+      })
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json.error) {
+          console.log('post request to login - error', json)
+        } else {
+          console.log('post request to login:', json)
+          localStorage.setItem('token', json.jwt)
+          dispatch(isLoggedIn())
         }
       })
   }
@@ -34,3 +65,47 @@ export const createUser = payload => {
 export const showUser = payload => {
   return { type: SHOW_USER, payload }
 }
+
+export const isLoggedIn = () => {
+  return { type: LOGGED_IN }
+}
+
+export const fetchCapsules = () => {
+  return (dispatch, getState) => {
+    fetch(API + '/capsules', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        dispatch(setCapsules(data))
+      })
+      .catch(e => console.log('error in get request', e))
+  }
+}
+
+export const setCapsules = payload => {
+  return { type: SET_CAPSULES, payload }
+}
+
+export const fetchCollection = () => {
+  return (dispatch, getState) => {
+    fetch(API + '/items', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(items => {
+        dispatch(setCollection(items))
+      })
+  }
+}
+
+export const setCollection = payload => {
+  return { type: SET_COLLECTION, payload }
+}
+
