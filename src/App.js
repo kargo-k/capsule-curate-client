@@ -1,6 +1,6 @@
 import React from 'react';
 import './scss/main.scss';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import store from './store'
 import Landing from './components/Landing';
@@ -14,14 +14,16 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Route exact path='/' component={Landing} />
-        <Route path='/'>
-          <Route path='/' component={Navbar} />
-          <Route path='/main' component={MainContainer} />
-          <Route path='/login' component={LoginForm} />
-          <Route path='/signup' component={SignupForm} />
-          <Route path='/about' component={About} />
-        </Route>
+        <Switch>
+          <Route exact path='/' component={Landing} />
+          <Route path='/'>
+            <Route path='/' component={Navbar} />
+            <Route path='/main' component={MainContainer} />
+            <Route path='/login' component={LoginForm} />
+            <Route path='/signup' component={SignupForm} />
+            <Route path='/about' component={About} />
+          </Route>
+        </Switch>
       </Router>
     </Provider>
   );
