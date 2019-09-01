@@ -37,11 +37,14 @@ class Navbar extends React.Component {
         <h1><Link to='/'>capsule curate</Link></h1>
         <div className='links'>
           <NavLink to='/about'>About</NavLink>
-          <NavLink to='/login'>Log In</NavLink>
-          <NavLink to='/signup'>Sign Up</NavLink>
+          <NavLink to='/explore'>Explore</NavLink>
           {this.props.user
             ? <NavLink to='/main' onClick={this.handleOnClick}>{this.props.user.username}</NavLink>
-            : <NavLink to='/main'>Explore</NavLink>}
+            : (<React.Fragment>
+              <NavLink to='/login'>Log In</NavLink>
+              <NavLink to='/signup'>Sign Up</NavLink>
+            </React.Fragment>)
+          }
         </div>
 
         {this.state.showMenu

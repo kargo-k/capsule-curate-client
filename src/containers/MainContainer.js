@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import CapsuleListContainer from './CapsuleListContainer';
 import DetailsContainer from './DetailsContainer';
 import CapsuleContainer from './CapsuleContainer';
 import ExploreContainer from './ExploreContainer';
-import CollectionContainer from './CollectionContainer';
 
 const mapStateToProps = state => {
   return { logged_in: state.logged_in }
@@ -16,7 +14,6 @@ const MainContainer = props => {
       {props.logged_in
         ? (<React.Fragment>
           <CapsuleContainer />
-          {/* <DetailsContainer /> */}
 
         </React.Fragment>)
         : (<React.Fragment>

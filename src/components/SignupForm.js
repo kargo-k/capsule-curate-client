@@ -76,7 +76,8 @@ class SignupForm extends React.Component {
       <form id="signup" onSubmit={this.handleSubmit}>
         <h1>Create an Account</h1>
 
-        <label>Select a Username:
+        <label><span className='left'><span>Select a Username:</span>
+          <span className='subtext'>minimum 3 characters</span></span>
           <input
             name="username"
             type="text"
@@ -86,11 +87,8 @@ class SignupForm extends React.Component {
           />
         </label>
 
-        {/* shows the error message for username if invalid */}
-
-
         <label><span className='left'><span>Select a Password:</span>
-          <span className='subtext'>(minimum {this.passwordMin} characters)</span></span>
+          <span className='subtext'>minimum {this.passwordMin} characters</span></span>
           <input
             name="password"
             type="password"
