@@ -4,6 +4,7 @@ body {
   background: $color-light-bg;
   background: -webkit-linear-gradient(to right, $color-light-bg,$color-light);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, $color-light-bg, $color-light); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-size: calc(15px + 0.5vw);
   font-family: $font-serif, "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -12,6 +13,7 @@ body {
 }
 #landing {
   background-image: url('../assets/bg.jpg');
+  position: 0% 0%;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
@@ -22,7 +24,7 @@ body {
   h1 {
     color: $color-dark;
     font-family: $font-cursive;
-    font-size: calc(150px + 2vmin);
+    font-size: calc(100px + 0.5vw);
     text-align: center;
     text-shadow: 3px 2px rgba(0,0,0,0.15);
   }
@@ -52,4 +54,7 @@ a {
 }
 .container {
   padding: 20px;
+}
+h1, h2, h3, h4 {
+  font-family: $font-sans-serif;
 }

@@ -15,7 +15,7 @@ form {
     font-family: $font-serif;
     padding: 5px 10px;
     margin-left: 10px;
-    font-size: 14px;
+    font-size: calc(16px + 0.2vw);
     width: 25vw;
   }
   label {
@@ -46,7 +46,7 @@ form {
     border-radius: 6px;
     font-family: $font-sans-serif;
     font-weight: 900;
-    font-size: 15px;
+    font-size: calc(16px + 0.2vw);
     margin: 10px 20px;
     padding: 5px 0px;
     text-decoration: none;
