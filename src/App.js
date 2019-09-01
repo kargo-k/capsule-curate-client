@@ -10,6 +10,7 @@ import MainContainer from './containers/MainContainer';
 import Navbar from './components/Navbar';
 import About from './components/About';
 import CollectionContainer from './containers/CollectionContainer';
+import Account from './components/Account';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path='/signup' component={SignupForm} />
             <Route path='/about' component={About} />
             <Route path='/explore' component={CollectionContainer} />
+            <Route path='/account' component={Account} />
           </Route>
         </Switch>
       </Router>

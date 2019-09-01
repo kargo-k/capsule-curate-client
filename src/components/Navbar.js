@@ -39,7 +39,10 @@ class Navbar extends React.Component {
           <NavLink to='/about'>About</NavLink>
           <NavLink to='/explore'>Explore</NavLink>
           {this.props.user
-            ? <NavLink to='/main' onClick={this.handleOnClick}>{this.props.user.username}</NavLink>
+            ? (<React.Fragment>
+              <NavLink to='/main' onFocus={this.handleOnClick}>Capsules</NavLink>
+              <NavLink to='/account'>{this.props.user.username}</NavLink>
+            </React.Fragment>)
             : (<React.Fragment>
               <NavLink to='/login'>Log In</NavLink>
               <NavLink to='/signup'>Sign Up</NavLink>
