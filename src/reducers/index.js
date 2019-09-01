@@ -2,7 +2,7 @@ import { SHOW_CAPSULE, SHOW_USER, LOGGED_IN, SET_CAPSULES, SET_COLLECTION } from
 
 const initialState = {
   show_capsule: null,
-  show_user: null,
+  user: null,
   logged_in: false,
   capsules_list: [],
   collection: []
@@ -14,7 +14,7 @@ function reducer(state = initialState, action) {
       console.log('show capsule reducer triggered', action)
       return { ...state, show_capsule: action.payload }
     case SHOW_USER:
-      return { ...state, show_user: action.payload }
+      return { ...state, user: action.payload }
     case LOGGED_IN:
       return { ...state, logged_in: true }
     case SET_CAPSULES:

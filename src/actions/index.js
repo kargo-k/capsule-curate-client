@@ -57,6 +57,7 @@ export const logInUser = credentials => {
           console.log('post request to login:', json)
           localStorage.setItem('token', json.jwt)
           dispatch(isLoggedIn())
+          dispatch(showUser(json.user))
         }
       })
   }

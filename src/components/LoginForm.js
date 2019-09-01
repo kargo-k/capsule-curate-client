@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logInUser, isLoggedIn } from '../actions';
 
@@ -21,38 +21,41 @@ class LoginForm extends React.Component {
 
     try {
       this.props.logInUser(credentials)
-      this.props.history.push('/main')
+      setTimeout(() => this.props.history.push('/main'), 500)
     } catch (e) {
       console.log('frontend login post', e.message)
     }
   }
 
-  redirectSignup = e => {
-    return <Link to='/signup' />
+  componentDidMount() {
+    this.username.focus();
   }
 
   render() {
     return (
       <form id='login' onSubmit={this.handleSubmit}>
         <h1>Login Form</h1>
-        <input
+        <label>Username: <input
           name="username"
           type="text"
-          placeholder="username"
-        />
+          placeholder="Username"
+          ref={(input) => { this.username = input }}
+        /></label>
 
+        <label>Password:
         <input
-          name="password"
-          type="password"
-          placeholder="password"
-        />
+            name="password"
+            type="password"
+            placeholder="Password"
+          /></label>
 
-        <input
+        <label className='single top'><input
+          className='btn'
           name="submit"
           type="submit"
-          value="Log In" />
+          value="Log In" /></label>
 
-        <Link to='/signup'><input type="button" value="New User?" /></Link>
+        <label className='single'><Link to='/signup'>New User?</Link></label>
 
       </form>
     )

@@ -6,13 +6,19 @@ const mapDispatchToProps = dispatch => {
   return { show_capsule: (capsule) => dispatch(showCapsule(capsule)) }
 }
 
-const CapsuleListItem = props => {
-  console.log('inside capsuel list item', props)
-  return (
-    <div className="capsule-list-item" onClick={() => props.show_capsule(props.capsule)}>
-      <h4>capsule title here: {props.capsule.title}</h4>
-    </div>
-  )
+class CapsuleListItem extends React.Component {
+
+  handleOnClick = (capsule) => {
+    this.props.show_capsule(capsule)
+    console.log('redirect me to main pls', capsule)
+  }
+  render() {
+    return (
+      <div className="capsule-list-item" onClick={() => this.handleOnClick(this.props.capsule)}>
+        {this.props.capsule.title}
+      </div >
+    )
+  }
 }
 
 export default connect(null, mapDispatchToProps)(CapsuleListItem)

@@ -1,0 +1,38 @@
+#navbar {
+  background: $color-med;
+  padding: 10px;
+  text-align: right;
+  h1 {
+    font-family: $font-sans-serif;
+    font-weight: 900;
+    font-size: calc(16px + 0.5vw);
+    margin: 0 0 0 10px;
+    a {
+      color: $color-light;
+    }
+    a:hover {
+      text-decoration: none;
+      color: $color-accent;
+    }
+  }
+  a {
+    color: $color-dark;
+  }
+  .active {
+    color: $color-accent;
+  }
+  a:hover {
+    text-decoration: underline;
+    color: $color-light;
+  }
+}
+.capsule-list-item {
+  display: block;
+  text-align: left;
+  padding: 0 10px;
+  font-size: calc(15px + 0.5vw);
+  width: calc(220px + 0.5vw);
+}
+#capsule-list {
+  background: $color-med;
+}

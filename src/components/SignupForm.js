@@ -74,9 +74,10 @@ class SignupForm extends React.Component {
   render() {
     return (
       <form id="signup" onSubmit={this.handleSubmit}>
-        <h1>Signup Form</h1>
+        <h1>Create an Account</h1>
 
-        <label>Select a Username:
+        <label><span className='left'><span>Select a Username:</span>
+          <span className='subtext'>minimum 3 characters</span></span>
           <input
             name="username"
             type="text"
@@ -86,34 +87,25 @@ class SignupForm extends React.Component {
           />
         </label>
 
-        {/* shows the error message for username if invalid */}
-        <span className='error'>
-          {this.state.validUsername ? null : this.state.userMsg}
-        </span>
-
-        <label>Select a Password:  (minimum {this.passwordMin} characters)
+        <label><span className='left'><span>Select a Password:</span>
+          <span className='subtext'>minimum {this.passwordMin} characters</span></span>
           <input
             name="password"
             type="password"
             placeholder="Password"
             value={this.state.password}
             onChange={this.matchPassword}
-          />
-        </label>
+          /></label>
+
 
         <label>Confirm Password:
           <input
             name="confirmPassword"
             type="password"
-            placeholder="Password"
+            placeholder="Confirm Password"
             value={this.state.confirmPassword}
             onChange={this.matchPassword}
           />
-
-          {/* shows error for password if invalid */}
-          <span className='error'>
-            {this.state.validPassword ? null : this.state.errorMsg}
-          </span>
         </label>
 
         <label>Location:
@@ -126,14 +118,22 @@ class SignupForm extends React.Component {
           />
         </label>
 
-        <input
+        {/* shows error for password if invalid */}
+        <span className='error'>
+          {this.state.validUsername ? null : this.state.userMsg}
+          <br />
+          {this.state.validPassword ? null : this.state.errorMsg}
+        </span>
+
+        <label className='single top'><input
           name="submit"
+          className='btn'
           type="submit"
           value="Create Account"
           disabled={!(this.state.validUsername && this.state.validPassword)}
-        />
+        /></label>
 
-        <Link to='/login'><input type="button" value="Already Have An Account?" /></Link>
+        <label className='single'><Link to='/login'>Already Have An Account?</Link></label>
 
         {/* shows error after submit if user cannot be created */}
         <span className='error'>
