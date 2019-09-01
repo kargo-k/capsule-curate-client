@@ -1,0 +1,23 @@
+#navbar {
+  display: flex;
+  justify-content: space-between;
+}
+div.main {
+  display: flex;
+}
+#grid-parent {
+  display: grid;
+  grid-template-columns: minmax(25px, 35px) minmax(vwmax, vwmax);
+  grid-column-gap: 10px;
+}
+.capsule {
+  background: $color-med;
+  display: grid;
+  grid-template-rows: repeat(5,auto);
+  grid-auto-flow: column;
+  grid-row-gap: 2px;
+  grid-column-gap: 2px;
+  img {
+    max-height: 150px;
+  }
+}

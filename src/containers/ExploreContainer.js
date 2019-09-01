@@ -8,7 +8,7 @@ const mapStateToProps = state => {
 
 const ExploreContainer = props => {
   return (
-    <div className='explore container'>
+    <div className='explore'>
       <h1>Explore Container</h1>
     </div>
   )

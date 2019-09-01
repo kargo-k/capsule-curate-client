@@ -13,13 +13,11 @@ const mapStateToProps = state => {
 const MainContainer = props => {
   return (
     <div className='main container'>
-      <h1>Main Container</h1>
       {props.logged_in
         ? (<React.Fragment>
-          <span>I am logged in</span>
           <CapsuleListContainer />
           <CapsuleContainer />
-          <DetailsContainer />
+          {/* <DetailsContainer /> */}
 
         </React.Fragment>)
         : (<React.Fragment>

@@ -11,8 +11,8 @@ const CapsuleContainer = ({ show_capsule }) => {
 
   if (show_capsule) {
     return (
-      <div id='show-capsule'>
-        <h2>(Capsule Title) {show_capsule.title}</h2>
+      <div id='grid-parent' className='capsule container'>
+        <h2>Current Capsule: {show_capsule.title}</h2>
         <h4>(Number of Items) {show_capsule.items.length}</h4>
         {show_capsule.items.map(item => <Item key={item.id} item={item} />)}
       </div>

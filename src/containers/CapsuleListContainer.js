@@ -21,8 +21,8 @@ class CapsuleListContainer extends React.Component {
 
   render() {
     return (
-      <div className='container' >
-        <h1>Capsule Container</h1>
+      <div className='list' >
+        <h1>Saved Capsules</h1>
         {this.props.capsules_list
           && this.props.capsules_list.map(capsule =>
             <CapsuleListItem
