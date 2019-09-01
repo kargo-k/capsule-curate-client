@@ -7,7 +7,6 @@ const mapStateToProps = state => {
 }
 
 const CapsuleContainer = ({ show_capsule }) => {
-  console.log('this is in the capsule container')
 
   if (show_capsule) {
     return (

@@ -20,7 +20,8 @@ div.main {
   width: 100%;
   display: flex;
   flex-flow: wrap;
-  justify-content: space-evenly;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
 
   // display: grid;
   // grid-template-columns: repeat(7,1fr);

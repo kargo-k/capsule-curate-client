@@ -28,7 +28,7 @@ class LoginForm extends React.Component {
   }
 
   componentDidMount() {
-    this.username.focus();
+    this.username.focus()
   }
 
   render() {
