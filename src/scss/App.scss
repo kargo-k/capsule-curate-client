@@ -1,3 +1,15 @@
+body {
+  margin: 0;
+  color: $color-dark;
+  background: $color-light-bg;
+  background: -webkit-linear-gradient(to right, $color-light-bg,$color-light);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, $color-light-bg, $color-light); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-family: $font-serif, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 #landing {
   background-image: url('../assets/bg.jpg');
   background-repeat: no-repeat;
@@ -18,7 +30,7 @@
     margin: 40px;
   }
   a {
-    background: $color-med2;
+    background: $color-med;
     margin-bottom: 20px;
     width: 20vw;
     display: block;
@@ -29,7 +41,6 @@
     background: $color-accent;
   }
 }
-
 a {
   border-radius: 6px;
   font-family: $font-sans-serif;
@@ -39,5 +50,3 @@ a {
   padding: 5px 0px;
   text-align: center;
 }
-
-
