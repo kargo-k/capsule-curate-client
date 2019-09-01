@@ -29,6 +29,10 @@
 .capsule-list-item {
   display: block;
   text-align: left;
-  padding-right: 10px;
+  padding: 0 10px;
+  font-size: calc(15px + 0.5vw);
+  width: calc(220px + 0.5vw);
+}
+#capsule-list {
   background: $color-med;
 }

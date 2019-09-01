@@ -2,8 +2,8 @@ body {
   margin: 0;
   color: $color-dark;
   background: $color-light-bg;
-  background: -webkit-linear-gradient(to right, $color-light-bg,$color-light);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, $color-light-bg, $color-light); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: -webkit-linear-gradient(to right, $color-light,$color-light-bg);
+  background: linear-gradient(to right, $color-light, $color-light-bg);
   font-size: calc(15px + 0.5vw);
   font-family: $font-serif, "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",

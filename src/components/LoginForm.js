@@ -27,6 +27,10 @@ class LoginForm extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.username.focus();
+  }
+
   render() {
     return (
       <form id='login' onSubmit={this.handleSubmit}>
@@ -35,6 +39,7 @@ class LoginForm extends React.Component {
           name="username"
           type="text"
           placeholder="Username"
+          ref={(input) => { this.username = input }}
         /></label>
 
         <label>Password:

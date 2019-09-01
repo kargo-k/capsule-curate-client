@@ -28,11 +28,12 @@ class Navbar extends React.Component {
   }
 
   handleHideCapsules = () => {
-
+    this.setState({ showMenu: false })
   }
 
   componentDidMount() {
     this.props.fetchCapsules()
+    document.addEventListener('click', this.handleHideCapsules)
   }
 
   render() {
@@ -45,7 +46,7 @@ class Navbar extends React.Component {
             <NavLink to='/explore'>Explore</NavLink>
             {this.props.user
               ? (<React.Fragment>
-                <NavLink to='/main' onMouseOver={this.handleShowCapsules} onMouseLeave={this.handleHideCapsules}>Capsules</NavLink>
+                <NavLink to='/main' onMouseOver={this.handleShowCapsules} >Capsules</NavLink>
                 <NavLink to='/account'>{this.props.user.username}</NavLink>
               </React.Fragment>)
               : (<React.Fragment>
