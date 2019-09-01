@@ -1,6 +1,16 @@
+
+#outer-navbar {
+  display: flex;
+  flex-direction: column;
+}
 #navbar {
   display: flex;
   justify-content: space-between;
+}
+#capsule-list {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
 }
 div.main {
   display: flex;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import DetailsContainer from './DetailsContainer';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import CapsuleContainer from './CapsuleContainer';
 import ExploreContainer from './ExploreContainer';
 
@@ -14,11 +14,8 @@ const MainContainer = props => {
       {props.logged_in
         ? (<React.Fragment>
           <CapsuleContainer />
-
         </React.Fragment>)
-        : (<React.Fragment>
-          <ExploreContainer />
-        </React.Fragment>)
+        : (<Redirect to='/' />)
       }
 
     </div>

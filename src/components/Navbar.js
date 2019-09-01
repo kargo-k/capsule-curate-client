@@ -23,8 +23,12 @@ class Navbar extends React.Component {
     showMenu: false
   }
 
-  handleOnClick = () => {
+  handleShowCapsules = () => {
     this.setState({ showMenu: true })
+  }
+
+  handleHideCapsules = () => {
+
   }
 
   componentDidMount() {
@@ -33,25 +37,27 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <div id='navbar'>
-        <h1><Link to='/'>capsule curate</Link></h1>
-        <div className='links'>
-          <NavLink to='/about'>About</NavLink>
-          <NavLink to='/explore'>Explore</NavLink>
-          {this.props.user
-            ? (<React.Fragment>
-              <NavLink to='/main' onFocus={this.handleOnClick}>Capsules</NavLink>
-              <NavLink to='/account'>{this.props.user.username}</NavLink>
-            </React.Fragment>)
-            : (<React.Fragment>
-              <NavLink to='/login'>Log In</NavLink>
-              <NavLink to='/signup'>Sign Up</NavLink>
-            </React.Fragment>)
-          }
+      <div id='outer-navbar'>
+        <div id='navbar'>
+          <h1><Link to='/'>capsule curate</Link></h1>
+          <div className='links'>
+            <NavLink to='/about'>About</NavLink>
+            <NavLink to='/explore'>Explore</NavLink>
+            {this.props.user
+              ? (<React.Fragment>
+                <NavLink to='/main' onMouseOver={this.handleShowCapsules} onMouseLeave={this.handleHideCapsules}>Capsules</NavLink>
+                <NavLink to='/account'>{this.props.user.username}</NavLink>
+              </React.Fragment>)
+              : (<React.Fragment>
+                <NavLink to='/login'>Log In</NavLink>
+                <NavLink to='/signup'>Sign Up</NavLink>
+              </React.Fragment>)
+            }
+          </div>
         </div>
 
         {this.state.showMenu
-          ? (<div className='user-menu'>
+          ? (<div id='capsule-list'>
             {this.props.capsules_list
               && this.props.capsules_list.map(capsule =>
                 <CapsuleListItem

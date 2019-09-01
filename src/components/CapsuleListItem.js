@@ -10,7 +10,7 @@ const CapsuleListItem = props => {
   console.log('inside capsuel list item', props)
   return (
     <div className="capsule-list-item" onClick={() => props.show_capsule(props.capsule)}>
-      <h4>{props.capsule.title}</h4>
+      {props.capsule.title}
     </div>
   )
 }
