@@ -15,7 +15,6 @@ const MainContainer = props => {
     <div className='main container'>
       {props.logged_in
         ? (<React.Fragment>
-          <CapsuleListContainer />
           <CapsuleContainer />
           {/* <DetailsContainer /> */}
 
