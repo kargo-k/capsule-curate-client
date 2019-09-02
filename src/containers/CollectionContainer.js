@@ -21,7 +21,7 @@ class CollectionContainer extends React.Component {
     return (
       <React.Fragment>
         <h1>Collection Container</h1>
-        {this.props.collection.map(item =>
+        {this.props.collection && this.props.collection.map(item =>
           <Item key={item.id} item={item} />
         )}
       </React.Fragment>

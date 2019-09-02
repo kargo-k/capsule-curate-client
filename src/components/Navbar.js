@@ -3,11 +3,13 @@ import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CapsuleListItem from './CapsuleListItem';
 import { fetchCapsules } from '../actions';
+import store from '../store';
 
 const mapStateToProps = state => {
   return {
     user: state.user,
-    capsules_list: state.capsules_list
+    capsules_list: state.capsules_list,
+    logged_in: state.logged_in
   }
 }
 
@@ -18,10 +20,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 class Navbar extends React.Component {
-
-  componentDidMount() {
-    this.props.fetchCapsules()
-  }
 
   render() {
     return (

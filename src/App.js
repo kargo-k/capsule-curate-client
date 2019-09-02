@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import About from './components/About';
 import CollectionContainer from './containers/CollectionContainer';
 import Account from './components/Account';
+import Logout from './components/Logout';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
             <Route path='/about' component={About} />
             <Route path='/explore' component={CollectionContainer} />
             <Route path='/account' component={Account} />
+            {/* <Route path='/settings' component={Settings} /> */}
+            <Route path='/logout' component={Logout} />
           </Route>
         </Switch>
       </Router>

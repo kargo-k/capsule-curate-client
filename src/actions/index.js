@@ -3,7 +3,8 @@ import {
   SHOW_USER,
   LOGGED_IN,
   SET_CAPSULES,
-  SET_COLLECTION
+  SET_COLLECTION,
+  LOG_OUT
 } from '../constants/action-types';
 
 import { API } from '../constants/api-url';
@@ -69,6 +70,10 @@ export const showUser = payload => {
 
 export const isLoggedIn = () => {
   return { type: LOGGED_IN }
+}
+
+export const logOutUser = () => {
+  return { type: LOG_OUT }
 }
 
 export const fetchCapsules = () => {
