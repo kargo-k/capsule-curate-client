@@ -71,6 +71,10 @@ class SignupForm extends React.Component {
       ? this.setState({ validUsername: true, userMsg: "" }) : this.setState({ validUsername: false, userMsg: 'Username must be between 3-16 characters.' })
   }
 
+  componentDidMount() {
+    this.username.focus()
+  }
+
   render() {
     return (
       <form id="signup" onSubmit={this.handleSubmit}>
@@ -84,6 +88,7 @@ class SignupForm extends React.Component {
             placeholder="Username"
             value={this.state.username}
             onChange={this.handleChange}
+            ref={input => { this.username = input }}
           />
         </label>
 

@@ -1,5 +1,5 @@
 
-#outer-navbar {
+#nav-container {
   display: flex;
   flex-direction: column;
 }
@@ -8,9 +8,10 @@
   justify-content: space-between;
 }
 #capsule-list {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-end;
+
+}
+#account-menu {
+
 }
 div.main {
   display: flex;
@@ -20,7 +21,8 @@ div.main {
   width: 100%;
   display: flex;
   flex-flow: wrap;
-  justify-content: space-evenly;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
 
   // display: grid;
   // grid-template-columns: repeat(7,1fr);

@@ -19,55 +19,60 @@ const mapDispatchToProps = dispatch => {
 
 class Navbar extends React.Component {
 
-  state = {
-    showMenu: false
-  }
-
-  handleShowCapsules = () => {
-    this.setState({ showMenu: true })
-  }
-
-  handleHideCapsules = () => {
-    this.setState({ showMenu: false })
-  }
-
   componentDidMount() {
     this.props.fetchCapsules()
-    document.addEventListener('click', this.handleHideCapsules)
   }
 
   render() {
     return (
-      <div id='outer-navbar'>
-        <div id='navbar'>
+      <div id='nav-container'>
+        <div id='navbar' className='nav'>
           <h1><Link to='/'>capsule curate</Link></h1>
           <div className='links'>
-            <NavLink to='/about'>About</NavLink>
-            <NavLink to='/explore'>Explore</NavLink>
-            {this.props.user
-              ? (<React.Fragment>
-                <NavLink to='/main' onMouseOver={this.handleShowCapsules} >Capsules</NavLink>
-                <NavLink to='/account'>{this.props.user.username}</NavLink>
-              </React.Fragment>)
-              : (<React.Fragment>
-                <NavLink to='/login'>Log In</NavLink>
-                <NavLink to='/signup'>Sign Up</NavLink>
-              </React.Fragment>)
-            }
+            <ul>
+              <li>
+                <NavLink to='/about'>About</NavLink>
+              </li>
+
+              <li>
+                <NavLink to='/explore'>Explore</NavLink>
+              </li>
+
+              {this.props.user
+                ? (<React.Fragment>
+                  <li>
+                    <NavLink to='/main'>Capsules</NavLink>
+                    <ul>
+                      {this.props.capsules_list
+                        && this.props.capsules_list.map(capsule =>
+                          <CapsuleListItem
+                            key={capsule.id}
+                            capsule={capsule}
+                          />)}
+                    </ul>
+                  </li>
+                  <li>
+                    <NavLink to='/account'>{this.props.user.username}</NavLink>
+                    <ul>
+                      <li><Link to='/account'>Profile</Link></li>
+                      <li><Link to='/settings'>Settings</Link></li>
+                      <li><Link to='/logout'>Logout</Link></li>
+                    </ul>
+                  </li>
+                </React.Fragment>)
+                : (<React.Fragment>
+                  <li>
+                    <NavLink to='/login'>Log In</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to='/signup'>Sign Up</NavLink>
+                  </li>
+                </React.Fragment>)
+              }
+
+            </ul>
           </div>
         </div>
-
-        {this.state.showMenu
-          ? (<div id='capsule-list'>
-            {this.props.capsules_list
-              && this.props.capsules_list.map(capsule =>
-                <CapsuleListItem
-                  key={capsule.id}
-                  capsule={capsule}
-                />)}
-          </div>)
-          : null
-        }
       </div >
     )
   }
