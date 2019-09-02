@@ -76,6 +76,20 @@ export const logOutUser = () => {
   return { type: LOG_OUT }
 }
 
+export const deleteUser = () => {
+  return (dispatch, getState) => {
+    fetch(API + '/profile', {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(json => console.log('deleted!!', json))
+      .catch(e => console.log('error in delete request', e))
+  }
+}
+
 export const fetchCapsules = () => {
   return (dispatch, getState) => {
     fetch(API + '/capsules', {

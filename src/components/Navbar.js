@@ -3,7 +3,6 @@ import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CapsuleListItem from './CapsuleListItem';
 import { fetchCapsules } from '../actions';
-import store from '../store';
 
 const mapStateToProps = state => {
   return {
@@ -52,8 +51,7 @@ class Navbar extends React.Component {
                   <li>
                     <NavLink to='/account'>{this.props.user.username}</NavLink>
                     <ul>
-                      <li><Link to='/account'>Profile</Link></li>
-                      <li><Link to='/settings'>Settings</Link></li>
+                      <li><Link to='/account'>Account</Link></li>
                       <li><Link to='/logout'>Logout</Link></li>
                     </ul>
                   </li>

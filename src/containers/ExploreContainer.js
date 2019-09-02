@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return { is_logged_in: state.is_logged_in }

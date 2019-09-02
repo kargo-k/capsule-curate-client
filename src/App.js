@@ -27,7 +27,6 @@ function App() {
             <Route path='/about' component={About} />
             <Route path='/explore' component={CollectionContainer} />
             <Route path='/account' component={Account} />
-            {/* <Route path='/settings' component={Settings} /> */}
             <Route path='/logout' component={Logout} />
           </Route>
         </Switch>
