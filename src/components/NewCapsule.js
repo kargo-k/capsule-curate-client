@@ -8,7 +8,6 @@ class NewCapsule extends React.Component {
     title: "",
     description: "",
     season: null,
-    colors: null,
     isActive: false
   }
 
@@ -16,16 +15,22 @@ class NewCapsule extends React.Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  add = (e) => {
+  handleSubmit = e => {
     e.preventDefault()
-    let newColor = document.createElement('input')
-    newColor.className = 'jscolor'
-    document.getElementById('color-boxes').appendChild(newColor)
+    console.log(e.target.color2.style["background-color"])
+  }
+  add = (e) => {
+    // let newColor = document.createElement('input')
+    // FIXME: this does not dynamically create a new color picker
+    // let picker = new jscolor(newColor)
+    // picker.fromHSV(360 / 100, 100, 100)
+    //http://jscolor.com/examples/
+    // document.getElementById('color-boxes').appendChild(newColor)
   }
 
   render() {
     return (
-      <form id='new-capsule'>
+      <form id='new-capsule' onSubmit={this.handleSubmit}>
         <h1>new capsule form here</h1>
 
         <label>Title:
@@ -49,17 +54,34 @@ class NewCapsule extends React.Component {
         <label>Season:
           <select value={this.state.value} onChange={this.handleChange}>
             {SEASONS.map(s =>
-              <option value={s} name='season'>{s}</option>
+              <option value={s} name='season' key={s}>{s}</option>
             )}
           </select>
         </label>
 
         <label>Color Palette:
-            <button onClick={this.add}>Add a Color</button>
-          <div id='color-boxes'>
-            <input class='jscolor' value="ab2567" />
-          </div>
+
+          <input type="hidden" id="color_value" value="AAC0AA" />
+          <button name='color1' className="jscolor {valueElement: 'color_value'} color-picker"></button>
+
+          <input type="hidden" id="color_value2" value="735372" />
+          <button name='color2' className="jscolor {valueElement: 'color_value2'} color-picker"></button>
+
+          <input type="hidden" id="color_value3" value="A18276" />
+          <button name='color3' className="jscolor {valueElement: 'color_value3'} color-picker"></button>
+
+          <input type="hidden" id="color_value4" value="7A918D" />
+          <button name='color4' className="jscolor {valueElement: 'color_value4'} color-picker"></button>
+
         </label>
+
+        <label className='single top'><input
+          name="submit"
+          className='btn'
+          type="submit"
+          value="Start Curating"
+          disabled={!(this.state.title)}
+        /></label>
 
       </form>
     )
