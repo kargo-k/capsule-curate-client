@@ -5,10 +5,7 @@ import jscolor from '../js/jscolor.js';
 class NewCapsule extends React.Component {
 
   state = {
-    title: "",
-    description: "",
-    season: null,
-    isActive: false
+    title: ""
   }
 
   handleChange = e => {
@@ -17,15 +14,10 @@ class NewCapsule extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log(e.target.color2.style["background-color"])
-  }
-  add = (e) => {
-    // let newColor = document.createElement('input')
-    // FIXME: this does not dynamically create a new color picker
-    // let picker = new jscolor(newColor)
-    // picker.fromHSV(360 / 100, 100, 100)
-    //http://jscolor.com/examples/
-    // document.getElementById('color-boxes').appendChild(newColor)
+    let colors = e.target.color1.style["background-color"] + ", " + e.target.color2.style["background-color"] + ", " + e.target.color3.style["background-color"] + ", " + e.target.color4.style["background-color"]
+    console.log(colors)
+    console.log(e.target.isActive.value)
+
   }
 
   render() {
@@ -47,12 +39,11 @@ class NewCapsule extends React.Component {
             type='text'
             name='description'
             placeholder='#capsulegoals'
-            value={this.state.description}
-            onChange={this.handleChange} />
+          />
         </label>
 
         <label>Season:
-          <select value={this.state.value} onChange={this.handleChange}>
+          <select>
             {SEASONS.map(s =>
               <option value={s} name='season' key={s}>{s}</option>
             )}
@@ -75,6 +66,14 @@ class NewCapsule extends React.Component {
 
         </label>
 
+        <label className='radio-buttons'>
+          Set this to your current active capsule?
+
+          <span className='radio text'><input name='isActive' type='radio' value={true} className='radio' /> Yes, going to wear this today!
+          <br />
+            <input name='isActive' type='radio' value={false} className='radio text' /> Nope, just planning ahead!</span>
+        </label>
+
         <label className='single top'><input
           name="submit"
           className='btn'
@@ -83,7 +82,7 @@ class NewCapsule extends React.Component {
           disabled={!(this.state.title)}
         /></label>
 
-      </form>
+      </form >
     )
   }
 }

@@ -22,6 +22,14 @@ form {
     margin: 5px 0px;
     display: flex;
     justify-content: space-between;
+    text-align: left;
+  }
+  span.radio {
+    font-size: calc(12px + 0.2vw);
+    input {
+      width: auto;
+      display: inline;
+    }
   }
   label.single {
     justify-content: center;
@@ -64,5 +72,8 @@ form {
   .color-picker {
     width: 10%;
     height: 30px;
+  }
+  select {
+    text-transform: capitalize;
   }
 }

@@ -107,6 +107,12 @@ export const fetchCapsules = () => {
   }
 }
 
+export const createCapsule = payload => {
+  return (dispatch, getState) => {
+    // fetch(API + '')
+  }
+}
+
 export const setCapsules = payload => {
   return { type: SET_CAPSULES, payload }
 }
