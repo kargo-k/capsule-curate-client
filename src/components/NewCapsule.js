@@ -9,9 +9,9 @@ const mapDispatchToProps = dispatch => {
   return { createCapsule: payload => dispatch(createCapsule(payload)) }
 }
 
-// const mapStateToProps = state => {
-//   return { logged_in: state.logged_in }
-// }
+const mapStateToProps = state => {
+  return { logged_in: state.logged_in }
+}
 
 class NewCapsule extends React.Component {
 
@@ -38,71 +38,74 @@ class NewCapsule extends React.Component {
   }
 
   render() {
-    return (
-      <form id='new-capsule' onSubmit={this.handleSubmit}>
-        <h1>new capsule form here</h1>
+    if (!logged_in) {
+      return <Redirect to='/' />
+    } else {
+      return (
+        <form id='new-capsule' onSubmit={this.handleSubmit}>
+          <h1>Curate a New Capsule</h1>
 
-        <label>Title:
+          <label>Title:
         <input
-            type='text'
-            name='title'
-            placeholder='Capsule Title'
-            value={this.state.title}
-            onChange={this.handleChange} />
-        </label>
+              type='text'
+              name='title'
+              placeholder='Capsule Title'
+              value={this.state.title}
+              onChange={this.handleChange} />
+          </label>
 
-        <label>Description:
+          <label>Description:
           <input
-            type='text'
-            name='description'
-            placeholder='#capsulegoals'
-          />
-        </label>
+              type='text'
+              name='description'
+              placeholder='#capsulegoals'
+            />
+          </label>
 
-        <label>Season:
+          <label>Season:
           <select onChange={this.handleChange} value={this.state.season}>
-            {SEASONS.map(s =>
-              <option value={s} name='season' key={s}>{s}</option>
-            )}
-          </select>
-        </label>
+              {SEASONS.map(s =>
+                <option value={s} name='season' key={s}>{s}</option>
+              )}
+            </select>
+          </label>
 
-        <label>Color Palette:
-
+          <label>Color Palette:
+  
           <input type="hidden" id="color_value" value="AAC0AA" />
-          <button name='color1' className="jscolor {valueElement: 'color_value'} color-picker"></button>
+            <button name='color1' className="jscolor {valueElement: 'color_value'} color-picker"></button>
 
-          <input type="hidden" id="color_value2" value="735372" />
-          <button name='color2' className="jscolor {valueElement: 'color_value2'} color-picker"></button>
+            <input type="hidden" id="color_value2" value="735372" />
+            <button name='color2' className="jscolor {valueElement: 'color_value2'} color-picker"></button>
 
-          <input type="hidden" id="color_value3" value="A18276" />
-          <button name='color3' className="jscolor {valueElement: 'color_value3'} color-picker"></button>
+            <input type="hidden" id="color_value3" value="A18276" />
+            <button name='color3' className="jscolor {valueElement: 'color_value3'} color-picker"></button>
 
-          <input type="hidden" id="color_value4" value="7A918D" />
-          <button name='color4' className="jscolor {valueElement: 'color_value4'} color-picker"></button>
+            <input type="hidden" id="color_value4" value="7A918D" />
+            <button name='color4' className="jscolor {valueElement: 'color_value4'} color-picker"></button>
 
-        </label>
+          </label>
 
-        <label className='radio-buttons'>
-          Set this to your current active capsule?
-
+          <label className='radio-buttons'>
+            Set this to your current active capsule?
+  
           <span className='radio text'><input name='isActive' type='radio' value={true} className='radio' /> Yes, going to wear this today!
           <br />
-            <input name='isActive' type='radio' value={false} className='radio text' /> Nope, just planning ahead!</span>
-        </label>
+              <input name='isActive' type='radio' value={false} className='radio text' /> Nope, just planning ahead!</span>
+          </label>
 
-        <label className='single top'><input
-          name="submit"
-          className='btn'
-          type="submit"
-          value="Start Curating"
-          disabled={!(this.state.title)}
-        /></label>
+          <label className='single top'><input
+            name="submit"
+            className='btn'
+            type="submit"
+            value="Start Curating"
+            disabled={!(this.state.title)}
+          /></label>
 
-      </form >
-    )
-
+        </form >
+      )
+    }
   }
 }
 
-export default connect(null, mapDispatchToProps)(NewCapsule);
+export default connect(mapStateToProps, mapDispatchToProps)(NewCapsule);
