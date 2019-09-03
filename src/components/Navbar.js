@@ -37,7 +37,7 @@ class Navbar extends React.Component {
                   <li>
                     <NavLink to='/main'>Capsules</NavLink>
                     <ul>
-                      {console.log('inside nav bar', this.props.capsules_list)}
+                      <li><Link to='/new'>Curate New Capsule</Link></li>
                       {this.props.capsules_list
                         && this.props.capsules_list.map(capsule =>
                           <CapsuleListItem

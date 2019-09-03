@@ -9,6 +9,7 @@ import SignupForm from './components/SignupForm';
 import MainContainer from './containers/MainContainer';
 import Navbar from './components/Navbar';
 import About from './components/About';
+import NewCapsule from './components/NewCapsule';
 import CollectionContainer from './containers/CollectionContainer';
 import Account from './components/Account';
 import Logout from './components/Logout';
@@ -26,6 +27,7 @@ function App() {
             <Route path='/signup' component={SignupForm} />
             <Route path='/about' component={About} />
             <Route path='/explore' component={CollectionContainer} />
+            <Route path='/new' component={NewCapsule} />
             <Route path='/account' component={Account} />
             <Route path='/logout' component={Logout} />
           </Route>
