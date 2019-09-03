@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import CapsuleContainer from './CapsuleContainer';
-import ExploreContainer from './ExploreContainer';
 
 const mapStateToProps = state => {
   return { logged_in: state.logged_in }

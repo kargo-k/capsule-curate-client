@@ -11,7 +11,7 @@ form {
     font-family: $font-sans-serif;
     padding-bottom: 10px;
   }
-  input {
+  input, select {
     font-family: $font-serif;
     padding: 5px 10px;
     margin-left: 10px;
@@ -22,6 +22,14 @@ form {
     margin: 5px 0px;
     display: flex;
     justify-content: space-between;
+    text-align: left;
+  }
+  span.radio {
+    font-size: calc(12px + 0.2vw);
+    input {
+      width: auto;
+      display: inline;
+    }
   }
   label.single {
     justify-content: center;
@@ -60,5 +68,12 @@ form {
   .btn:disabled {
     background: $color-light;
     color: rgba(0,0,0,0.24);
+  }
+  .color-picker {
+    width: 10%;
+    height: 30px;
+  }
+  select {
+    text-transform: capitalize;
   }
 }

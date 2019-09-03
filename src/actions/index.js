@@ -3,7 +3,8 @@ import {
   SHOW_USER,
   LOGGED_IN,
   SET_CAPSULES,
-  SET_COLLECTION
+  SET_COLLECTION,
+  LOG_OUT
 } from '../constants/action-types';
 
 import { API } from '../constants/api-url';
@@ -71,7 +72,26 @@ export const isLoggedIn = () => {
   return { type: LOGGED_IN }
 }
 
+export const logOutUser = () => {
+  return { type: LOG_OUT }
+}
+
+export const deleteUser = () => {
+  return (dispatch, getState) => {
+    fetch(API + '/profile', {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(json => console.log('deleted!!', json))
+      .catch(e => console.log('error in delete request', e))
+  }
+}
+
 export const fetchCapsules = () => {
+  console.log('inside fetch capsules ...')
   return (dispatch, getState) => {
     fetch(API + '/capsules', {
       method: 'GET',
@@ -84,6 +104,32 @@ export const fetchCapsules = () => {
         dispatch(setCapsules(data))
       })
       .catch(e => console.log('error in get request', e))
+  }
+}
+
+export const createCapsule = payload => {
+  return (dispatch, getState) => {
+    fetch(API + '/capsules', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        capsule: payload
+      })
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json.error) {
+          console.log('failed to create capsule...', json)
+        } else {
+          console.log('successfully created capsule', json)
+          localStorage.setItem('token', json.jwt)
+          dispatch(isLoggedIn())
+        }
+      })
   }
 }
 

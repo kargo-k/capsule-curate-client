@@ -2,26 +2,20 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CapsuleListItem from './CapsuleListItem';
-import { fetchCapsules } from '../actions';
 
 const mapStateToProps = state => {
   return {
     user: state.user,
-    capsules_list: state.capsules_list
+    capsules_list: state.capsules_list,
+    logged_in: state.logged_in
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    fetchCapsules: () => dispatch(fetchCapsules())
-  }
+  return {}
 }
 
 class Navbar extends React.Component {
-
-  componentDidMount() {
-    this.props.fetchCapsules()
-  }
 
   render() {
     return (
@@ -43,6 +37,7 @@ class Navbar extends React.Component {
                   <li>
                     <NavLink to='/main'>Capsules</NavLink>
                     <ul>
+                      <li><Link to='/new'>_Curate New Capsule_</Link></li>
                       {this.props.capsules_list
                         && this.props.capsules_list.map(capsule =>
                           <CapsuleListItem
@@ -54,8 +49,7 @@ class Navbar extends React.Component {
                   <li>
                     <NavLink to='/account'>{this.props.user.username}</NavLink>
                     <ul>
-                      <li><Link to='/account'>Profile</Link></li>
-                      <li><Link to='/settings'>Settings</Link></li>
+                      <li><Link to='/account'>Account</Link></li>
                       <li><Link to='/logout'>Logout</Link></li>
                     </ul>
                   </li>
