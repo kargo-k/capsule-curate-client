@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logInUser, isLoggedIn } from '../actions';
+import { logInUser, isLoggedIn, fetchCapsules } from '../actions';
 
 const mapDispatchtoProps = dispatch => {
   return {
     logInUser: (credentials) => dispatch(logInUser(credentials)),
-    isLoggedIn: () => dispatch(isLoggedIn())
+    isLoggedIn: () => dispatch(isLoggedIn()),
+    fetchCapsules: () => dispatch(fetchCapsules())
   }
 }
 
@@ -22,6 +23,7 @@ class LoginForm extends React.Component {
     try {
       this.props.logInUser(credentials)
       setTimeout(() => this.props.history.push('/main'), 500)
+      setTimeout(() => this.props.fetchCapsules(), 500)
     } catch (e) {
       console.log('frontend login post', e.message)
     }

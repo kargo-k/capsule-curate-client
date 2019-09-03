@@ -91,6 +91,7 @@ export const deleteUser = () => {
 }
 
 export const fetchCapsules = () => {
+  console.log('inside fetch capsules ...')
   return (dispatch, getState) => {
     fetch(API + '/capsules', {
       method: 'GET',

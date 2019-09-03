@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CapsuleListItem from './CapsuleListItem';
-import { fetchCapsules } from '../actions';
 
 const mapStateToProps = state => {
   return {
@@ -13,9 +12,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    fetchCapsules: () => dispatch(fetchCapsules())
-  }
+  return {}
 }
 
 class Navbar extends React.Component {
@@ -40,6 +37,7 @@ class Navbar extends React.Component {
                   <li>
                     <NavLink to='/main'>Capsules</NavLink>
                     <ul>
+                      {console.log('inside nav bar', this.props.capsules_list)}
                       {this.props.capsules_list
                         && this.props.capsules_list.map(capsule =>
                           <CapsuleListItem
