@@ -4,7 +4,9 @@ import { Redirect } from 'react-router-dom';
 import { SEASONS } from '../constants';
 import { createCapsule } from '../actions';
 import reactCSS from 'reactcss';
-import { SketchPicker } from 'react-color';
+import { ChromePicker, SliderPicker } from 'react-color';
+import { blockStatement } from '@babel/types';
+import { Z_FIXED } from 'zlib';
 
 const mapDispatchToProps = dispatch => {
   return { createCapsule: payload => dispatch(createCapsule(payload)) }
@@ -26,26 +28,22 @@ class NewCapsule extends React.Component {
     color1: {
       r: '170',
       g: '192',
-      b: '170',
-      a: '1'
+      b: '170'
     },
     color2: {
       r: '115',
       g: '83',
-      b: '114',
-      a: '1'
+      b: '114'
     },
     color3: {
       r: '161',
       g: '130',
-      b: '118',
-      a: '1'
+      b: '118'
     },
     color4: {
       r: '122',
       g: '145',
-      b: '141',
-      a: '1'
+      b: '141'
     },
   }
 
@@ -84,8 +82,8 @@ class NewCapsule extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log('submit form clicked')
-    let colors = e.target.color1.style["background-color"] + ", " + e.target.color2.style["background-color"] + ", " + e.target.color3.style["background-color"] + ", " + e.target.color4.style["background-color"]
+    let colors = `${this.rgb_to_s(this.state.color1)};${this.rgb_to_s(this.state.color2)};${this.rgb_to_s(this.state.color3)};${this.rgb_to_s(this.state.color4)}`
+
     let payload = {
       title: this.state.title,
       description: e.target.description.value,
@@ -96,43 +94,47 @@ class NewCapsule extends React.Component {
     this.props.createCapsule(payload)
   }
 
+  rgb_to_s = rgb => {
+    return `rgb(${rgb.r},${rgb.g},${rgb.b})`
+  }
+
   render() {
 
     const styles = reactCSS({
       'default': {
         color1: {
           width: '36px',
-          height: '14px',
+          height: '36px',
           borderRadius: '2px',
-          background: `rgba(${this.state.color1.r}, ${this.state.color1.g}, ${this.state.color1.b}, ${this.state.color1.a})`,
+          background: `rgb(${this.state.color1.r}, ${this.state.color1.g}, ${this.state.color1.b}`,
         },
         color2: {
           width: '36px',
-          height: '14px',
+          height: '36px',
           borderRadius: '2px',
-          background: `rgba(${this.state.color2.r}, ${this.state.color2.g}, ${this.state.color2.b}, ${this.state.color2.a})`,
+          background: `rgb(${this.state.color2.r}, ${this.state.color2.g}, ${this.state.color2.b})`,
         },
         color3: {
           width: '36px',
-          height: '14px',
+          height: '36px',
           borderRadius: '2px',
-          background: `rgba(${this.state.color3.r}, ${this.state.color3.g}, ${this.state.color3.b}, ${this.state.color3.a})`,
+          background: `rgb(${this.state.color3.r}, ${this.state.color3.g}, ${this.state.color3.b})`,
         },
         color4: {
           width: '36px',
-          height: '14px',
+          height: '36px',
           borderRadius: '2px',
-          background: `rgba(${this.state.color4.r}, ${this.state.color4.g}, ${this.state.color4.b}, ${this.state.color4.a})`,
+          background: `rgb(${this.state.color4.r}, ${this.state.color4.g}, ${this.state.color4.b})`,
         },
         swatch: {
           padding: '5px',
           borderRadius: '1px',
-          boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-          display: 'inline-block',
-          cursor: 'pointer',
+          cursor: 'crosshair',
         },
         popover: {
           position: 'fixed',
+          top: '500px',
+          right: '130px',
           zIndex: '2',
         },
         cover: {
@@ -184,15 +186,21 @@ class NewCapsule extends React.Component {
           </div>
           {this.state.picker1 ? <div style={styles.popover}>
             <div style={styles.cover} onClick={this.handleClose} />
-            <SketchPicker id='color1' color={this.state.color1} onChangeComplete={this.handleColor1Change} />
+            <ChromePicker id='color1' color={this.state.color1} onChangeComplete={this.handleColor1Change} />
           </div> : null}
+
+          {/* <div onClick={this.handleClick} >
+          <div id='picker1' style={styles.color1} />
+        </div>
+        {this.state.picker1 ?
+          (<React.Fragment><div style={styles.cover} onClick={this.handleClose} /> <SliderPicker id='color1' color={this.state.color1} onChangeComplete={this.handleColor1Change} /></React.Fragment>) : null} */}
 
           <div style={styles.swatch} onClick={this.handleClick} >
             <div id='picker2' style={styles.color2} />
           </div>
           {this.state.picker2 ? <div style={styles.popover}>
             <div style={styles.cover} onClick={this.handleClose} />
-            <SketchPicker id='color2' color={this.state.color2} onChangeComplete={this.handleColor2Change} />
+            <ChromePicker id='color2' color={this.state.color2} onChangeComplete={this.handleColor2Change} />
           </div> : null}
 
           <div style={styles.swatch} onClick={this.handleClick} >
@@ -200,7 +208,7 @@ class NewCapsule extends React.Component {
           </div>
           {this.state.picker3 ? <div style={styles.popover}>
             <div style={styles.cover} onClick={this.handleClose} />
-            <SketchPicker id='color3' color={this.state.color3} onChangeComplete={this.handleColor3Change} />
+            <ChromePicker id='color3' color={this.state.color3} onChangeComplete={this.handleColor3Change} />
           </div> : null}
 
           <div style={styles.swatch} onClick={this.handleClick} >
@@ -208,7 +216,7 @@ class NewCapsule extends React.Component {
           </div>
           {this.state.picker4 ? <div style={styles.popover}>
             <div style={styles.cover} onClick={this.handleClose} />
-            <SketchPicker id='color4' color={this.state.color4} onChangeComplete={this.handleColor4Change} />
+            <ChromePicker id='color4' color={this.state.color4} onChangeComplete={this.handleColor4Change} />
           </div> : null}
 
         </label>
@@ -218,7 +226,7 @@ class NewCapsule extends React.Component {
 
           <span className='radio text'><input name='isActive' type='radio' value={true} className='radio' /> Yes, starting today!
           <br />
-            <input name='isActive' type='radio' value={false} className='radio text' /> Nope, just planning ahead!</span>
+            <input name='isActive' type='radio' value={false} className='radio text' checked /> Nope, just planning ahead!</span>
         </label>
 
         <label className='single top'><input
