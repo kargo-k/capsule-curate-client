@@ -6,13 +6,14 @@ import store from './store'
 import Landing from './components/Landing';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
-import MainContainer from './containers/MainContainer';
 import Navbar from './components/Navbar';
 import About from './components/About';
 import NewCapsule from './components/NewCapsule';
 import CollectionContainer from './containers/CollectionContainer';
 import Account from './components/Account';
 import Logout from './components/Logout';
+import CapsuleContainer from './containers/CapsuleContainer';
+import Delete from './components/Delete';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Route exact path='/' component={Landing} />
           <Route path='/'>
             <Route path='/' component={Navbar} />
-            <Route path='/main' component={MainContainer} />
+            <Route path='/main' component={CapsuleContainer} />
             <Route path='/login' component={LoginForm} />
             <Route path='/signup' component={SignupForm} />
             <Route path='/about' component={About} />
@@ -30,6 +31,7 @@ function App() {
             <Route path='/new' component={NewCapsule} />
             <Route path='/account' component={Account} />
             <Route path='/logout' component={Logout} />
+            <Route path='/deleted' component={Delete} />
           </Route>
         </Switch>
       </Router>
