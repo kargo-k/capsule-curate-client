@@ -16,6 +16,13 @@ class NewCapsule extends React.Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  add = (e) => {
+    e.preventDefault()
+    let newColor = document.createElement('input')
+    newColor.className = 'jscolor'
+    document.getElementById('color-boxes').appendChild(newColor)
+  }
+
   render() {
     return (
       <form id='new-capsule'>
@@ -48,7 +55,10 @@ class NewCapsule extends React.Component {
         </label>
 
         <label>Color Palette:
-
+            <button onClick={this.add}>Add a Color</button>
+          <div id='color-boxes'>
+            <input class='jscolor' value="ab2567" />
+          </div>
         </label>
 
       </form>
