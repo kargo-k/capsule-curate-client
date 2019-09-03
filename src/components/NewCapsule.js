@@ -1,12 +1,17 @@
 import React from 'react';
-import jscolor from '../js/jscolor.js';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { SEASONS } from '../constants';
 import { createCapsule } from '../actions';
+import jscolor from '../js/jscolor.js';
 
 const mapDispatchToProps = dispatch => {
   return { createCapsule: payload => dispatch(createCapsule(payload)) }
 }
+
+// const mapStateToProps = state => {
+//   return { logged_in: state.logged_in }
+// }
 
 class NewCapsule extends React.Component {
 
@@ -96,6 +101,7 @@ class NewCapsule extends React.Component {
 
       </form >
     )
+
   }
 }
 
