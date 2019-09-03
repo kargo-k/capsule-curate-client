@@ -46,7 +46,6 @@
   li ul {
     background: $color-med;
     position: absolute;
-    // width: fit-content;
     z-index: 1;
   }
   li ul li {
@@ -57,6 +56,9 @@
     -o-transition:height 200ms ease-in;
     transition:height 200ms ease-in;
     font-size: calc(12px + 0.5vw);
+    a {
+      width: 150px;
+    }
   }
   ul > li:hover ul li {
     height: auto;
