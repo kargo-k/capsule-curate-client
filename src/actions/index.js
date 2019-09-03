@@ -109,7 +109,27 @@ export const fetchCapsules = () => {
 
 export const createCapsule = payload => {
   return (dispatch, getState) => {
-    // fetch(API + '')
+    fetch(API + '/capsules', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        capsule: payload
+      })
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json.error) {
+          console.log('failed to create capsule...', json)
+        } else {
+          console.log('successfully created capsule', json)
+          localStorage.setItem('token', json.jwt)
+          dispatch(isLoggedIn())
+        }
+      })
   }
 }
 

@@ -1,11 +1,18 @@
 import React from 'react';
-import { SEASONS } from '../constants';
 import jscolor from '../js/jscolor.js';
+import { connect } from 'react-redux';
+import { SEASONS } from '../constants';
+import { createCapsule } from '../actions';
+
+const mapDispatchToProps = dispatch => {
+  return { createCapsule: payload => dispatch(createCapsule(payload)) }
+}
 
 class NewCapsule extends React.Component {
 
   state = {
-    title: ""
+    title: "",
+    season: ""
   }
 
   handleChange = e => {
@@ -15,9 +22,14 @@ class NewCapsule extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     let colors = e.target.color1.style["background-color"] + ", " + e.target.color2.style["background-color"] + ", " + e.target.color3.style["background-color"] + ", " + e.target.color4.style["background-color"]
-    console.log(colors)
-    console.log(e.target.isActive.value)
-
+    let payload = {
+      title: this.state.title,
+      description: e.target.description.value,
+      season: this.state.season,
+      colors: colors,
+      active: e.target.isActive.value
+    }
+    this.props.createCapsule(payload)
   }
 
   render() {
@@ -43,7 +55,7 @@ class NewCapsule extends React.Component {
         </label>
 
         <label>Season:
-          <select>
+          <select onChange={this.handleChange} value={this.state.season}>
             {SEASONS.map(s =>
               <option value={s} name='season' key={s}>{s}</option>
             )}
@@ -87,4 +99,4 @@ class NewCapsule extends React.Component {
   }
 }
 
-export default NewCapsule;
+export default connect(null, mapDispatchToProps)(NewCapsule);
