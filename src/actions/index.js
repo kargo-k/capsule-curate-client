@@ -126,8 +126,7 @@ export const createCapsule = payload => {
           console.log('failed to create capsule...', json)
         } else {
           console.log('successfully created capsule', json)
-          localStorage.setItem('token', json.jwt)
-          dispatch(isLoggedIn())
+          dispatch(fetchCapsules())
         }
       })
   }

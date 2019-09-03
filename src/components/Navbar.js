@@ -11,10 +11,6 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {}
-}
-
 class Navbar extends React.Component {
 
   render() {
@@ -50,7 +46,7 @@ class Navbar extends React.Component {
                     <NavLink to='/account'>{this.props.user.username}</NavLink>
                     <ul>
                       <li><Link to='/account'>Account</Link></li>
-                      <li><Link to='/logout'>Logout</Link></li>
+                      <li><Link to='/logout' >Logout</Link></li>
                     </ul>
                   </li>
                 </React.Fragment>)
@@ -72,4 +68,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+export default connect(mapStateToProps)(Navbar)
