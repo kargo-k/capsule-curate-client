@@ -38,7 +38,7 @@ class NewCapsule extends React.Component {
   }
 
   render() {
-    if (!logged_in) {
+    if (!this.props.logged_in) {
       return <Redirect to='/' />
     } else {
       return (
@@ -71,7 +71,7 @@ class NewCapsule extends React.Component {
           </label>
 
           <label>Color Palette:
-  
+
           <input type="hidden" id="color_value" value="AAC0AA" />
             <button name='color1' className="jscolor {valueElement: 'color_value'} color-picker"></button>
 
@@ -88,7 +88,7 @@ class NewCapsule extends React.Component {
 
           <label className='radio-buttons'>
             Set this to your current active capsule?
-  
+
           <span className='radio text'><input name='isActive' type='radio' value={true} className='radio' /> Yes, going to wear this today!
           <br />
               <input name='isActive' type='radio' value={false} className='radio text' /> Nope, just planning ahead!</span>
