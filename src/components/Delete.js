@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 const mapStateToProps = state => {
-  return { logged_in: state.logged_in }
+  return { user: state.user }
 }
 
 const Delete = props => {
 
   setTimeout(() => props.history.push('/account'), 3000)
 
-  if (!props.logged_in) {
+  if (!props.user.username) {
     return <Redirect to='/' />
   } else {
     return (

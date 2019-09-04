@@ -5,8 +5,7 @@ import { deleteUser } from '../actions'
 
 const mapStateToProps = state => {
   return {
-    user: state.user,
-    logged_in: state.logged_in
+    user: state.user
   }
 }
 
@@ -16,12 +15,13 @@ const mapDispatchToProps = dispatch => {
 
 const Account = props => {
 
-  if (!props.logged_in) {
+  if (!localStorage.getItem('username')) {
     return (
       // Redirect to root if the user is not logged in
       <Redirect to='/' />
     )
   } else {
+    // If the user is logged in (in localstorage) then show user details
     return (<div className='user container'>
       <h1>{props.user.username}</h1>
       <h3>{props.user.location}</h3>

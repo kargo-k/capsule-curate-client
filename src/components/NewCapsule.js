@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = state => {
-  return { logged_in: state.logged_in }
+  return { user: state.user }
 }
 
 class NewCapsule extends React.Component {
@@ -147,7 +147,7 @@ class NewCapsule extends React.Component {
       },
     });
 
-    if (!this.props.logged_in) {
+    if (!this.props.user.username) {
       return <Redirect to='/' />
     } else {
       return (
@@ -188,12 +188,6 @@ class NewCapsule extends React.Component {
               <div style={styles.cover} onClick={this.handleClose} />
               <ChromePicker id='color1' disableAlpha={true} color={this.state.color1} onChangeComplete={this.handleColor1Change} />
             </div> : null}
-
-            {/* <div onClick={this.handleClick} >
-          <div id='picker1' style={styles.color1} />
-        </div>
-        {this.state.picker1 ?
-          (<React.Fragment><div style={styles.cover} onClick={this.handleClose} /> <SliderPicker id='color1' color={this.state.color1} onChangeComplete={this.handleColor1Change} /></React.Fragment>) : null} */}
 
             <div style={styles.swatch} onClick={this.handleClick} >
               <div id='picker2' style={styles.color2} />

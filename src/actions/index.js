@@ -1,6 +1,6 @@
 import {
   SHOW_CAPSULE, SET_CAPSULES,
-  SHOW_USER, LOGGED_IN, LOG_OUT,
+  SHOW_USER, LOG_OUT,
   SET_COLLECTION,
   ADD_ITEM, SHOW_ITEM
 } from '../constants/action-types';
@@ -26,7 +26,9 @@ export const createUser = payload => {
         } else {
           console.log('successfully created user', json)
           localStorage.setItem('token', json.jwt)
-          dispatch(isLoggedIn())
+          localStorage.setItem('user_id', json.user.id)
+          localStorage.setItem('username', json.user.username)
+          localStorage.setItem('location', json.user.location)
         }
       })
   }
@@ -53,9 +55,9 @@ export const logInUser = credentials => {
           localStorage.setItem('user_id', json.user.id)
           localStorage.setItem('username', json.user.username)
           localStorage.setItem('location', json.user.location)
-          dispatch(isLoggedIn())
           dispatch(showUser(json.user))
           dispatch(showCapsule(json.capsule))
+          dispatch(fetchCapsules())
         }
       })
   }
@@ -63,10 +65,6 @@ export const logInUser = credentials => {
 
 export const showUser = payload => {
   return { type: SHOW_USER, payload }
-}
-
-export const isLoggedIn = () => {
-  return { type: LOGGED_IN }
 }
 
 export const logOutUser = () => {
@@ -97,6 +95,7 @@ export const fetchCapsules = () => {
     })
       .then(res => res.json())
       .then(data => {
+        localStorage.setItem('capsules_list', JSON.stringify(data))
         dispatch(setCapsules(data))
       })
       .catch(e => console.log('error in get request', e))
@@ -138,7 +137,6 @@ export const showCapsule = payload => {
 }
 
 export const deleteCapsule = id => {
-  console.log('inside delete capsule')
   return (dispatch, getState) => {
     fetch(API + `/capsules/${id}`, {
       method: 'DELETE',
