@@ -1,10 +1,13 @@
 import React from 'react';
 
+
+
 const Item = ({ item }) => {
   return (
-    <React.Fragment>
+    <span className='item-details'>
       <img src={item.image} alt={item.name} />
-    </React.Fragment>
+      <span className='text'>{item.name}</span>
+    </span>
   )
 }
 

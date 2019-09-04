@@ -77,3 +77,11 @@ form {
     text-transform: capitalize;
   }
 }
+#filter {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  border: 0px;
+  flex-direction: row;
+  align-content: flex-start;
+}

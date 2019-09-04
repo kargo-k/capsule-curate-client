@@ -186,7 +186,7 @@ class NewCapsule extends React.Component {
             </div>
             {this.state.picker1 ? <div style={styles.popover}>
               <div style={styles.cover} onClick={this.handleClose} />
-              <ChromePicker id='color1' color={this.state.color1} onChangeComplete={this.handleColor1Change} />
+              <ChromePicker id='color1' disableAlpha={true} color={this.state.color1} onChangeComplete={this.handleColor1Change} />
             </div> : null}
 
             {/* <div onClick={this.handleClick} >
@@ -200,7 +200,7 @@ class NewCapsule extends React.Component {
             </div>
             {this.state.picker2 ? <div style={styles.popover}>
               <div style={styles.cover} onClick={this.handleClose} />
-              <ChromePicker id='color2' color={this.state.color2} onChangeComplete={this.handleColor2Change} />
+              <ChromePicker id='color2' disableAlpha={true} color={this.state.color2} onChangeComplete={this.handleColor2Change} />
             </div> : null}
 
             <div style={styles.swatch} onClick={this.handleClick} >
@@ -208,7 +208,7 @@ class NewCapsule extends React.Component {
             </div>
             {this.state.picker3 ? <div style={styles.popover}>
               <div style={styles.cover} onClick={this.handleClose} />
-              <ChromePicker id='color3' color={this.state.color3} onChangeComplete={this.handleColor3Change} />
+              <ChromePicker id='color3' disableAlpha={true} color={this.state.color3} onChangeComplete={this.handleColor3Change} />
             </div> : null}
 
             <div style={styles.swatch} onClick={this.handleClick} >
@@ -216,7 +216,7 @@ class NewCapsule extends React.Component {
             </div>
             {this.state.picker4 ? <div style={styles.popover}>
               <div style={styles.cover} onClick={this.handleClose} />
-              <ChromePicker id='color4' color={this.state.color4} onChangeComplete={this.handleColor4Change} />
+              <ChromePicker id='color4' disableAlpha={true} color={this.state.color4} onChangeComplete={this.handleColor4Change} />
             </div> : null}
 
           </label>

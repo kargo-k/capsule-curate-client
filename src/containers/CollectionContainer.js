@@ -13,18 +13,56 @@ const mapDispatchToProps = dispatch => {
 
 class CollectionContainer extends React.Component {
 
+  state = {
+    all: "",
+    search: "",
+    price: "",
+    color: "",
+    type: ""
+  }
+
   componentDidMount() {
     this.props.fetchCollection()
   }
 
+  handleChange = e => {
+    this.setState({ search: e.target.value })
+  }
+
+  filterCollection = e => {
+    e.preventDefault()
+    this.setState(prevState => {
+      let all = prevState.all
+      let str = prevState.search
+      let results = this.props.collection.filter(item => item.name.toLowerCase().includes(str))
+      return { all: results }
+    })
+  }
+
   render() {
     return (
-      <React.Fragment>
+      <div className='container'>
         <h1>Collection Container</h1>
-        {this.props.collection && this.props.collection.map(item =>
-          <Item key={item.id} item={item} />
-        )}
-      </React.Fragment>
+
+        <div>
+          <form id='filter' onSubmit={this.filterCollection}>
+            <input
+              name='search'
+              value={this.state.search}
+              type='text'
+              onChange={this.handleChange}
+              placeholder='Filter by name'
+            />
+            <input className='btn' type='submit' value='Search' />
+          </form>
+        </div>
+
+        {this.state.all &&
+          this.state.all.slice(0, 28).map(item =>
+            <Item key={item.id} item={item} />
+          )}
+
+      </div>
     )
   }
 }

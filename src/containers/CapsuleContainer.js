@@ -7,7 +7,8 @@ import { deleteCapsule } from '../actions';
 const mapStateToProps = state => {
   return {
     show_capsule: state.show_capsule,
-    logged_in: state.logged_in
+    logged_in: state.logged_in,
+    user: state.user
   }
 }
 
@@ -43,7 +44,8 @@ class CapsuleContainer extends React.Component {
         )
       } else {
         return (<div className='container'>
-          <h1>No Active Capsules!  Curate a new capsule!</h1>
+          <h3>Welcome back, {this.props.user.username}</h3>
+          <p>Looks like you don't have an active capsule.  Activate an existing capsule, or <Link to='/new'>curate a new one!</Link></p>
         </div>)
       }
     } else {
