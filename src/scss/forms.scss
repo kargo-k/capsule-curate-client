@@ -46,7 +46,6 @@ form {
     font-size: 8pt;
     text-align: left;
   }
- 
   .btn, a {
     background: $color-med;
     color: $color-dark;
@@ -80,7 +79,7 @@ form {
 }
 #filter {
   margin: 0px;
-  padding: 0px;
+  padding: 0px 0px 10px 0px;
   display: flex;
   border: 0px;
   flex-direction: row;
@@ -109,4 +108,20 @@ form {
     box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
     display: inline-block;
   }
+}
+button#next {
+  background: $color-med;
+  color: $color-dark;
+  border-radius: 4px;
+  width: 20vw;
+  border-radius: 6px;
+  font-family: $font-sans-serif;
+  font-weight: 900;
+  font-size: calc(16px + 0.2vw);
+  margin: 10px 20px;
+  padding: 5px 0px;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
+  display: inline-block;
 }
