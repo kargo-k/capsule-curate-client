@@ -1,17 +1,11 @@
 import {
-  SHOW_CAPSULE,
-  SHOW_USER,
-  LOGGED_IN,
-  SET_CAPSULES,
+  SHOW_CAPSULE, SET_CAPSULES,
+  SHOW_USER, LOGGED_IN, LOG_OUT,
   SET_COLLECTION,
-  LOG_OUT
+  ADD_ITEM, SHOW_ITEM
 } from '../constants/action-types';
 
 import { API } from '../constants/api-url';
-
-export const showCapsule = payload => {
-  return { type: SHOW_CAPSULE, payload }
-}
 
 export const createUser = payload => {
   return (dispatch, getState) => {
@@ -55,10 +49,10 @@ export const logInUser = credentials => {
         if (json.error) {
           console.log('post request to login - error', json)
         } else {
-          console.log('post request to login:', json)
           localStorage.setItem('token', json.jwt)
           dispatch(isLoggedIn())
           dispatch(showUser(json.user))
+          dispatch(showCapsule(json.capsule))
         }
       })
   }
@@ -91,7 +85,6 @@ export const deleteUser = () => {
 }
 
 export const fetchCapsules = () => {
-  console.log('inside fetch capsules ...')
   return (dispatch, getState) => {
     fetch(API + '/capsules', {
       method: 'GET',
@@ -126,6 +119,7 @@ export const createCapsule = payload => {
           console.log('failed to create capsule...', json)
         } else {
           console.log('successfully created capsule', json)
+          dispatch(showCapsule(json))
           dispatch(fetchCapsules())
         }
       })
@@ -134,6 +128,28 @@ export const createCapsule = payload => {
 
 export const setCapsules = payload => {
   return { type: SET_CAPSULES, payload }
+}
+
+export const showCapsule = payload => {
+  return { type: SHOW_CAPSULE, payload }
+}
+
+export const deleteCapsule = id => {
+  console.log('inside delete capsule')
+  return (dispatch, getState) => {
+    fetch(API + `/capsules/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(json => {
+        console.log('after delete --', json)
+        // dispatch(showCapsule())
+      })
+      .catch(e => console.log('error in delete request', e))
+  }
 }
 
 export const fetchCollection = () => {
@@ -155,3 +171,22 @@ export const setCollection = payload => {
   return { type: SET_COLLECTION, payload }
 }
 
+export const showItem = payload => {
+  return { type: SHOW_ITEM, payload }
+}
+
+export const addItem = payload => {
+  return (dispatch, getState) => {
+    fetch(API + `/capsules/${payload.capsule.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(json => {
+        console.log('adding item to capsule', json)
+      })
+      .catch(e => console.log('error in patch request', e))
+  }
+}

@@ -2,14 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { SEASONS } from '../constants';
-import { createCapsule } from '../actions';
+import { createCapsule, showCapsule } from '../actions';
 import reactCSS from 'reactcss';
 import { ChromePicker, SliderPicker } from 'react-color';
-import { blockStatement } from '@babel/types';
-import { Z_FIXED } from 'zlib';
 
 const mapDispatchToProps = dispatch => {
-  return { createCapsule: payload => dispatch(createCapsule(payload)) }
+  return {
+    createCapsule: payload => dispatch(createCapsule(payload)),
+    showCapsule: payload => dispatch(showCapsule(payload))
+  }
 }
 
 const mapStateToProps = state => {
@@ -92,6 +93,7 @@ class NewCapsule extends React.Component {
       active: e.target.isActive.value
     }
     this.props.createCapsule(payload)
+    this.props.history.push('/main')
   }
 
   rgb_to_s = rgb => {
@@ -132,9 +134,7 @@ class NewCapsule extends React.Component {
           cursor: 'crosshair',
         },
         popover: {
-          position: 'fixed',
-          top: '500px',
-          right: '130px',
+          position: 'relative',
           zIndex: '2',
         },
         cover: {
@@ -147,99 +147,103 @@ class NewCapsule extends React.Component {
       },
     });
 
-    // if (!this.props.logged_in) {
-    //   return <Redirect to='/' />
-    // } else {
-    return (
-      <form id='new-capsule' onSubmit={this.handleSubmit}>
-        <h1>Curate a New Capsule</h1>
+    if (!this.props.logged_in) {
+      return <Redirect to='/' />
+    } else {
+      return (
+        <form id='new-capsule' onSubmit={this.handleSubmit}>
+          <h1>Curate a New Capsule</h1>
 
-        <label>Title:
+          <label>Title:
         <input
-            type='text'
-            name='title'
-            placeholder='Capsule Title'
-            value={this.state.title}
-            onChange={this.handleChange} />
-        </label>
+              type='text'
+              name='title'
+              placeholder='Capsule Title'
+              value={this.state.title}
+              onChange={this.handleChange} />
+          </label>
 
-        <label>Description:
+          <label>Description:
           <input
-            type='text'
-            name='description'
-            placeholder='#capsulegoals'
-          />
-        </label>
+              type='text'
+              name='description'
+              placeholder='#capsulegoals'
+            />
+          </label>
 
-        <label>Season:
+          <label>Season:
           <select onChange={this.handleChange} value={this.state.season}>
-            {SEASONS.map(s =>
-              <option value={s} name='season' key={s}>{s}</option>
-            )}
-          </select>
-        </label>
+              {SEASONS.map(s =>
+                <option value={s} name='season' key={s}>{s}</option>
+              )}
+            </select>
+          </label>
 
-        <label>Color Palette:
+          <label>Color Palette:
 
         <div style={styles.swatch} onClick={this.handleClick} >
-            <div id='picker1' style={styles.color1} />
-          </div>
-          {this.state.picker1 ? <div style={styles.popover}>
-            <div style={styles.cover} onClick={this.handleClose} />
-            <ChromePicker id='color1' color={this.state.color1} onChangeComplete={this.handleColor1Change} />
-          </div> : null}
+              <div id='picker1' style={styles.color1} />
+            </div>
+            {this.state.picker1 ? <div style={styles.popover}>
+              <div style={styles.cover} onClick={this.handleClose} />
+              <ChromePicker id='color1' disableAlpha={true} color={this.state.color1} onChangeComplete={this.handleColor1Change} />
+            </div> : null}
 
-          {/* <div onClick={this.handleClick} >
+            {/* <div onClick={this.handleClick} >
           <div id='picker1' style={styles.color1} />
         </div>
         {this.state.picker1 ?
           (<React.Fragment><div style={styles.cover} onClick={this.handleClose} /> <SliderPicker id='color1' color={this.state.color1} onChangeComplete={this.handleColor1Change} /></React.Fragment>) : null} */}
 
-          <div style={styles.swatch} onClick={this.handleClick} >
-            <div id='picker2' style={styles.color2} />
-          </div>
-          {this.state.picker2 ? <div style={styles.popover}>
-            <div style={styles.cover} onClick={this.handleClose} />
-            <ChromePicker id='color2' color={this.state.color2} onChangeComplete={this.handleColor2Change} />
-          </div> : null}
+            <div style={styles.swatch} onClick={this.handleClick} >
+              <div id='picker2' style={styles.color2} />
+            </div>
+            {this.state.picker2 ? <div style={styles.popover}>
+              <div style={styles.cover} onClick={this.handleClose} />
+              <ChromePicker id='color2' disableAlpha={true} color={this.state.color2} onChangeComplete={this.handleColor2Change} />
+            </div> : null}
 
-          <div style={styles.swatch} onClick={this.handleClick} >
-            <div id='picker3' style={styles.color3} />
-          </div>
-          {this.state.picker3 ? <div style={styles.popover}>
-            <div style={styles.cover} onClick={this.handleClose} />
-            <ChromePicker id='color3' color={this.state.color3} onChangeComplete={this.handleColor3Change} />
-          </div> : null}
+            <div style={styles.swatch} onClick={this.handleClick} >
+              <div id='picker3' style={styles.color3} />
+            </div>
+            {this.state.picker3 ? <div style={styles.popover}>
+              <div style={styles.cover} onClick={this.handleClose} />
+              <ChromePicker id='color3' disableAlpha={true} color={this.state.color3} onChangeComplete={this.handleColor3Change} />
+            </div> : null}
 
-          <div style={styles.swatch} onClick={this.handleClick} >
-            <div id='picker4' style={styles.color4} />
-          </div>
-          {this.state.picker4 ? <div style={styles.popover}>
-            <div style={styles.cover} onClick={this.handleClose} />
-            <ChromePicker id='color4' color={this.state.color4} onChangeComplete={this.handleColor4Change} />
-          </div> : null}
+            <div style={styles.swatch} onClick={this.handleClick} >
+              <div id='picker4' style={styles.color4} />
+            </div>
+            {this.state.picker4 ? <div style={styles.popover}>
+              <div style={styles.cover} onClick={this.handleClose} />
+              <ChromePicker id='color4' disableAlpha={true} color={this.state.color4} onChangeComplete={this.handleColor4Change} />
+            </div> : null}
 
-        </label>
+          </label>
 
-        <label className='radio-buttons'>
-          Set this to your current active capsule?
+          <label className='radio-buttons'>
+            Set this to your current active capsule?
 
-          <span className='radio text'><input name='isActive' type='radio' value={true} className='radio' /> Yes, starting today!
-          <br />
-            <input name='isActive' type='radio' value={false} className='radio text' checked /> Nope, just planning ahead!</span>
-        </label>
+          <span className='radio text'>
 
-        <label className='single top'><input
-          name="submit"
-          className='btn'
-          type="submit"
-          value="Start Curating"
-          disabled={!(this.state.title)}
-        /></label>
+              <div><input name='isActive' type='radio' value={true} className='radio' /> Yes, starting today!</div>
 
-      </form >
-    )
-    // }
+              <div><input name='isActive' type='radio' value={false} className='radio text' defaultChecked /> Nope, just planning ahead!</div>
+
+            </span>
+          </label>
+
+          <label className='single top'><input
+            name="submit"
+            className='btn'
+            type="submit"
+            value="Start Curating"
+            disabled={!(this.state.title)}
+          /></label>
+
+        </form >
+      )
+    }
   }
 }
 

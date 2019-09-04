@@ -17,6 +17,7 @@ form {
     margin-left: 10px;
     font-size: calc(16px + 0.2vw);
     width: 25vw;
+    height: 30px;
   }
   label {
     margin: 5px 0px;
@@ -75,5 +76,37 @@ form {
   }
   select {
     text-transform: capitalize;
+  }
+}
+#filter {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  border: 0px;
+  flex-direction: row;
+  align-content: flex-start;
+  input {
+    font-family: $font-serif;
+    padding: 5px 10px;
+    margin-left: 10px;
+    font-size: calc(16px + 0.2vw);
+    width: 25vw;
+    height: 30px;
+  }
+  .btn, a {
+    background: $color-med;
+    color: $color-dark;
+    border-radius: 4px;
+    width: 20vw;
+    border-radius: 6px;
+    font-family: $font-sans-serif;
+    font-weight: 900;
+    font-size: calc(16px + 0.2vw);
+    margin: 10px 20px;
+    padding: 5px 0px;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
+    display: inline-block;
   }
 }
