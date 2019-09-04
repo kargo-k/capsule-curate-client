@@ -146,7 +146,7 @@ export const deleteCapsule = id => {
       .then(res => res.json())
       .then(json => {
         console.log('after delete --', json)
-        // dispatch(showCapsule())
+        dispatch(fetchCapsules())
       })
       .catch(e => console.log('error in delete request', e))
   }
