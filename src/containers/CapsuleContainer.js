@@ -37,7 +37,7 @@ class CapsuleContainer extends React.Component {
             <h3>Settings:</h3>
             <Link to='#' onClick={() => this.handleClick(this.props.show_capsule.id)}>Delete Capsule</Link>
 
-            <div id='grid-parent'>
+            <div className='grid'>
               {this.props.show_capsule.items && this.props.show_capsule.items.map(item => <Item key={item.id} item={item} />)}
             </div>
           </div>

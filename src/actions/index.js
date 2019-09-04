@@ -50,6 +50,9 @@ export const logInUser = credentials => {
           console.log('post request to login - error', json)
         } else {
           localStorage.setItem('token', json.jwt)
+          localStorage.setItem('user_id', json.user.id)
+          localStorage.setItem('username', json.user.username)
+          localStorage.setItem('location', json.user.location)
           dispatch(isLoggedIn())
           dispatch(showUser(json.user))
           dispatch(showCapsule(json.capsule))
@@ -146,7 +149,7 @@ export const deleteCapsule = id => {
       .then(res => res.json())
       .then(json => {
         console.log('after delete --', json)
-        // dispatch(showCapsule())
+        dispatch(fetchCapsules())
       })
       .catch(e => console.log('error in delete request', e))
   }

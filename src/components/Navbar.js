@@ -33,7 +33,7 @@ class Navbar extends React.Component {
                   <li>
                     <NavLink to='/main'>Capsules</NavLink>
                     <ul>
-                      <li><Link to='/new'>_Curate New Capsule_</Link></li>
+                      <li><Link to='/new' id='curate-new'> + New Capsule</Link></li>
                       {this.props.capsules_list
                         && this.props.capsules_list.map(capsule =>
                           <CapsuleListItem

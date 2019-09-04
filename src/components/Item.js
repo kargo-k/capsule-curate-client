@@ -7,6 +7,9 @@ const mapDispatchToProps = dispatch => {
   return { show_item: (payload) => dispatch(showItem(payload)) }
 }
 
+const mapStateToProps = state => {
+  return {show_capsule: state.show_capsule}
+}
 
 const Item = props => {
   
@@ -14,6 +17,14 @@ const Item = props => {
     props.show_item(item)
   }
   
+
+  // if (props.show_capsule) {
+  //   return (
+  //     <span className='item-details'>
+  //       <img src={props.item.image} alt={props.item.name} />  
+  //     </span>
+  //   )
+  // } else {
   return (
     <span className='item-details'>
       <img src={props.item.image} alt={props.item.name} />
@@ -24,8 +35,10 @@ const Item = props => {
           </Link>
         </div>
       </span>
+
     </span>
   )
+  // }
 }
 
-export default connect(null, mapDispatchToProps)(Item);
+export default connect(mapStateToProps, mapDispatchToProps)(Item);
