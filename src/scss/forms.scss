@@ -17,6 +17,7 @@ form {
     margin-left: 10px;
     font-size: calc(16px + 0.2vw);
     width: 25vw;
+    height: 30px;
   }
   label {
     margin: 5px 0px;
@@ -84,4 +85,12 @@ form {
   border: 0px;
   flex-direction: row;
   align-content: flex-start;
+  input {
+    font-family: $font-serif;
+    padding: 5px 10px;
+    margin-left: 10px;
+    font-size: calc(16px + 0.2vw);
+    width: 25vw;
+    height: 30px;
+  }
 }
