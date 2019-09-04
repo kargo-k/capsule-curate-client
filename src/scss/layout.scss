@@ -15,18 +15,39 @@
 div.main {
   display: flex;
 }
-#grid-parent {
-  background: $color-light;
-  width: 100%;
+.container {
+  padding: 20px;
+  align-content: center;
+}
+.grid {
+  background: pink;
   display: flex;
-  flex-direction: row-reverse;
+  flex-wrap: wrap;
 }
 span.item-details {
-  color: blue;
-  font-size: 9pt;
   display: flex;
+  flex-direction: row;
+  position: relative;
+  img {
+    // height: auto;
+    max-width: calc(18vw);
+  }
 }
-span.text {
-  // display: none;
-  width: 50px;
+span.slider {
+  // display: inline-block;
+  display: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  height: 100%;
+  z-index: 2;
+  background: $color-accent;
+  padding: 10px 10px -10px 10px;
+}
+span.item-details:hover {
+  span.slider {
+    display: inline-block;
+  }
 }

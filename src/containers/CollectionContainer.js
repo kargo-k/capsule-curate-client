@@ -57,10 +57,12 @@ class CollectionContainer extends React.Component {
           </form>
         </div>
 
-        {this.state.all &&
-          this.state.all.slice(0, 28).map(item =>
-            <Item key={item.id} item={item} />
-          )}
+        <div className='grid'>
+          {this.state.all &&
+            this.state.all.slice(0, 28).map(item =>
+              <Item key={item.id} item={item} />
+            )}
+        </div>
 
       </div>
     )

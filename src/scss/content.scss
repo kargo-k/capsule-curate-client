@@ -1,6 +1,9 @@
 .error {
   color: $color-error;
 }
-img {
-  max-height: 150px;
+span.item-details {
+  font-size: calc(13px + 0.2vw);
+  font-family: $font-sans-serif;
+  font-weight: 600;
+  color: $color-light;
 }
