@@ -14,13 +14,14 @@ const mapDispatchToProps = dispatch => {
 class CollectionContainer extends React.Component {
 
   state = {
-    all: "",
+    all: [],
     search: "",
     price: "",
     color: "",
     category: "all",
     collection_page: 0,
-    results_page: 0
+    results_page: 0,
+    showCollection: true
   }
 
   componentDidMount() {
@@ -51,7 +52,7 @@ class CollectionContainer extends React.Component {
           return (item.name.toLowerCase().includes(str) && (item.category === cat || item.category2 === cat))
         }
       })
-      return { all: results }
+      return { all: results, showCollection: false }
     })
   }
 
@@ -59,6 +60,22 @@ class CollectionContainer extends React.Component {
 
     // pagination increments
     let n_items = 15;
+
+    let initialState = {
+      all: [],
+      search: "",
+      price: "",
+      color: "",
+      category: "all",
+      collection_page: 0,
+      results_page: 0,
+      showCollection: true
+    }
+
+    const reset = () => {
+      // console.log(this.state.showCollection)
+      this.setState({ ...initialState })
+    }
 
     return (
       <div className='container'>
@@ -90,22 +107,23 @@ class CollectionContainer extends React.Component {
             </label>
 
             <input className='btn' type='submit' value='Search' />
+            <button className='btn' id='reset' onClick={reset}>Reset</button>
           </form>
         </div>
 
         <div className='grid'>
-          {this.props.collection && this.state.all == [] &&
-            this.props.collection.slice(this.state.collection_page, this.state.collection_page + n_items).map(item =>
+          {this.props.collection && this.state.showCollection === true &&
+            this.props.collection.slice((this.state.collection_page * n_items), (this.state.collection_page * n_items) + n_items).map(item =>
               <Item key={item.id} item={item} />
             )
           }
 
-          {this.props.collection && this.props.collection.length > n_items &&
+          {this.props.collection && this.state.showCollection === true && this.props.collection.length > n_items &&
             <button id='next' name='collection_page' onClick={this.handleNext} className='btn overlay'>Next Page</button>
           }
 
           {this.state.all &&
-            this.state.all.slice(this.state.results_page, this.state.results_page + n_items).map(item =>
+            this.state.all.slice((this.state.results_page * n_items), (this.state.results_page * n_items) + n_items).map(item =>
               <Item key={item.id} item={item} />
             )}
 

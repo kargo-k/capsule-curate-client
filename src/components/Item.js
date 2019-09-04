@@ -18,13 +18,13 @@ const Item = props => {
   }
   
 
-  if (props.show_capsule) {
-    return (
-      <span className='item-details'>
-        <img src={props.item.image} alt={props.item.name} />  
-      </span>
-    )
-  } else {
+  // if (props.show_capsule) {
+  //   return (
+  //     <span className='item-details'>
+  //       <img src={props.item.image} alt={props.item.name} />  
+  //     </span>
+  //   )
+  // } else {
   return (
     <span className='item-details'>
       <img src={props.item.image} alt={props.item.name} />
@@ -38,7 +38,7 @@ const Item = props => {
 
     </span>
   )
-  }
+  // }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Item);
