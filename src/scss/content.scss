@@ -1,9 +1,10 @@
 .error {
   color: $color-error;
 }
-span.item-details {
+div.text {
   font-size: calc(13px + 0.2vw);
   font-family: $font-sans-serif;
   font-weight: 600;
   color: $color-light;
+  margin: 10px;
 }
