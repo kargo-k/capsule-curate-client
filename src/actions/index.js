@@ -1,10 +1,8 @@
 import {
-  SHOW_CAPSULE,
-  SHOW_USER,
-  LOGGED_IN,
-  SET_CAPSULES,
+  SHOW_CAPSULE, SET_CAPSULES,
+  SHOW_USER, LOGGED_IN, LOG_OUT,
   SET_COLLECTION,
-  LOG_OUT
+  ADD_ITEM, SHOW_ITEM
 } from '../constants/action-types';
 
 import { API } from '../constants/api-url';
@@ -173,3 +171,22 @@ export const setCollection = payload => {
   return { type: SET_COLLECTION, payload }
 }
 
+export const showItem = payload => {
+  return { type: SHOW_ITEM, payload }
+}
+
+export const addItem = payload => {
+  return (dispatch, getState) => {
+    fetch(API + `/capsules/${payload.capsule.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(json => {
+        console.log('adding item to capsule', json)
+      })
+      .catch(e => console.log('error in patch request', e))
+  }
+}

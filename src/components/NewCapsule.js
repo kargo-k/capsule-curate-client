@@ -224,9 +224,13 @@ class NewCapsule extends React.Component {
           <label className='radio-buttons'>
             Set this to your current active capsule?
 
-          <span className='radio text'><input name='isActive' type='radio' value={true} className='radio' /> Yes, starting today!
-          <br />
-              <input name='isActive' type='radio' value={false} className='radio text' defaultChecked /> Nope, just planning ahead!</span>
+          <span className='radio text'>
+
+              <div><input name='isActive' type='radio' value={true} className='radio' /> Yes, starting today!</div>
+
+              <div><input name='isActive' type='radio' value={false} className='radio text' defaultChecked /> Nope, just planning ahead!</div>
+
+            </span>
           </label>
 
           <label className='single top'><input

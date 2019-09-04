@@ -42,7 +42,7 @@ class CollectionContainer extends React.Component {
   render() {
     return (
       <div className='container'>
-        <h1>Collection Container</h1>
+        <h1>Browse the Collection</h1>
 
         <div>
           <form id='filter' onSubmit={this.filterCollection}>
@@ -53,13 +53,14 @@ class CollectionContainer extends React.Component {
               onChange={this.handleChange}
               placeholder='Filter by name'
             />
+
             <input className='btn' type='submit' value='Search' />
           </form>
         </div>
 
         <div className='grid'>
           {this.state.all &&
-            this.state.all.slice(0, 28).map(item =>
+            this.state.all.slice(0, 30).map(item =>
               <Item key={item.id} item={item} />
             )}
         </div>

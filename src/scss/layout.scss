@@ -29,7 +29,7 @@ span.item-details {
   position: relative;
   img {
     // height: auto;
-    max-width: calc(19vw);
+    max-width: 19vw;
   }
 }
 span.slider {
@@ -42,8 +42,8 @@ span.slider {
   right: 0px;
   height: 0px;
   z-index: 2;
-  background: $color-accent;
-  opacity: 0.8;
+  background: $color-med;
+  opacity: 0.9;
   padding: 20px 20px -10px 20px;
   -webkit-transition: height 1s;
   transition: height 1s;
@@ -52,5 +52,14 @@ span.item-details:hover {
   span.slider {
     display: inline-block;
     height: 100%;
+  }
+}
+#item-details {
+  padding: 20px;
+  img {
+    height: 300px;
+  }
+  .details {
+    display: flex;
   }
 }

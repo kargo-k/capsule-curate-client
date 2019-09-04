@@ -5,6 +5,37 @@ div.text {
   font-size: calc(13px + 0.2vw);
   font-family: $font-sans-serif;
   font-weight: 600;
-  color: $color-light;
   margin: 10px;
+  // height: 100%;
+  .subtext {
+    color: $color-light;
+    text-align: left;
+  }
+}
+a.item-link {
+  margin: 0;
+  padding: 0;
+  color: $color-dark;
+}
+#item-details {
+  div.text {
+    font-family: $font-serif;
+    font-weight: normal;
+  }
+  .btn, a {
+    background: $color-med;
+    color: $color-dark;
+    border-radius: 4px;
+    width: 20vw;
+    border-radius: 6px;
+    font-family: $font-sans-serif;
+    font-weight: 900;
+    font-size: calc(16px + 0.2vw);
+    margin: 10px 20px;
+    padding: 5px 0px;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
+    display: inline-block;
+  }
 }
