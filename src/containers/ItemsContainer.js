@@ -3,11 +3,12 @@ import { connect } from "react-redux";
 import Item from '../components/Item'
 
 const mapStateToProps = state => {
-  return { capsule: state.show_capsule }
+  return { capsule: state.show_capsule || state.active_capsule }
 }
 
 class ItemsContainer extends React.Component {
   render() {
+
     if (this.props.capsule === null) {
       return (
         <div>

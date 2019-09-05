@@ -101,6 +101,11 @@ export const fetchCapsules = () => {
       .then(res => res.json())
       .then(data => {
         localStorage.setItem('capsules_list', JSON.stringify(data))
+        let active = data.filter(capsule => capsule.active === true)[0]
+        console.log('inside fetch capsules, active: ', active[0])
+        localStorage.setItem('active_capsule', JSON.stringify(active))
+        dispatch(activeCapsule(active))
+        dispatch(showCapsule(active))
         dispatch(setCapsules(data))
       })
       .catch(e => console.log('error in get request', e))

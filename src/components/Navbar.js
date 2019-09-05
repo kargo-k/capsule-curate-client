@@ -1,12 +1,13 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { showCapsule } from '../actions'
+import { showCapsule, activeCapsule } from '../actions'
 import CapsuleListItem from './CapsuleListItem';
 
 const mapStateToProps = state => {
   return {
-    capsules_list: state.capsules_list
+    capsules_list: state.capsules_list,
+    active_capsule: state.active_capsule
   }
 }
 
@@ -20,7 +21,7 @@ class Navbar extends React.Component {
 
   handleOnClick = () => {
     // reinitializes the show capsule state to null so that when the user clicks on the username in the navbar, the active capsule will show
-    this.props.showCapsule(null)
+    this.props.showCapsule(this.props.active_capsule)
   }
 
   render() {

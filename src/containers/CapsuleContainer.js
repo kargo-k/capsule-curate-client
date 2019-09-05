@@ -38,6 +38,7 @@ class CapsuleContainer extends React.Component {
   }
 
   render() {
+
     if (this.props.user) {
       let capsule = this.props.show_capsule || this.props.active_capsule
       if (capsule) {
