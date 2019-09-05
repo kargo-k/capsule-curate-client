@@ -8,6 +8,7 @@ import ItemsContainer from './ItemsContainer';
 const mapStateToProps = state => {
   return {
     show_capsule: state.show_capsule,
+    active_capsule: state.active_capsule,
     user: state.user
   }
 }
@@ -23,8 +24,8 @@ class CapsuleContainer extends React.Component {
     setTimeout(() => this.props.history.push('/deleted'), 500)
   }
 
-  splitColors = () => {
-    let colors = this.props.show_capsule.colors.split(";")
+  splitColors = (cap_colors) => {
+    let colors = cap_colors.split(";")
     let styles = {
       backgroundColor: `${colors[0]}`,
       backgroundImage:
@@ -39,17 +40,19 @@ class CapsuleContainer extends React.Component {
 
   render() {
     if (this.props.user) {
-      if (this.props.show_capsule) {
+      console.log(this.props)
+      let capsule = this.props.show_capsule || this.props.active_capsule
+      if (capsule) {
         let styles
-        this.props.show_capsule.colors ? styles = this.splitColors() : styles = { backgroundColor: '#fcfcfa' }
+        capsule.colors ? styles = this.splitColors(capsule.colors) : styles = { backgroundColor: '#fcfcfa' }
         return (
           <div id='capsule-show' className='container' style={styles}>
-            <h2>Current Capsule: {this.props.show_capsule.title}</h2>
-            <h4>(Number of Items) {this.props.show_capsule.items && this.props.show_capsule.items.length}</h4>
-            <h4>Active: {this.props.show_capsule.active ? `${true}` : `${false}`}</h4>
-            <h4>{this.props.show_capsule.colors}</h4>
+            <h2>Current Capsule: {capsule.title}</h2>
+            <h4>(Number of Items) {capsule.items && capsule.items.length}</h4>
+            <h4>Active: {capsule.active ? `${true}` : `${false}`}</h4>
+            <h4>{capsule.colors}</h4>
 
-            <Link to='#' className='btn' onClick={() => this.handleClick(this.props.show_capsule.id)}>Delete Capsule</Link>
+            <Link to='#' className='btn' onClick={() => this.handleClick(capsule.id)}>Delete Capsule</Link>
 
             <ItemsContainer />
 

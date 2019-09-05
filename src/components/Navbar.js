@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchCapsules } from '../actions'
+import { fetchCapsules, showCapsule } from '../actions'
 import CapsuleListItem from './CapsuleListItem';
 
 const mapStateToProps = state => {
@@ -11,10 +11,18 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return { fetchCapsules: () => dispatch(fetchCapsules()) }
+  return {
+    fetchCapsules: () => dispatch(fetchCapsules()),
+    showCapsule: (payload) => dispatch(showCapsule(payload))
+  }
 }
 
 class Navbar extends React.Component {
+
+  handleOnClick = () => {
+    this.props.showCapsule(null)
+  }
+
   render() {
     if (!localStorage.getItem('username')) {
       // if the user is not logged in (no data in localstorage)
@@ -74,7 +82,7 @@ class Navbar extends React.Component {
                   </ul>
                 </li>
                 <li>
-                  <NavLink to='/account'>{localStorage.getItem('username')}</NavLink>
+                  <NavLink to='/main' onClick={this.handleOnClick}>{localStorage.getItem('username')}</NavLink>
                   <ul>
                     <li><Link to='/account'>Account</Link></li>
                     <li><Link to='/logout' >Logout</Link></li>

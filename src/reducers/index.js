@@ -1,7 +1,7 @@
 import { SHOW_CAPSULE, SHOW_USER, SET_CAPSULES, SET_COLLECTION, LOG_OUT, DELETE_USER, SHOW_ITEM, ACTIVE_CAPSULE } from '../constants/action-types';
 
 const initialState = {
-  show_capsule: JSON.parse(localStorage.getItem('capsules_list')).filter(c => c.active === true)[0],
+  show_capsule: null,
   user: {
     id: localStorage.getItem('user_id'),
     username: localStorage.getItem('username'),

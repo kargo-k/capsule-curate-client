@@ -125,9 +125,8 @@ export const createCapsule = payload => {
       .then(res => res.json())
       .then(json => {
         if (json.error) {
-          console.log('failed to create capsule...', json)
+          console.log('Failed to create capsule.', json)
         } else {
-          console.log('successfully created capsule', json)
           dispatch(showCapsule(json.capsule))
           dispatch(activeCapsule(json.capsule))
           dispatch(fetchCapsules())
@@ -155,10 +154,9 @@ export const deleteCapsule = id => {
     })
       .then(res => res.json())
       .then(json => {
-        console.log('after delete --', json)
         dispatch(fetchCapsules())
       })
-      .catch(e => console.log('error in delete request', e))
+      .catch(e => console.log('Error in delete request.', e))
   }
 }
 
