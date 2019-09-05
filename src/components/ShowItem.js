@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { addItem } from '../actions';
+import { addItem, fetchCapsules } from '../actions';
 
 const mapStateToProps = state => {
   return {
@@ -19,8 +19,13 @@ const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log('submit add capsule', e.target)
-
+    console.log('submit add capsule', e.target.capsule.value)
+    let payload = {
+      capsule_id: e.target.capsule.value,
+      item_id: item.id
+    }
+    addItem(payload)
+    fetchCapsules()
   }
 
   if (!item) {
@@ -41,7 +46,7 @@ const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
             <form onSubmit={handleSubmit}>
 
               {/* active capsule is the default selected capsule */}
-              <select defaultValue={active_capsule.id}>
+              <select name='capsule' defaultValue={active_capsule.id}>
                 {capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
               </select>
 
@@ -60,4 +65,4 @@ const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
   }
 }
 
-export default connect(mapStateToProps)(ShowItem)
+export default connect(mapStateToProps, mapDispatchToProps)(ShowItem)

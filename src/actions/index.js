@@ -187,10 +187,12 @@ export const showItem = payload => {
 
 export const addItem = payload => {
   return (dispatch, getState) => {
-    fetch(API + `/capsules/${payload.capsule.id}`, {
+    fetch(API + `/capsules/${payload.capsule_id}`, {
       method: 'PATCH',
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
       body: JSON.stringify({
         capsule_id: payload.capsule_id,
