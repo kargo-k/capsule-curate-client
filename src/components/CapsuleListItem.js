@@ -4,7 +4,9 @@ import { showCapsule } from '../actions';
 import { Link } from 'react-router-dom';
 
 const mapDispatchToProps = dispatch => {
-  return { show_capsule: (capsule) => dispatch(showCapsule(capsule)) }
+  return {
+    show_capsule: (capsule) => dispatch(showCapsule(capsule)),
+  }
 }
 
 class CapsuleListItem extends React.Component {
@@ -12,6 +14,7 @@ class CapsuleListItem extends React.Component {
   handleOnClick = (capsule) => {
     this.props.show_capsule(capsule)
   }
+
 
   render() {
     return (

@@ -2,7 +2,7 @@ import {
   SHOW_CAPSULE, SET_CAPSULES, ACTIVE_CAPSULE,
   SHOW_USER, LOG_OUT,
   SET_COLLECTION,
-  ADD_ITEM, SHOW_ITEM
+  SHOW_ITEM
 } from '../constants/action-types';
 
 import { API } from '../constants/api-url';
@@ -90,6 +90,7 @@ export const deleteUser = () => {
 }
 
 export const fetchCapsules = () => {
+  console.log('start fetch capsules')
   return (dispatch, getState) => {
     fetch(API + '/capsules', {
       method: 'GET',
@@ -200,9 +201,7 @@ export const addItem = payload => {
       })
     })
       .then(res => res.json())
-      .then(json => {
-        console.log('adding item to capsule', json)
-      })
+      .then(data => dispatch(fetchCapsules()))
       .catch(e => console.log('error in patch request', e))
   }
 }

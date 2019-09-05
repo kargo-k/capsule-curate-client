@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import Item from '../components/Item';
 import { deleteCapsule } from '../actions';
 import ItemsContainer from './ItemsContainer';
 

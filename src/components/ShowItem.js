@@ -12,31 +12,31 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return { addItem: (payload) => dispatch(addItem(payload)) }
+  return {
+    addItem: (payload) => dispatch(addItem(payload)),
+    fetchCapsules: () => dispatch(fetchCapsules())
+  }
 }
 
 const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log('submit add capsule', e.target.capsule.value)
     let payload = {
       capsule_id: e.target.capsule.value,
       item_id: item.id
     }
     addItem(payload)
-    fetchCapsules()
   }
 
   if (!item) {
     return <Redirect to='/explore' />
   } else {
-    console.log(active_capsule)
     return (
       <div className='container' id='item-details'>
         <h1>{item.name}</h1>
         <div className='details'>
-          <img src={item.image} />
+          <img src={item.image} alt={item.name} />
           <div className='text'>
             Brand: {item.brand} <br />
             Price: {item.price} <br />
