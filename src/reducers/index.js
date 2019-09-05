@@ -10,7 +10,7 @@ const initialState = {
   capsules_list: JSON.parse(localStorage.getItem('capsules_list')),
   collection: null,
   show_item: null,
-  active_capsule: null
+  active_capsule: JSON.parse(localStorage.getItem('active_capsule'))
 }
 
 function reducer(state = initialState, action) {

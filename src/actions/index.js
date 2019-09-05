@@ -53,10 +53,12 @@ export const logInUser = credentials => {
         if (json.error) {
           console.log('post request to login - error', json)
         } else {
+          console.log('after login res', json)
           localStorage.setItem('token', json.jwt)
           localStorage.setItem('user_id', json.user.id)
           localStorage.setItem('username', json.user.username)
           localStorage.setItem('location', json.user.location)
+          localStorage.setItem('active_capsule', JSON.stringify(json.capsule))
           dispatch(showUser(json.user))
           dispatch(showCapsule(json.capsule))
           dispatch(fetchCapsules())
@@ -189,7 +191,11 @@ export const addItem = payload => {
       method: 'PATCH',
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
+      },
+      body: JSON.stringify({
+        capsule_id: payload.capsule_id,
+        item_id: payload.item_id
+      })
     })
       .then(res => res.json())
       .then(json => {

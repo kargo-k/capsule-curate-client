@@ -6,7 +6,8 @@ import { addItem } from '../actions';
 const mapStateToProps = state => {
   return {
     item: state.show_item,
-    capsules_list: state.capsules_list
+    capsules_list: state.capsules_list,
+    active_capsule: state.active_capsule
   }
 }
 
@@ -14,16 +15,18 @@ const mapDispatchToProps = dispatch => {
   return { addItem: (payload) => dispatch(addItem(payload)) }
 }
 
-const ShowItem = ({ item, capsules_list, addItem }) => {
+const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log('submit add capsule')
+    console.log('submit add capsule', e.target)
+
   }
 
   if (!item) {
     return <Redirect to='/explore' />
   } else {
+    console.log(active_capsule)
     return (
       <div className='container' id='item-details'>
         <h1>{item.name}</h1>
@@ -38,8 +41,8 @@ const ShowItem = ({ item, capsules_list, addItem }) => {
             <form onSubmit={handleSubmit}>
 
               {/* active capsule is the default selected capsule */}
-              <select>
-                {capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} selected={capsule.active ? 'selected' : null}>{capsule.title}</option>)}
+              <select defaultValue={active_capsule.id}>
+                {capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
               </select>
 
               <label className='single top'><input
