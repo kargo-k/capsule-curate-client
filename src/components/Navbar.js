@@ -20,6 +20,7 @@ const mapDispatchToProps = dispatch => {
 class Navbar extends React.Component {
 
   handleOnClick = () => {
+    // reinitializes the show capsule state to null so that when the user clicks on the username in the navbar, the active capsule will show
     this.props.showCapsule(null)
   }
 
