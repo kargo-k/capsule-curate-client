@@ -8,6 +8,7 @@ import {
 import { API } from '../constants/api-url';
 
 export const createUser = payload => {
+  localStorage.clear()
   return (dispatch, getState) => {
     fetch(API + '/users', {
       method: 'POST',
