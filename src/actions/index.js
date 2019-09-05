@@ -52,6 +52,7 @@ export const logInUser = credentials => {
       .then(json => {
         if (json.error) {
           console.log('post request to login - error', json)
+          localStorage.clear()
         } else {
           console.log('after login res', json)
           localStorage.setItem('token', json.jwt)
@@ -72,6 +73,7 @@ export const showUser = payload => {
 }
 
 export const logOutUser = () => {
+  localStorage.clear()
   return { type: LOG_OUT }
 }
 
@@ -84,13 +86,14 @@ export const deleteUser = () => {
       }
     })
       .then(res => res.json())
-      .then(json => console.log('deleted!!', json))
+      .then(json => {
+        localStorage.clear()
+      })
       .catch(e => console.log('error in delete request', e))
   }
 }
 
 export const fetchCapsules = () => {
-  console.log('start fetch capsules')
   return (dispatch, getState) => {
     fetch(API + '/capsules', {
       method: 'GET',
@@ -102,7 +105,6 @@ export const fetchCapsules = () => {
       .then(data => {
         localStorage.setItem('capsules_list', JSON.stringify(data))
         let active = data.filter(capsule => capsule.active === true)[0]
-        console.log('inside fetch capsules, active: ', active[0])
         localStorage.setItem('active_capsule', JSON.stringify(active))
         dispatch(activeCapsule(active))
         dispatch(showCapsule(active))

@@ -28,7 +28,13 @@ function reducer(state = initialState, action) {
     case SET_COLLECTION:
       return { ...state, collection: action.payload }
     case LOG_OUT:
-      return { ...initialState }
+      return {
+        show_capsule: null,
+        user: null,
+        capsules_list: null,
+        show_item: null,
+        active_capsule: null
+      }
     case DELETE_USER:
       return { ...initialState }
     default:

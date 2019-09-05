@@ -82,7 +82,7 @@ class Navbar extends React.Component {
                   </ul>
                 </li>
                 <li>
-                  <NavLink to='/main' onClick={this.handleOnClick}>{localStorage.getItem('username')}</NavLink>
+                  <NavLink to='/active' onClick={this.handleOnClick}>{localStorage.getItem('username')}</NavLink>
                   <ul>
                     <li><Link to='/account'>Account</Link></li>
                     <li><Link to='/logout' >Logout</Link></li>

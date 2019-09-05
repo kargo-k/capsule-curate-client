@@ -29,6 +29,12 @@ class SignupForm extends React.Component {
     submitError: ""
   }
 
+  componentWillUnmount() {
+    clearInterval(this.matchPassword)
+    clearInterval(this.checkPW)
+    clearInterval(this.checkUsername)
+  }
+
   handleSubmit = e => {
     e.preventDefault()
     let payload = {
@@ -38,7 +44,7 @@ class SignupForm extends React.Component {
     }
     try {
       this.props.createUser(payload)
-      setTimeout(() => this.props.history.push('/main'), 500)
+      setTimeout(() => this.props.history.push('/main'), 1000)
     } catch (e) {
       console.log(e.message)
     }

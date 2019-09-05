@@ -11,7 +11,7 @@ const Logout = props => {
 
   props.logout()
   localStorage.clear()
-  // setTimeout(() => props.history.push('/'), 5000)
+  setTimeout(() => props.history.push('/'), 5000)
 
   return (
     <div className='container'>

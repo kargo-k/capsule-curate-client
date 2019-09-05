@@ -15,6 +15,7 @@ import Logout from './components/Logout';
 import CapsuleContainer from './containers/CapsuleContainer';
 import Delete from './components/Delete';
 import ShowItem from './components/ShowItem';
+import ActiveCapsuleContainer from './containers/ActiveCapsuleContainer';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/'>
             <Route path='/' component={Navbar} />
             <Route path='/main' component={CapsuleContainer} />
+            <Route path='/active' component={ActiveCapsuleContainer} />
             <Route path='/login' component={LoginForm} />
             <Route path='/signup' component={SignupForm} />
             <Route path='/about' component={About} />
