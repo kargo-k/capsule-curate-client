@@ -20,6 +20,8 @@ const mapDispatchToProps = dispatch => {
 
 const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
 
+  let style
+
   const handleSubmit = e => {
     e.preventDefault()
     let payload = {
@@ -32,6 +34,7 @@ const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
   if (!item) {
     return <Redirect to='/explore' />
   } else {
+    style = { display: 'none' }
     return (
       <div id='item-details'>
         <h1>{item.name}</h1>
@@ -56,6 +59,8 @@ const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
             value="Add to Capsule" /></label>
 
         </form>
+
+        <div className='added-message' style={style}>Added Item!</div>
 
       </div >
     )

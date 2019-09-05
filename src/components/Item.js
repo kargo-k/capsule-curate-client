@@ -13,7 +13,6 @@ const mapStateToProps = state => {
 const Item = props => {
 
   const handleOnClick = item => {
-    console.log('show this item')
     props.show_item(item)
   }
 
