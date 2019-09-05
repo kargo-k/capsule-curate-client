@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchCapsules, showCapsule } from '../actions'
+import { showCapsule } from '../actions'
 import CapsuleListItem from './CapsuleListItem';
 
 const mapStateToProps = state => {
@@ -12,7 +12,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCapsules: () => dispatch(fetchCapsules()),
     showCapsule: (payload) => dispatch(showCapsule(payload))
   }
 }
@@ -55,7 +54,6 @@ class Navbar extends React.Component {
       )
     } else {
       // if the user is logged in, then render user's navbar
-      this.props.fetchCapsules()
       return (
         <div id='nav-container'>
           <div id='navbar' className='nav'>

@@ -40,7 +40,6 @@ class CapsuleContainer extends React.Component {
 
   render() {
     if (this.props.user) {
-      console.log(this.props)
       let capsule = this.props.show_capsule || this.props.active_capsule
       if (capsule) {
         let styles
@@ -50,7 +49,7 @@ class CapsuleContainer extends React.Component {
             <h2>Current Capsule: {capsule.title}</h2>
             <h4>(Number of Items) {capsule.items && capsule.items.length}</h4>
             <h4>Active: {capsule.active ? `${true}` : `${false}`}</h4>
-            <h4>{capsule.colors}</h4>
+            <h4>Season: {capsule.season}</h4>
 
             <Link to='#' className='btn' onClick={() => this.handleClick(capsule.id)}>Delete Capsule</Link>
 
