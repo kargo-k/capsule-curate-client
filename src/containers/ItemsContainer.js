@@ -3,16 +3,25 @@ import { connect } from "react-redux";
 import Item from '../components/Item'
 
 const mapStateToProps = state => {
-  return { items: state.show_capsule.items }
+  return { capsule: state.show_capsule }
 }
 
 class ItemsContainer extends React.Component {
   render() {
-    return (
-      <div className='grid'>
-        {this.props.items && this.props.items.map(item => <Item key={item.id} item={item} />)}
-      </div>
-    )
+    if (this.props.capsule === null) {
+      return (
+        <div>
+          No items to show.  Start adding items!
+        </div>
+      )
+    } else {
+      let items = this.props.capsule.items
+      return (
+        <div className='grid'>
+          {items && items.map(item => <Item key={item.id} item={item} />)}
+        </div>
+      )
+    }
   }
 }
 

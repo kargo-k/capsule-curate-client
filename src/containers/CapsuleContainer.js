@@ -19,14 +19,12 @@ const mapDispatchToProps = dispatch => {
 class CapsuleContainer extends React.Component {
 
   handleClick = id => {
-    console.log('inside handle click', this.props.history)
     this.props.deleteCapsule(id)
     setTimeout(() => this.props.history.push('/deleted'), 500)
   }
 
   splitColors = () => {
     let colors = this.props.show_capsule.colors.split(";")
-    console.log(colors[0])
     let styles = {
       backgroundColor: `${colors[0]}`,
       backgroundImage:

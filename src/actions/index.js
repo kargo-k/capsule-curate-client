@@ -1,5 +1,5 @@
 import {
-  SHOW_CAPSULE, SET_CAPSULES,
+  SHOW_CAPSULE, SET_CAPSULES, ACTIVE_CAPSULE,
   SHOW_USER, LOG_OUT,
   SET_COLLECTION,
   ADD_ITEM, SHOW_ITEM
@@ -104,6 +104,11 @@ export const fetchCapsules = () => {
   }
 }
 
+export const activeCapsule = payload => {
+  // sets the user's active capsule to state
+  return { type: ACTIVE_CAPSULE, payload }
+}
+
 export const createCapsule = payload => {
   return (dispatch, getState) => {
     fetch(API + '/capsules', {
@@ -123,7 +128,8 @@ export const createCapsule = payload => {
           console.log('failed to create capsule...', json)
         } else {
           console.log('successfully created capsule', json)
-          dispatch(showCapsule(json))
+          dispatch(showCapsule(json.capsule))
+          dispatch(activeCapsule(json.capsule))
           dispatch(fetchCapsules())
         }
       })
@@ -131,6 +137,7 @@ export const createCapsule = payload => {
 }
 
 export const setCapsules = payload => {
+  // sets the user's list of capsules to state
   return { type: SET_CAPSULES, payload }
 }
 
