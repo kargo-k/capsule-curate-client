@@ -7,7 +7,6 @@ import { deleteCapsule } from '../actions';
 const mapStateToProps = state => {
   return {
     show_capsule: state.show_capsule,
-    logged_in: state.logged_in,
     user: state.user
   }
 }
@@ -25,7 +24,7 @@ class CapsuleContainer extends React.Component {
   }
 
   render() {
-    if (this.props.logged_in) {
+    if (this.props.user) {
       if (this.props.show_capsule) {
         return (
           <div id='capsule-show' className='container'>
@@ -34,8 +33,7 @@ class CapsuleContainer extends React.Component {
             <h4>Active: {this.props.show_capsule.active ? `${true}` : `${false}`}</h4>
             <h4>{this.props.show_capsule.colors}</h4>
 
-            <h3>Settings:</h3>
-            <Link to='#' onClick={() => this.handleClick(this.props.show_capsule.id)}>Delete Capsule</Link>
+            <Link to='#' className='btn' onClick={() => this.handleClick(this.props.show_capsule.id)}>Delete Capsule</Link>
 
             <div className='grid'>
               {this.props.show_capsule.items && this.props.show_capsule.items.map(item => <Item key={item.id} item={item} />)}

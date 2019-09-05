@@ -39,3 +39,6 @@ a.item-link {
     display: inline-block;
   }
 }
+p, li {
+  font-size: calc(14px + 0.2vw);
+}

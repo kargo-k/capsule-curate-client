@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logOutUser } from '../actions'
 
@@ -10,11 +11,12 @@ const Logout = props => {
 
   props.logout()
   localStorage.clear()
-  setTimeout(() => props.history.push('/'), 5000)
+  // setTimeout(() => props.history.push('/'), 5000)
 
   return (
     <div className='container'>
       <h4>You are Logged out</h4>
+      <Link to='/' className='btn'>Home</Link>
     </div>
   )
 }

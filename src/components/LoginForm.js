@@ -1,14 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logInUser, isLoggedIn, fetchCapsules } from '../actions';
+import { logInUser, fetchCapsules } from '../actions';
 
-const mapDispatchtoProps = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     logInUser: (credentials) => dispatch(logInUser(credentials)),
-    isLoggedIn: () => dispatch(isLoggedIn()),
-    fetchCapsules: () => dispatch(fetchCapsules())
+    fetchCapsules: () => dispatch(fetchCapsules()),
   }
+}
+
+const mapStateToProps = state => {
+  return { user: state.user }
 }
 
 class LoginForm extends React.Component {
@@ -25,7 +28,7 @@ class LoginForm extends React.Component {
       setTimeout(() => this.props.history.push('/main'), 500)
       setTimeout(() => this.props.fetchCapsules(), 500)
     } catch (e) {
-      console.log('frontend login post', e.message)
+      console.log('frontend login post error', e.message)
     }
   }
 
@@ -34,34 +37,38 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    return (
-      <form id='login' onSubmit={this.handleSubmit}>
-        <h1>Login Form</h1>
-        <label>Username: <input
-          name="username"
-          type="text"
-          placeholder="Username"
-          ref={(input) => { this.username = input }}
-        /></label>
-
-        <label>Password:
-        <input
-            name="password"
-            type="password"
-            placeholder="Password"
+    if (!this.props.user) {
+      return <Redirect to='/main' />
+    } else {
+      return (
+        <form id='login' onSubmit={this.handleSubmit}>
+          <h1>Login Form</h1>
+          <label>Username: <input
+            name="username"
+            type="text"
+            placeholder="Username"
+            ref={(input) => { this.username = input }}
           /></label>
 
-        <label className='single top'><input
-          className='btn'
-          name="submit"
-          type="submit"
-          value="Log In" /></label>
+          <label>Password:
+        <input
+              name="password"
+              type="password"
+              placeholder="Password"
+            /></label>
 
-        <label className='single'><Link to='/signup'>New User?</Link></label>
+          <label className='single top'><input
+            className='btn'
+            name="submit"
+            type="submit"
+            value="Log In" /></label>
 
-      </form>
-    )
+          <label className='single'><Link to='/signup'>New User?</Link></label>
+
+        </form>
+      )
+    }
   }
 }
 
-export default connect(null, mapDispatchtoProps)(LoginForm)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
