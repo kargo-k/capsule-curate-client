@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { showItem } from '../actions';
 
 const mapDispatchToProps = dispatch => {
@@ -14,6 +13,7 @@ const mapStateToProps = state => {
 const Item = props => {
 
   const handleOnClick = item => {
+    console.log('show this item')
     props.show_item(item)
   }
 
@@ -22,9 +22,9 @@ const Item = props => {
       <img src={props.item.image} alt={props.item.name} />
       <span className='slider' onClick={() => handleOnClick(props.item)}>
         <div className='text'>
-          <Link className='item-link' to='/item'>{props.item.name}
+          <div className='item-link' to='/item'>{props.item.name}
             <div className='subtext'>{props.item.brand} / {props.item.price}</div>
-          </Link>
+          </div>
 
         </div>
       </span>

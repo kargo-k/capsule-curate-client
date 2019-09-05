@@ -33,33 +33,30 @@ const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
     return <Redirect to='/explore' />
   } else {
     return (
-      <div className='container' id='item-details'>
+      <div id='item-details'>
         <h1>{item.name}</h1>
-        <div className='details'>
-          <img src={item.image} alt={item.name} />
-          <div className='text'>
-            Brand: {item.brand} <br />
-            Price: {item.price} <br />
 
-            <a target='_blank' className='btn' href={`https://${item.shop_link}`}>Purchase</a>
+        <img src={item.image} alt={item.name} />
+        <div className='text'>Brand: {item.brand}</div>
+        <div className='text'>Price: {item.price}</div>
 
-            <form onSubmit={handleSubmit}>
+        {/* <div><a target='_blank' className='btn' href={`https://${item.shop_link}`}>Purchase</a></div> */}
 
-              {/* active capsule is the default selected capsule */}
-              <select name='capsule' defaultValue={active_capsule.id}>
-                {capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
-              </select>
+        <form onSubmit={handleSubmit} id='show-item-form'>
 
-              <label className='single top'><input
-                className='btn'
-                name="submit"
-                type="submit"
-                value="Add to Capsule" /></label>
+          {/* active capsule is the default selected capsule */}
+          <select name='capsule' defaultValue={active_capsule.id}>
+            {capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
+          </select>
 
-            </form>
+          <label><input
+            className='btn'
+            name="submit"
+            type="submit"
+            value="Add to Capsule" /></label>
 
-          </div>
-        </div>
+        </form>
+
       </div >
     )
   }
