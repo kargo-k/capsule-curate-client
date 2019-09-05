@@ -42,11 +42,11 @@ span.slider {
   right: 0px;
   height: 0px;
   z-index: 2;
-  background: $color-med;
   opacity: 0.9;
   padding: 20px 20px -10px 20px;
   -webkit-transition: height 1s;
   transition: height 1s;
+  background: linear-gradient(to bottom, $color-med 10%, rgba(255,255,255,0));
 }
 span.item-details:hover {
   span.slider {

@@ -40,11 +40,12 @@ class CollectionContainer extends React.Component {
   filterCollection = e => {
     e.preventDefault()
     this.setState(prevState => {
-      let all = prevState.all
       let str = prevState.search
       let cat = prevState.category
       let results = this.props.collection.filter(item => {
-        if (str === "") {
+        if (str === "" && cat === 'all') {
+          return this.props.collection
+        } else if (str === "") {
           return (item.category === cat || item.category2 === cat)
         } else if (cat === 'all') {
           return item.name.toLowerCase().includes(str)
@@ -62,7 +63,6 @@ class CollectionContainer extends React.Component {
     let n_items = 15;
 
     let initialState = {
-      all: [],
       search: "",
       price: "",
       color: "",
@@ -73,7 +73,6 @@ class CollectionContainer extends React.Component {
     }
 
     const reset = () => {
-      // console.log(this.state.showCollection)
       this.setState({ ...initialState })
     }
 
@@ -105,6 +104,21 @@ class CollectionContainer extends React.Component {
                 <option value="outerwear">Outwear</option>
               </select>
             </label>
+
+            {/* <label>Color Family:
+              <select name='color' value={this.state.color} onChange={this.handleChange}>
+                <option value="all">All</option>
+                <option value="red">Red</option>
+                <option value="orange">Orange</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="violet">Violet</option>
+                <option value="white">White</option>
+                <option value="gray">Gray</option>
+                <option value="black">Black</option>
+              </select>
+            </label> */}
 
             <input className='btn' type='submit' value='Search' />
             <button className='btn' id='reset' onClick={reset}>Reset</button>

@@ -35,6 +35,7 @@ export const createUser = payload => {
 }
 
 export const logInUser = credentials => {
+  localStorage.clear()
   return (dispatch, getState) => {
     fetch(API + '/login', {
       method: 'POST',
