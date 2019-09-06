@@ -50,21 +50,27 @@ class ActiveCapsuleContainer extends React.Component {
       })
   }
 
-
   render() {
-    return (
-      <div className='container' id='active-container' >
-        <div id='active-left' className='flex'>
-          <h1>Today's forecast for {this.location}: </h1>
-          <Weather data={this.state} />
-          <Outfit />
+    if (this.state.fetchComplete) {
+      return (
+        <div className='container' id='active-container' >
+          <div id='active-left' className='flex'>
+            <h1>Today's forecast for {this.location}: </h1>
+            <Weather data={this.state} />
+            <Outfit
+              hi={this.state.day.apparentTemperatureHigh}
+              lo={this.state.day.apparentTemperatureLow}
+              precip={this.state.current.precipProbability} />
+          </div>
+          <div id='active-right' className='flex'>
+            <h1>{this.props.active_capsule.title}</h1>
+            <ItemsContainer />
+          </div>
         </div>
-        <div id='active-right' className='flex'>
-          <h1>{this.props.active_capsule.title}</h1>
-          <ItemsContainer />
-        </div>
-      </div>
-    )
+      )
+    } else {
+      return null
+    }
   }
 }
 
