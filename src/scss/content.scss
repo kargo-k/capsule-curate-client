@@ -38,6 +38,11 @@ a.item-link {
     box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
     display: inline-block;
   }
+  .added-message {
+    color: $color-accent;
+    font-weight: 600;
+    font-size: calc(12px + 0.2vw);
+  }
 }
 p, li {
   font-size: calc(14px + 0.2vw);

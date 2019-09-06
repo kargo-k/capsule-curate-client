@@ -38,7 +38,7 @@
   a {
     display: block;
     color: $color-dark;
-    padding: 0 20px;
+    padding: 0px;
   }
   a:hover {
     color: $color-accent;
@@ -51,14 +51,11 @@
   li ul li {
     overflow: hidden;
     height: 0;
-    -webkit-transition:height 200ms ease-in;
-    -moz-transition:height 200ms ease-in;
-    -o-transition:height 200ms ease-in;
-    transition:height 200ms ease-in;
-    font-size: calc(12px + 0.5vw);
-    a {
-      // width: 150px;
-    }
+    font-size: calc(12px + 0.2vw);
+  }
+  ul > li > a {
+    // width: 100%;
+    // word-wrap: normal;
   }
   ul > li:hover ul li {
     height: auto;

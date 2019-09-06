@@ -172,9 +172,9 @@ class NewCapsule extends React.Component {
           </label>
 
           <label>Season:
-          <select onChange={this.handleChange} value={this.state.season}>
+          <select name='season' onChange={this.handleChange} value={this.state.season}>
               {SEASONS.map(s =>
-                <option value={s} name='season' key={s}>{s}</option>
+                <option value={s} key={s}>{s}</option>
               )}
             </select>
           </label>

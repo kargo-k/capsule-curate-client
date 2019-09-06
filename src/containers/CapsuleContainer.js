@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import Item from '../components/Item';
 import { deleteCapsule } from '../actions';
+import ItemsContainer from './ItemsContainer';
 
 const mapStateToProps = state => {
   return {
     show_capsule: state.show_capsule,
+    active_capsule: state.active_capsule,
     user: state.user
   }
 }
@@ -18,32 +19,48 @@ const mapDispatchToProps = dispatch => {
 class CapsuleContainer extends React.Component {
 
   handleClick = id => {
-    console.log('inside handle click', this.props.history)
     this.props.deleteCapsule(id)
     setTimeout(() => this.props.history.push('/deleted'), 500)
   }
 
+  splitColors = (cap_colors) => {
+    let colors = cap_colors.split(";")
+    let styles = {
+      backgroundColor: `${colors[0]}`,
+      backgroundImage:
+        `linear-gradient(225deg, 
+        ${colors[0]} 0%, 
+        ${colors[1]} 25%, 
+        ${colors[2]} 50%,
+        ${colors[3]} 75%)`
+    }
+    return styles
+  }
+
   render() {
+
     if (this.props.user) {
-      if (this.props.show_capsule) {
+      let capsule = this.props.show_capsule || this.props.active_capsule
+      if (capsule) {
+        let styles
+        capsule.colors ? styles = this.splitColors(capsule.colors) : styles = { backgroundColor: '#fcfcfa' }
         return (
-          <div id='capsule-show' className='container'>
-            <h2>Current Capsule: {this.props.show_capsule.title}</h2>
-            <h4>(Number of Items) {this.props.show_capsule.items && this.props.show_capsule.items.length}</h4>
-            <h4>Active: {this.props.show_capsule.active ? `${true}` : `${false}`}</h4>
-            <h4>{this.props.show_capsule.colors}</h4>
+          <div id='capsule-show' className='container' style={styles}>
+            <h2>Current Capsule: {capsule.title}</h2>
+            <h4>(Number of Items) {capsule.items && capsule.items.length}</h4>
+            <h4>Active: {capsule.active ? `${true}` : `${false}`}</h4>
+            <h4>Season: {capsule.season}</h4>
 
-            <Link to='#' className='btn' onClick={() => this.handleClick(this.props.show_capsule.id)}>Delete Capsule</Link>
+            <Link to='#' className='btn' onClick={() => this.handleClick(capsule.id)}>Delete Capsule</Link>
 
-            <div className='grid'>
-              {this.props.show_capsule.items && this.props.show_capsule.items.map(item => <Item key={item.id} item={item} />)}
-            </div>
-          </div>
+            <ItemsContainer />
+
+          </div >
         )
       } else {
         return (<div className='container'>
           <h3>Welcome back, {this.props.user.username}</h3>
-          <p>Looks like you don't have an active capsule.  Activate an existing capsule, or <Link to='/new'>curate a new one!</Link></p>
+          <p>Looks like you don't have an active capsule. <Link to='/new'>curate a new one!</Link></p>
         </div>)
       }
     } else {

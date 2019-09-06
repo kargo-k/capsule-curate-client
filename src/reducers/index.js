@@ -1,4 +1,4 @@
-import { SHOW_CAPSULE, SHOW_USER, SET_CAPSULES, SET_COLLECTION, LOG_OUT, DELETE_USER, SHOW_ITEM } from '../constants/action-types';
+import { SHOW_CAPSULE, SHOW_USER, SET_CAPSULES, SET_COLLECTION, LOG_OUT, DELETE_USER, SHOW_ITEM, ACTIVE_CAPSULE } from '../constants/action-types';
 
 const initialState = {
   show_capsule: null,
@@ -9,11 +9,14 @@ const initialState = {
   },
   capsules_list: JSON.parse(localStorage.getItem('capsules_list')),
   collection: null,
-  show_item: null
+  show_item: null,
+  active_capsule: JSON.parse(localStorage.getItem('active_capsule'))
 }
 
 function reducer(state = initialState, action) {
   switch (action.type) {
+    case ACTIVE_CAPSULE:
+      return { ...state, active_capsule: action.payload }
     case SHOW_CAPSULE:
       return { ...state, show_capsule: action.payload }
     case SHOW_USER:
@@ -25,7 +28,13 @@ function reducer(state = initialState, action) {
     case SET_COLLECTION:
       return { ...state, collection: action.payload }
     case LOG_OUT:
-      return { ...initialState }
+      return {
+        show_capsule: null,
+        user: null,
+        capsules_list: null,
+        show_item: null,
+        active_capsule: null
+      }
     case DELETE_USER:
       return { ...initialState }
     default:

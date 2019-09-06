@@ -1,13 +1,14 @@
 import {
-  SHOW_CAPSULE, SET_CAPSULES,
+  SHOW_CAPSULE, SET_CAPSULES, ACTIVE_CAPSULE,
   SHOW_USER, LOG_OUT,
   SET_COLLECTION,
-  ADD_ITEM, SHOW_ITEM
+  SHOW_ITEM
 } from '../constants/action-types';
 
 import { API } from '../constants/api-url';
 
 export const createUser = payload => {
+  localStorage.clear()
   return (dispatch, getState) => {
     fetch(API + '/users', {
       method: 'POST',
@@ -51,11 +52,14 @@ export const logInUser = credentials => {
       .then(json => {
         if (json.error) {
           console.log('post request to login - error', json)
+          localStorage.clear()
         } else {
+          console.log('after login res', json)
           localStorage.setItem('token', json.jwt)
           localStorage.setItem('user_id', json.user.id)
           localStorage.setItem('username', json.user.username)
           localStorage.setItem('location', json.user.location)
+          localStorage.setItem('active_capsule', JSON.stringify(json.capsule))
           dispatch(showUser(json.user))
           dispatch(showCapsule(json.capsule))
           dispatch(fetchCapsules())
@@ -69,6 +73,7 @@ export const showUser = payload => {
 }
 
 export const logOutUser = () => {
+  localStorage.clear()
   return { type: LOG_OUT }
 }
 
@@ -81,7 +86,9 @@ export const deleteUser = () => {
       }
     })
       .then(res => res.json())
-      .then(json => console.log('deleted!!', json))
+      .then(json => {
+        localStorage.clear()
+      })
       .catch(e => console.log('error in delete request', e))
   }
 }
@@ -97,10 +104,19 @@ export const fetchCapsules = () => {
       .then(res => res.json())
       .then(data => {
         localStorage.setItem('capsules_list', JSON.stringify(data))
+        let active = data.filter(capsule => capsule.active === true)[0]
+        localStorage.setItem('active_capsule', JSON.stringify(active))
+        dispatch(activeCapsule(active))
+        dispatch(showCapsule(active))
         dispatch(setCapsules(data))
       })
       .catch(e => console.log('error in get request', e))
   }
+}
+
+export const activeCapsule = payload => {
+  // sets the user's active capsule to state
+  return { type: ACTIVE_CAPSULE, payload }
 }
 
 export const createCapsule = payload => {
@@ -119,10 +135,10 @@ export const createCapsule = payload => {
       .then(res => res.json())
       .then(json => {
         if (json.error) {
-          console.log('failed to create capsule...', json)
+          console.log('Failed to create capsule.', json)
         } else {
-          console.log('successfully created capsule', json)
-          dispatch(showCapsule(json))
+          dispatch(showCapsule(json.capsule))
+          dispatch(activeCapsule(json.capsule))
           dispatch(fetchCapsules())
         }
       })
@@ -130,6 +146,7 @@ export const createCapsule = payload => {
 }
 
 export const setCapsules = payload => {
+  // sets the user's list of capsules to state
   return { type: SET_CAPSULES, payload }
 }
 
@@ -147,10 +164,9 @@ export const deleteCapsule = id => {
     })
       .then(res => res.json())
       .then(json => {
-        console.log('after delete --', json)
         dispatch(fetchCapsules())
       })
-      .catch(e => console.log('error in delete request', e))
+      .catch(e => console.log('Error in delete request.', e))
   }
 }
 
@@ -179,16 +195,20 @@ export const showItem = payload => {
 
 export const addItem = payload => {
   return (dispatch, getState) => {
-    fetch(API + `/capsules/${payload.capsule.id}`, {
+    fetch(API + `/capsules/${payload.capsule_id}`, {
       method: 'PATCH',
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        capsule_id: payload.capsule_id,
+        item_id: payload.item_id
+      })
     })
       .then(res => res.json())
-      .then(json => {
-        console.log('adding item to capsule', json)
-      })
+      .then(data => dispatch(fetchCapsules()))
       .catch(e => console.log('error in patch request', e))
   }
 }

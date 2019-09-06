@@ -8,8 +8,6 @@ const mapStateToProps = state => {
 
 const Delete = props => {
 
-  setTimeout(() => props.history.push('/account'), 3000)
-
   if (!props.user.username) {
     return <Redirect to='/' />
   } else {
