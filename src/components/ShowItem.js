@@ -36,7 +36,7 @@ const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
   } else {
     style = { display: 'none' }
     return (
-      <div id='item-details'>
+      <div id='item-details' className='container'>
         <h1>{item.name}</h1>
 
         <img src={item.image} alt={item.name} />

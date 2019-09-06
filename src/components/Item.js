@@ -27,13 +27,9 @@ const Item = props => {
           {props.removeItem &&
             <button className='remove-btn' onClick={() => props.removeItem({ capsule_id: props.capsule_id, item_id: props.item.id })}>Remove</button>}
 
-
           <div className='text'>{props.item.name}
             <div className='subtext'>{props.item.brand}</div>
           </div>
-
-
-
 
         </span>
       </Link>
