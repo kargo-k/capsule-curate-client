@@ -24,9 +24,9 @@ div.main {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  span.slider {
-    display: none;
-  }
+  // span.slider {
+  //   display: none;
+  // }
   span.item-details {
     display: flex;
     flex-direction: row;
@@ -36,6 +36,26 @@ div.main {
       width: auto;
       max-height: 200px;
       min-height: 100px;
+    }
+  }
+  span.slider {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    height: 0px;
+    z-index: 2;
+    opacity: 0.9;
+    padding: 20px 20px -10px 20px;
+    -webkit-transition: height .2s;
+    transition: height 1s;
+    background: linear-gradient(to bottom, $color-med 10%, rgba(255,255,255,0));
+  }
+  span.item-details:hover {
+    span.slider {
+      display: inline-block;
+      height: 100%;
     }
   }
 }

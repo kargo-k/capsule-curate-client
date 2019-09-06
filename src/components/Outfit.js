@@ -14,7 +14,7 @@ class Outfit extends React.Component {
       <div id='ootd-container'>
         <h1>#OOTD</h1>
         <div id='ootd-div'>
-          {ootd.map(item => <Item key={item.id} item={item} />)}
+          {ootd.map(item => <Item key={item.name} item={item} />)}
         </div>
       </div>
     )
@@ -30,7 +30,7 @@ class Outfit extends React.Component {
       ootd_date = ootd.pop()
     }
 
-    if (ootd && ootd_date < new Date()) {
+    if (!ootd || ootd_date < new Date()) {
       // if the ootd is stored in local storage and the date is less than today picks a new outfit based on weather forecast each day
       let one_piece_outfits = this.props.items.filter(i => i.category2 === 'one piece')
       let bottoms = this.props.items.filter(i => i.category2 === 'bottoms')

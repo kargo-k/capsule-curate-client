@@ -23,6 +23,7 @@ const Item = props => {
         <div className='text'>
           <div className='item-link' to='/item'>{props.item.name}
             <div className='subtext'>{props.item.brand} / {props.item.price}</div>
+            <button onClick={() => props.removeItem({ capsule_id: props.capsule_id, item_id: props.item.id })}>Remove Item</button>
           </div>
 
         </div>

@@ -4,9 +4,14 @@ import { connect } from 'react-redux';
 import ItemsContainer from './ItemsContainer';
 import Outfit from '../components/Outfit';
 import { WEATHER } from '../constants/api-url';
+import { removeItem } from '../actions';
 
 const mapStateToProps = state => {
   return { active_capsule: state.active_capsule }
+}
+
+const mapDispatchToProps = dispatch => {
+  return { removeItem: item => dispatch(removeItem(item)) }
 }
 
 class ActiveCapsuleContainer extends React.Component {
@@ -28,7 +33,6 @@ class ActiveCapsuleContainer extends React.Component {
         fetch(WEATHER + `/weather?loc=${lat_lng.lat}_${lat_lng.lng}`)
           .then(res => res.json())
           .then(json => {
-            console.log(json)
             let current = json.currently
             let summary = json.hourly.summary
             let morning = json.hourly.data[8]
@@ -63,7 +67,7 @@ class ActiveCapsuleContainer extends React.Component {
           </div>
           <div id='active-right' className='flex'>
             <h1>{this.props.active_capsule.title}</h1>
-            <ItemsContainer />
+            <ItemsContainer removeItem={this.props.removeItem} />
           </div>
         </div>
       )
@@ -73,4 +77,4 @@ class ActiveCapsuleContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(ActiveCapsuleContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ActiveCapsuleContainer);
