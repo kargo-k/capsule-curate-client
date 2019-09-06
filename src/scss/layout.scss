@@ -22,37 +22,53 @@ div.main {
 .flex {
   display: flex;
   flex-wrap: wrap;
-}
-span.item-details {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  img {
-    // height: auto;
-    max-height: 20vh;
-    min-height: 170px;
-  }
-}
-span.slider {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  height: 0px;
-  z-index: 2;
-  opacity: 0.9;
-  padding: 20px 20px -10px 20px;
-  -webkit-transition: height .2s;
-  transition: height 1s;
-  background: linear-gradient(to bottom, $color-med 10%, rgba(255,255,255,0));
-}
-span.item-details:hover {
+  align-items: center;
+  justify-content: space-around;
   span.slider {
-    display: inline-block;
-    height: 100%;
+    display: none;
+  }
+  span.item-details {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    img {
+      // image size within an item container
+      width: auto;
+      max-height: 20vh;
+      min-height: 170px;
+    }
   }
 }
+// slider should only show in the discover section
+div.collection {
+  span.item-details {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+  }
+  span.slider {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    height: 0px;
+    z-index: 2;
+    opacity: 0.9;
+    padding: 20px 20px -10px 20px;
+    -webkit-transition: height .2s;
+    transition: height 1s;
+    background: linear-gradient(to bottom, $color-med 10%, rgba(255,255,255,0));
+  }
+  span.item-details:hover {
+    span.slider {
+      display: inline-block;
+      height: 100%;
+    }
+  }
+}
+
+
 #collection {
   display: flex;
   justify-content: space-between;
@@ -94,13 +110,24 @@ span.item-details:hover {
 #active-container {
   display: flex;
   justify-content: space-between;
+  height: 100%;
+
   #active-left {
+    background: $color-accent;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-self: flex-start;
     height: 100%;
     #weather p {
-      padding: 10px;
+      padding: 5px;
     }
+  }
+
+  #active-right {
+    background: $color-light2;
+    flex: 4 1 auto;
+    flex-direction: column;
+    align-items: center;
   }
 }

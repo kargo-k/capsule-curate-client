@@ -125,7 +125,7 @@ class CollectionContainer extends React.Component {
           </form>
         </div>
 
-        <div className='flex'>
+        <div className='flex collection'>
           {this.props.collection && this.state.showCollection === true &&
             this.props.collection.slice((this.state.collection_page * n_items), (this.state.collection_page * n_items) + n_items).map(item =>
               <Item key={item.id} item={item} />
