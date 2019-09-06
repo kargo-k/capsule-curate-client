@@ -11,12 +11,12 @@ class Outfit extends React.Component {
   render() {
     let ootd = this.pickOutfit()
     return (
-      <React.Fragment>
+      <div id='ootd-container'>
         <h1>#OOTD</h1>
-        <div className='container' id='ootd-div'>
+        <div id='ootd-div'>
           {ootd.map(item => <Item key={item.id} item={item} />)}
         </div>
-      </React.Fragment>
+      </div>
     )
   }
 

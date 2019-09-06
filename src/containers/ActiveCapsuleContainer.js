@@ -55,7 +55,6 @@ class ActiveCapsuleContainer extends React.Component {
       return (
         <div className='container' id='active-container' >
           <div id='active-left' className='flex'>
-            <h1>Today's forecast for {this.location}: </h1>
             <Weather data={this.state} />
             <Outfit
               hi={this.state.day.apparentTemperatureHigh}

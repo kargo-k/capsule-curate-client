@@ -2,13 +2,28 @@ import React from 'react';
 
 
 const Weather = ({ data }) => {
-
+  let location = localStorage.getItem('location')
   if (data.fetchComplete) {
     return (
       <div id='weather'>
-        <p>It is currently {data.current.summary.toLowerCase()} and is {data.current.temperature}F.
 
-          Today, expect it to be {data.summary.toLowerCase()} Today's high is {data.day.apparentTemperatureHigh}F and low of {data.day.apparentTemperatureLow}F with a {data.current.precipProbability}% probability of rain.</p>
+        <h1>Today's forecast for {location}</h1>
+
+        <p>Currently, it is {data.current.temperature}F and {data.current.summary.toLowerCase()}.  Expect it to be {data.summary.toLowerCase()}</p>
+
+        <table id='hilo'>
+          <tbody>
+            <tr>
+              <td>High: {data.day.apparentTemperatureHigh}&deg;F</td>
+            </tr>
+            <tr>
+              <td>Low: {data.day.apparentTemperatureLow}&deg;F</td>
+            </tr>
+            <tr>
+              <td>{data.current.precipProbability}% chance of Rain</td>
+            </tr>
+          </tbody>
+        </table>
 
         <table>
           <tbody>
@@ -17,14 +32,14 @@ const Weather = ({ data }) => {
               <th>5 pm</th>
               <th>9 pm</th></tr>
             <tr>
-              <td>{data.morning.temperature}F</td>
-              <td>{data.noon.temperature}F</td>
-              <td>{data.evening.temperature}F</td>
-              <td>{data.night.temperature}F</td>
+              <td>{data.morning.temperature}&deg;F</td>
+              <td>{data.noon.temperature}&deg;F</td>
+              <td>{data.evening.temperature}&deg;F</td>
+              <td>{data.night.temperature}&deg;F</td>
             </tr>
           </tbody>
         </table>
-      </div>
+      </div >
     )
   } else {
     return null
