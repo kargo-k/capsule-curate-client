@@ -11,8 +11,8 @@ const ActiveCapsuleContainer = props => {
 
   return (
     <div className='container'>
-      <h1>Welcome back!</h1>
       <Weather />
+      <h1>{props.active_capsule.title}</h1>
       <ItemsContainer />
     </div>
   )

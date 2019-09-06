@@ -56,7 +56,7 @@ class Weather extends React.Component {
           <h1>Today's forecast for {this.location}: </h1>
           It is currently {this.state.current.summary.toLowerCase()} and is {this.state.current.temperature}F.
 
-          Today, expect it to be {this.state.summary.toLowerCase()} with a high of {this.state.day.apparentTemperatureHigh}F and a low of {this.state.day.apparentTemperatureLow}F with a {this.state.current.precipProbability}% probability of rain.
+          Today, expect it to be {this.state.summary.toLowerCase()} Today's high is {this.state.day.apparentTemperatureHigh}F and low of {this.state.day.apparentTemperatureLow}F with a {this.state.current.precipProbability}% probability of rain.
 
           <table>
             <tbody>
