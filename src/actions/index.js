@@ -193,6 +193,27 @@ export const showItem = payload => {
   return { type: SHOW_ITEM, payload }
 }
 
+export const removeItem = payload => {
+  console.log('dispatch dispatch remove item')
+  return (dispatch, getState) => {
+    fetch(API + `/capsules/${payload.capsule_id}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        capsule_id: payload.capsule_id,
+        item_id: payload.item_id
+      })
+    })
+      .then(res => res.json())
+      .then(data => dispatch(fetchCapsules()))
+      .catch(e => console.log('error in patch request', e))
+  }
+}
+
 export const addItem = payload => {
   return (dispatch, getState) => {
     fetch(API + `/capsules/${payload.capsule_id}`, {
