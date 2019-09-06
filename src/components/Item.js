@@ -17,16 +17,16 @@ const Item = props => {
   }
 
   return (
-    <span className='item-details'>
+    <span className='item-details' onClick={() => handleOnClick(props.item)}>
       <img src={props.item.image} alt={props.item.name} />
-      <span className='slider' onClick={() => handleOnClick(props.item)}>
+      {/* <span className='slider' >
         <div className='text'>
           <div className='item-link' to='/item'>{props.item.name}
             <div className='subtext'>{props.item.brand} / {props.item.price}</div>
           </div>
 
         </div>
-      </span>
+      </span> */}
 
     </span>
   )

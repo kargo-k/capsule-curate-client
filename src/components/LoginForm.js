@@ -24,7 +24,7 @@ class LoginForm extends React.Component {
 
     try {
       this.props.logInUser(credentials)
-      setTimeout(() => this.props.history.push('/main'), 0)
+      setTimeout(() => this.props.history.push('/active'), 0)
     } catch (e) {
       console.log('frontend login post error', e.message)
     }
