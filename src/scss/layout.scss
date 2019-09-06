@@ -19,7 +19,7 @@ div.main {
   padding: 20px;
   align-items: center;
 }
-.grid {
+.flex {
   display: flex;
   flex-wrap: wrap;
 }
@@ -85,6 +85,19 @@ span.item-details:hover {
         padding: 0;
         width: auto;
       }
+    }
+  }
+}
+#active-container {
+  display: flex;
+  justify-content: space-between;
+  #active-left {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    height: 100%;
+    #weather p {
+      padding: 10px;
     }
   }
 }

@@ -18,7 +18,7 @@ class ItemsContainer extends React.Component {
     } else {
       let items = this.props.capsule.items
       return (
-        <div className='grid'>
+        <div className='flex'>
           {items && items.map(item => <Item key={item.id} item={item} />)}
         </div>
       )
