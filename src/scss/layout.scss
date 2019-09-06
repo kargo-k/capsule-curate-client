@@ -55,11 +55,14 @@ span.item-details:hover {
 }
 #collection {
   display: flex;
+  justify-content: space-between;
   #browse {
+    align-self: flex-start;
     width: 60%;
   }
   #item-details {
     display: flex;
+    align-self: center;
     margin-left: 20px;
     width: 35%;
     height: 100%;
