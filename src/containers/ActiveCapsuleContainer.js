@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return { removeItem: item => dispatch(removeItem(item)) }
+  return { removeItem: payload => dispatch(removeItem(payload)) }
 }
 
 class ActiveCapsuleContainer extends React.Component {
