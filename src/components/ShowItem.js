@@ -37,13 +37,11 @@ const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
     style = { display: 'none' }
     return (
       <div id='item-details' className='container'>
-        <h1>{item.name}</h1>
+        <h1>{item.name} // {item.brand}</h1>
 
         <img src={item.image} alt={item.name} />
-        <div className='text'>Brand: {item.brand}</div>
+        <div className='text'>Color: {item.color}</div>
         <div className='text'>Price: {item.price}</div>
-
-        {/* <div><a target='_blank' className='btn' href={`https://${item.shop_link}`}>Purchase</a></div> */}
 
         <form onSubmit={handleSubmit} id='show-item-form'>
 
@@ -59,6 +57,8 @@ const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
             value="Add to Capsule" /></label>
 
         </form>
+
+        <div><a target='_blank' className='btn' id="purchase" href={`https://${item.shop_link}`}>Purchase at {item.brand}</a></div>
 
         <div className='added-message' style={style}>Added Item!</div>
 

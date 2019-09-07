@@ -100,11 +100,12 @@ div.collection {
 
 #item-details {
   display: flex;
-  align-self: center;
-  margin-left: 20px;
-  width: 35%;
+  margin: 20px;
+  width: 100%;
   height: 100%;
-  max-width: 300px;
+  border: 1px $color-med solid;
+  align-self: center;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   div.text {
@@ -238,4 +239,3 @@ div.collection {
     }
   }
 }
-
