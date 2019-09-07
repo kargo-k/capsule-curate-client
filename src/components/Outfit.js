@@ -14,7 +14,7 @@ class Outfit extends React.Component {
       <div id='ootd-container'>
         <h1>#OOTD</h1>
         <div id='ootd-div'>
-          {ootd.map(item => <Item key={item.name} item={item} />)}
+          {ootd.map(item => <Item key={item.id} item={item} />)}
         </div>
       </div>
     )
