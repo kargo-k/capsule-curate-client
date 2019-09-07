@@ -35,37 +35,35 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    if (!this.props.user) {
-      return <Redirect to='/main' />
-    } else {
-      return (
-        <form id='login' onSubmit={this.handleSubmit}>
-          <h1>Login Form</h1>
-          <label>Username: <input
-            name="username"
-            type="text"
-            placeholder="Username"
-            ref={(input) => { this.username = input }}
+
+    return (
+      <form id='login' onSubmit={this.handleSubmit}>
+        <h1>Login Form</h1>
+        <label>Username: <input
+          name="username"
+          type="text"
+          placeholder="Username"
+          ref={(input) => { this.username = input }}
+        /></label>
+
+        <label>Password:
+        <input
+            name="password"
+            type="password"
+            placeholder="Password"
           /></label>
 
-          <label>Password:
-        <input
-              name="password"
-              type="password"
-              placeholder="Password"
-            /></label>
+        <label className='single top'><input
+          className='btn'
+          name="submit"
+          type="submit"
+          value="Log In" /></label>
 
-          <label className='single top'><input
-            className='btn'
-            name="submit"
-            type="submit"
-            value="Log In" /></label>
+        <label className='single'><Link to='/signup'>New User?</Link></label>
 
-          <label className='single'><Link to='/signup'>New User?</Link></label>
+      </form>
+    )
 
-        </form>
-      )
-    }
   }
 }
 

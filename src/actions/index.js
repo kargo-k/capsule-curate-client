@@ -54,14 +54,11 @@ export const logInUser = credentials => {
           console.log('post request to login - error', json)
           localStorage.clear()
         } else {
-          console.log('after login res', json)
           localStorage.setItem('token', json.jwt)
           localStorage.setItem('user_id', json.user.id)
           localStorage.setItem('username', json.user.username)
           localStorage.setItem('location', json.user.location)
-          localStorage.setItem('active_capsule', JSON.stringify(json.capsule))
           dispatch(showUser(json.user))
-          dispatch(showCapsule(json.capsule))
           dispatch(fetchCapsules())
         }
       })
@@ -104,9 +101,11 @@ export const fetchCapsules = () => {
       .then(res => res.json())
       .then(data => {
         localStorage.setItem('capsules_list', JSON.stringify(data))
-        let active = data.filter(capsule => capsule.active === true)[0]
-        localStorage.setItem('active_capsule', JSON.stringify(active))
-        dispatch(activeCapsule(active))
+        let active = data.filter(capsule => capsule.active === true)
+        if (active !== []) {
+          localStorage.setItem('active_capsule', JSON.stringify(active[0]))
+          dispatch(activeCapsule(active))
+        }
         dispatch(showCapsule(active))
         dispatch(setCapsules(data))
       })

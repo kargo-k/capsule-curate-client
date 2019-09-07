@@ -19,7 +19,7 @@ const Header = props => {
       <h3>{props.capsule.season} Season </h3>
       <h3>{props.capsule.items.length} of 36 Hangers Filled</h3>
 
-      <Link to='#' className='btn' onClick={() => handleClick(props.capsule.id)}>{props.capsule.active ? 'Put in Storage' : 'Start The New Season'}</Link>
+      <Link to='#' className='btn' onClick={() => handleClick(props.capsule.id)}>{props.capsule.active ? 'Put Away' : 'Start Wearing'}</Link>
 
 
     </div>

@@ -10,16 +10,16 @@ const mapStateToProps = state => {
 class Outfit extends React.Component {
 
   componentDidMount() {
-    // if (this.props.items.length === 0) {
-    //   this.render(false)
-    // } else {
-    //   this.render(true)
-    // }
+    if (!this.props.items) {
+      this.render(false)
+    } else {
+      this.render(true)
+    }
   }
 
   render(bool) {
-    console.log(this.props.items)
-    if (this.props.items.length === 0) {
+    if (this.props.items) {
+      debugger
       return (
         <div id='ootd-container'>
           <h1>Add items to get an #OOTD</h1>
@@ -30,20 +30,29 @@ class Outfit extends React.Component {
       )
     } else {
       let ootd = this.pickOutfit()
-      ootd = ootd.filter(el => el != null)
-      return (
-        <div id='ootd-container'>
-          <h1>#OOTD</h1>
-          <div id='ootd-div'>
-            {ootd.map(item => <Item key={item.id} item={item} />)}
+      debugger
+      if (ootd) {
+        ootd = ootd.filter(el => el != null)
+        return (
+          <div id='ootd-container'>
+            <h1>#OOTD</h1>
+            <div id='ootd-div'>
+              {ootd.map(item => <Item key={item.id} item={item} />)}
+            </div>
           </div>
-        </div>
-      )
+        )
+      } else {
+        return (
+          <div id='ootd-container'>
+            <h1>no outfits to show</h1>
+          </div>
+        )
+      }
+
     }
   }
 
   pickOutfit() {
-
     let ootd, ootd_date
     ootd = JSON.parse(localStorage.getItem('ootd'))
 
@@ -52,7 +61,7 @@ class Outfit extends React.Component {
       ootd_date = ootd.pop()
     }
 
-    if (!ootd || ootd_date < new Date()) {
+    if (this.props.items && ootd || ootd_date < new Date()) {
       // if the ootd is stored in local storage and the date is less than today picks a new outfit based on weather forecast each day
       let one_piece_outfits = this.props.items.filter(i => i.category2 === 'one piece')
       let bottoms = this.props.items.filter(i => i.category2 === 'bottoms')
