@@ -38,7 +38,7 @@ class Navbar extends React.Component {
                 </li>
 
                 <li>
-                  <NavLink to='/explore'>Discover</NavLink>
+                  <NavLink to='/discover'>Discover</NavLink>
                 </li>
 
                 <li>
@@ -66,7 +66,7 @@ class Navbar extends React.Component {
                 </li>
 
                 <li>
-                  <NavLink to='/explore'>Discover</NavLink>
+                  <NavLink to='/discover'>Discover</NavLink>
                 </li>
 
                 <li>

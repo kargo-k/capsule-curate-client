@@ -154,6 +154,22 @@ export const showCapsule = payload => {
   return { type: SHOW_CAPSULE, payload }
 }
 
+export const toggleCapsule = id => {
+  return (dispatch, getState) => {
+    fetch(API + `/capsules/activate/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(json => {
+        dispatch(fetchCapsules())
+      })
+      .catch(e => console.log('Error in delete request.', e))
+  }
+}
+
 export const deleteCapsule = id => {
   return (dispatch, getState) => {
     fetch(API + `/capsules/${id}`, {

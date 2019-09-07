@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Item from './Item';
 
 const mapStateToProps = state => {
@@ -8,16 +9,37 @@ const mapStateToProps = state => {
 
 class Outfit extends React.Component {
 
-  render() {
-    let ootd = this.pickOutfit()
-    return (
-      <div id='ootd-container'>
-        <h1>#OOTD</h1>
-        <div id='ootd-div'>
-          {ootd.map(item => <Item key={item.id} item={item} />)}
+  componentDidMount() {
+    // if (this.props.items.length === 0) {
+    //   this.render(false)
+    // } else {
+    //   this.render(true)
+    // }
+  }
+
+  render(bool) {
+    console.log(this.props.items)
+    if (this.props.items.length === 0) {
+      return (
+        <div id='ootd-container'>
+          <h1>Add items to get an #OOTD</h1>
+          <div id='ootd-div'>
+            <Link className='btn' to='/discover'>Add Items</Link>
+          </div>
+        </div >
+      )
+    } else {
+      let ootd = this.pickOutfit()
+      ootd = ootd.filter(el => el != null)
+      return (
+        <div id='ootd-container'>
+          <h1>#OOTD</h1>
+          <div id='ootd-div'>
+            {ootd.map(item => <Item key={item.id} item={item} />)}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 
   pickOutfit() {
@@ -58,8 +80,8 @@ class Outfit extends React.Component {
           bottoms = bottoms.filter(i => i.category !== 'shorts')
         }
 
-        ootd.push(tops[Math.floor(Math.random() * tops.length)])
-        ootd.push(bottoms[Math.floor(Math.random() * bottoms.length)])
+        tops !== [] && ootd.push(tops[Math.floor(Math.random() * tops.length)])
+        bottoms !== [] && ootd.push(bottoms[Math.floor(Math.random() * bottoms.length)])
       }
 
       // if the probability of rain is greater than 60%, suggest a rain item if the user has one
