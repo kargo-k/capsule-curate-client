@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import ItemsContainer from './ItemsContainer';
 import Outfit from '../components/Outfit';
 import { WEATHER } from '../constants/api-url';
-import { removeItem } from '../actions';
+import { updateItem } from '../actions';
 
 const mapStateToProps = state => {
   return { active_capsule: state.active_capsule }
 }
 
 const mapDispatchToProps = dispatch => {
-  return { removeItem: payload => dispatch(removeItem(payload)) }
+  return { updateItem: payload => dispatch(updateItem(payload)) }
 }
 
 class ActiveCapsuleContainer extends React.Component {
@@ -67,7 +67,7 @@ class ActiveCapsuleContainer extends React.Component {
           </div>
           <div id='active-right' className='flex'>
             <h1>{this.props.active_capsule.title}</h1>
-            <ItemsContainer removeItem={this.props.removeItem} />
+            <ItemsContainer updateItem={this.props.updateItem} />
           </div>
         </div>
       )

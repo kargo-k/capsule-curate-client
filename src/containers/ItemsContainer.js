@@ -19,7 +19,7 @@ class ItemsContainer extends React.Component {
       let items = this.props.capsule.items
       return (
         <div className='flex'>
-          {items && items.map(item => <Item key={item.id} item={item} capsule_id={this.props.capsule.id} removeItem={this.props.removeItem} />)}
+          {items && items.map(item => <Item key={item.id} item={item} capsule_id={this.props.capsule.id} updateItem={this.props.updateItem} />)}
         </div>
       )
     }

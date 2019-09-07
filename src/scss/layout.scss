@@ -101,20 +101,32 @@ div.collection {
 #item-details {
   display: flex;
   margin: 20px;
-  width: 100%;
-  height: 100%;
   border: 1px $color-med solid;
-  align-self: center;
-  justify-content: center;
   flex-direction: column;
-  align-items: center;
+  div.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
   div.text {
-    display: inline;
+    display: block;
   }
   img {
     display: block;
-    max-width: 250px;
-    max-height: 300px;
+    max-width: 50vw;
+    max-height: 80vh;
+  }
+  div.right {
+    width: 40%;
+    label {
+      display: block;
+      font-size: calc(12px + 0.2vw);
+      option {
+        font-size: calc(12px + 0.2vw);
+        color: blue;
+        background-color: blue;
+      }
+    }
   }
   form#show-item-form {
     width: 100%;
@@ -126,6 +138,9 @@ div.collection {
       margin: 0;
       padding: 0;
       width: auto;
+    }
+    .btn:enabled:hover, a:hover {
+      background: $color-accent;
     }
   }
 }

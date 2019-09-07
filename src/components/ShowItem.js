@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { addItem, fetchCapsules } from '../actions';
+import { updateItem, fetchCapsules } from '../actions';
 
 const mapStateToProps = state => {
   return {
@@ -13,22 +13,22 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addItem: (payload) => dispatch(addItem(payload)),
+    updateItem: (payload) => dispatch(updateItem(payload)),
     fetchCapsules: () => dispatch(fetchCapsules())
   }
 }
 
-const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
+const ShowItem = ({ item, capsules_list, updateItem, active_capsule }) => {
 
   let style
 
   const handleSubmit = e => {
     e.preventDefault()
     let payload = {
-      capsule_id: e.target.capsule.value,
+      capsule_id: e.target.capsule.value.id,
       item_id: item.id
     }
-    addItem(payload)
+    updateItem(payload)
   }
 
   if (!item) {
@@ -38,30 +38,40 @@ const ShowItem = ({ item, capsules_list, addItem, active_capsule }) => {
     return (
       <div id='item-details' className='container'>
         <h1>{item.name} // {item.brand}</h1>
+        <div className='wrapper' >
 
         <img src={item.image} alt={item.name} />
+
+        <div className='right'>
         <div className='text'>Color: {item.color}</div>
         <div className='text'>Price: {item.price}</div>
 
         <form onSubmit={handleSubmit} id='show-item-form'>
 
           {/* active capsule is the default selected capsule */}
-          <select name='capsule' defaultValue={active_capsule.id}>
-            {capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
-          </select>
+          <div className='custom-select'>
+            <label>Add this to a capsule:
+              <select name='capsule' defaultValue={active_capsule.id}>
+                {capsules_list.map(capsule => <option key={capsule.id} value={capsule} >{capsule.title}</option>)}
+              </select>
+            </label>
+          </div>
 
           <label><input
-            className='btn'
+            className='btn accent'
             name="submit"
             type="submit"
-            value="Add to Capsule" /></label>
+            value="Add" /></label>
+
+        <label><a target='_blank' className='btn' id="purchase" href={`https://${item.shop_link}`}>Purchase at {item.brand}</a></label>
 
         </form>
 
-        <div><a target='_blank' className='btn' id="purchase" href={`https://${item.shop_link}`}>Purchase at {item.brand}</a></div>
 
         <div className='added-message' style={style}>Added Item!</div>
+        </div>
 
+        </div>
       </div >
     )
   }

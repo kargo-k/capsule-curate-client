@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { deleteCapsule, removeItem } from '../actions';
+import { deleteCapsule, updateItem } from '../actions';
 import ItemsContainer from './ItemsContainer';
+import Header from '../components/Header'
 
 const mapStateToProps = state => {
   return {
@@ -15,7 +16,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     deleteCapsule: (id) => dispatch(deleteCapsule(id)),
-    removeItem: payload => dispatch(removeItem(payload))
+    updateItem: payload => dispatch(updateItem(payload))
   }
 }
 
@@ -56,7 +57,7 @@ class CapsuleContainer extends React.Component {
 
             <Link to='#' className='btn' onClick={() => this.handleClick(capsule.id)}>Delete Capsule</Link>
 
-            <ItemsContainer capsule_id={capsule.id} removeItem={this.props.removeItem} />
+            <ItemsContainer capsule_id={capsule.id} updateItem={this.props.updateItem} />
 
           </div >
         )
