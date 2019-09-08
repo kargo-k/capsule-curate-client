@@ -44,30 +44,17 @@ class CapsuleContainer extends React.Component {
   render() {
 
     if (this.props.user) {
-      let capsule = this.props.show_capsule || this.props.active_capsule
+      let capsule = this.props.show_capsule
       if (capsule) {
-
         return (
           <div id='capsule-show' className='container'>
 
             <Header capsule={capsule} />
 
-            {/* <h2>Current Capsule: {capsule.title}</h2>
-            <h4>(Number of Items) {capsule.items && capsule.items.length}</h4>
-            <h4>Active: {capsule.active ? `${true}` : `${false}`}</h4>
-            <h4>Season: {capsule.season}</h4>
-
-            <Link to='#' className='btn' onClick={() => this.handleClick(capsule.id)}>Delete Capsule</Link> */}
-
             <ItemsContainer capsule_id={capsule.id} updateItem={this.props.updateItem} />
 
           </div >
         )
-      } else {
-        return (<div className='container'>
-          <h3>Welcome back, {this.props.user.username}</h3>
-          <p>Looks like you don't have an active capsule. Activate an existing capsule, or <Link to='/new'>curate a new one!</Link></p>
-        </div>)
       }
     } else {
       return <Redirect to='/' />

@@ -9,17 +9,13 @@ const mapStateToProps = state => {
 
 class Outfit extends React.Component {
 
+  state = { items: [] }
+
   componentDidMount() {
-    if (!this.props.items) {
-      this.render(false)
-    } else {
-      this.render(true)
-    }
   }
 
-  render(bool) {
+  render() {
     if (this.props.items) {
-      debugger
       return (
         <div id='ootd-container'>
           <h1>Add items to get an #OOTD</h1>

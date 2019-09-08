@@ -10,7 +10,6 @@ const mapDispatchToProps = dispatch => {
 const Logout = props => {
 
   props.logout()
-  localStorage.clear()
 
   return (
     <div className='container'>

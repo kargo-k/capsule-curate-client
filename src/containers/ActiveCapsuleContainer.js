@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Weather from '../components/Weather';
 import { connect } from 'react-redux';
 import ItemsContainer from './ItemsContainer';
@@ -7,7 +8,10 @@ import { WEATHER } from '../constants/api-url';
 import { updateItem } from '../actions';
 
 const mapStateToProps = state => {
-  return { active_capsule: state.active_capsule }
+  return {
+    active_capsule: state.active_capsule,
+    user: state.user
+  }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -55,7 +59,7 @@ class ActiveCapsuleContainer extends React.Component {
   }
 
   render() {
-    if (this.state.fetchComplete) {
+    if (this.state.fetchComplete && this.props.active_capsule) {
       return (
         <div className='container' id='active-container' >
           <div id='active-left' className='flex'>
@@ -72,7 +76,12 @@ class ActiveCapsuleContainer extends React.Component {
         </div>
       )
     } else {
-      return null
+      return (
+        <div className='container'>
+          {/* <h3>Welcome back, {this.props.user.username}</h3> */}
+          <p>Looks like you don't have an active capsule. Activate an existing capsule, or <Link to='/new'>curate a new one!</Link></p>
+        </div>
+      )
     }
   }
 }
