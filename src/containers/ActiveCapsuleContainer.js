@@ -30,32 +30,34 @@ class ActiveCapsuleContainer extends React.Component {
   // const WEATHER_ENDPOINT = `/weather?loc=${latitude}_${longitude}`;
 
   componentDidMount() {
-    fetch(WEATHER + `/location/${this.location}`)
-      .then(res => res.json())
-      .then(json => {
-        let lat_lng = json.results[0].geometry.location;
-        fetch(WEATHER + `/weather?loc=${lat_lng.lat}_${lat_lng.lng}`)
-          .then(res => res.json())
-          .then(json => {
-            let current = json.currently
-            let summary = json.hourly.summary
-            let morning = json.hourly.data[8]
-            let noon = json.hourly.data[12]
-            let evening = json.hourly.data[17]
-            let night = json.hourly.data[21]
-            let day = json.daily.data[0]
-            this.setState({
-              current: current,
-              summary: summary,
-              day: day,
-              morning: morning,
-              noon: noon,
-              evening: evening,
-              night: night,
-              fetchComplete: true
+    if (this.props.username) {
+      fetch(WEATHER + `/location/${this.location}`)
+        .then(res => res.json())
+        .then(json => {
+          let lat_lng = json.results[0].geometry.location;
+          fetch(WEATHER + `/weather?loc=${lat_lng.lat}_${lat_lng.lng}`)
+            .then(res => res.json())
+            .then(json => {
+              let current = json.currently
+              let summary = json.hourly.summary
+              let morning = json.hourly.data[8]
+              let noon = json.hourly.data[12]
+              let evening = json.hourly.data[17]
+              let night = json.hourly.data[21]
+              let day = json.daily.data[0]
+              this.setState({
+                current: current,
+                summary: summary,
+                day: day,
+                morning: morning,
+                noon: noon,
+                evening: evening,
+                night: night,
+                fetchComplete: true
+              })
             })
-          })
-      })
+        })
+    }
   }
 
   render() {
@@ -75,13 +77,16 @@ class ActiveCapsuleContainer extends React.Component {
           </div>
         </div>
       )
-    } else {
+    } else if (this.props.user.username) {
+      console.log('inside active capsule', this.props);
       return (
         <div className='container'>
           <h3>Welcome back, {this.props.user.username}</h3>
           <p>Looks like you don't have an active capsule. Activate an existing capsule, or <Link to='/new'>curate a new one!</Link></p>
         </div>
       )
+    } else {
+      return <Redirect to='/' />
     }
   }
 }

@@ -1,11 +1,7 @@
 import { SHOW_CAPSULE, SET_USER, SET_CAPSULES, SET_COLLECTION, LOG_OUT, DELETE_USER, SHOW_ITEM, ACTIVE_CAPSULE } from '../constants/action-types';
 
 const initialState = {
-  user: {
-    id: localStorage.getItem('user_id'),
-    username: localStorage.getItem('username'),
-    location: localStorage.getItem('location')
-  },
+  user: JSON.parse(localStorage.getItem('user')),
   capsules_list: JSON.parse(localStorage.getItem('capsules_list')),
   show_capsule: null,
   active_capsule: null,
@@ -28,6 +24,7 @@ function reducer(state = initialState, action) {
     case SET_COLLECTION:
       return { ...state, collection: action.payload }
     case LOG_OUT:
+      console.log('user logged out');
       return {
         show_capsule: null,
         user: null,

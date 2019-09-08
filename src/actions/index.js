@@ -96,6 +96,7 @@ export const deleteUser = () => {
 
 export const fetchCapsules = () => {
   // every time fetchCapsules is called, it fetches all of the capsules for the user and resets the capsules list and active_capsule in state.  if the user does not have any active capsule, the active_capsule in state will be null
+  console.log('fetching capsules happening!');
   return (dispatch, getState) => {
     fetch(API + '/capsules', {
       method: 'GET',
@@ -106,7 +107,6 @@ export const fetchCapsules = () => {
       .then(res => res.json())
       .then(data => {
         localStorage.setItem('capsules_list', JSON.stringify(data))
-
         // filters all the user's capsules for their active capsule
         let active = data.filter(capsule => capsule.active === true)
         if (active !== []) {
@@ -164,7 +164,7 @@ export const showCapsule = payload => {
 }
 
 export const toggleCapsule = id => {
-  // activates or inactivates a capsule. a user can have only 1 active capsule
+  // activates or inactivates a capsule. a user can have only 1 active capsule at a time
   return (dispatch, getState) => {
     fetch(API + `/capsules/activate/${id}`, {
       method: 'PATCH',
@@ -174,6 +174,11 @@ export const toggleCapsule = id => {
     })
       .then(res => res.json())
       .then(json => {
+        // sets the updated capsule to the show_capsule in state
+        dispatch(showCapsule(json.capsule))
+        // if (json.capsule.active) {
+        //   dispatch(activeCapsule(json.capsule))
+        // }
         // does a fetch for the updated capsule list
         dispatch(fetchCapsules())
       })

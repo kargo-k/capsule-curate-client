@@ -49,7 +49,7 @@ class CapsuleContainer extends React.Component {
         return (
           <div id='capsule-show' className='container'>
 
-            <Header capsule={capsule} />
+            <Header />
 
             <ItemsContainer capsule_id={capsule.id} updateItem={this.props.updateItem} />
 
