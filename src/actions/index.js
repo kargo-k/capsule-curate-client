@@ -4,7 +4,6 @@ import {
   SET_COLLECTION,
   SHOW_ITEM
 } from '../constants/action-types';
-
 import { API } from '../constants/api-url';
 
 export const createUser = payload => {
@@ -123,6 +122,7 @@ export const fetchCapsules = () => {
 
 export const activeCapsule = payload => {
   // sets the user's active capsule to state
+  console.log('setting the active capsule to state: ', payload);
   return { type: ACTIVE_CAPSULE, payload }
 }
 

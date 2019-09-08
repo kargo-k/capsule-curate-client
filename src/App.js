@@ -1,6 +1,6 @@
 import React from 'react';
 import './scss/main.scss';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import store from './store'
 import Landing from './components/Landing';

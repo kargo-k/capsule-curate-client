@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Weather from '../components/Weather';
 import { connect } from 'react-redux';
 import ItemsContainer from './ItemsContainer';
@@ -78,7 +78,7 @@ class ActiveCapsuleContainer extends React.Component {
     } else {
       return (
         <div className='container'>
-          {/* <h3>Welcome back, {this.props.user.username}</h3> */}
+          <h3>Welcome back, {this.props.user.username}</h3>
           <p>Looks like you don't have an active capsule. Activate an existing capsule, or <Link to='/new'>curate a new one!</Link></p>
         </div>
       )

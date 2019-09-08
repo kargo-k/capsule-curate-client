@@ -20,7 +20,7 @@ class Outfit extends React.Component {
         <div id='ootd-container'>
           <h1>Add items to get an #OOTD</h1>
           <div id='ootd-div'>
-            <Link className='btn' to='/discover'>Add Items</Link>
+            <Link className='btn' to='/discover'>Browse Collection</Link>
           </div>
         </div >
       )

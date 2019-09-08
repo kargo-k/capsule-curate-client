@@ -9,7 +9,7 @@ const Weather = ({ data }) => {
 
         <h1>Today's forecast for {location}</h1>
 
-        <p>Currently, it is {data.current.temperature}F and {data.current.summary.toLowerCase()}.  Expect it to be {data.summary.toLowerCase()}</p>
+        <p>Currently, it is {data.current.temperature}&deg;F and {data.current.summary.toLowerCase()}.  Expect it to be {data.summary.toLowerCase()}</p>
 
         <table id='hilo'>
           <tbody>
@@ -20,7 +20,7 @@ const Weather = ({ data }) => {
               <td>Low: {data.day.apparentTemperatureLow}&deg;F</td>
             </tr>
             <tr>
-              <td>{data.current.precipProbability}% chance of Rain</td>
+              <td>{data.current.precipProbability}% chance of rain</td>
             </tr>
           </tbody>
         </table>

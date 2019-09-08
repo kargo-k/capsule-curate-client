@@ -24,46 +24,48 @@ class LoginForm extends React.Component {
 
     try {
       this.props.logInUser(credentials)
-      setTimeout(() => this.props.history.push('/active'), 0)
     } catch (e) {
       console.log('frontend login post error', e.message)
     }
   }
 
   componentDidMount() {
-    this.username.focus()
+    !this.props.user.username && this.username.focus()
   }
 
   render() {
-
-    return (
-      <form id='login' onSubmit={this.handleSubmit}>
-        <h1>Login Form</h1>
-        <label>Username: <input
-          name="username"
-          type="text"
-          placeholder="Username"
-          ref={(input) => { this.username = input }}
-        /></label>
-
-        <label>Password:
-        <input
-            name="password"
-            type="password"
-            placeholder="Password"
+    debugger
+    if (this.props.user.username) {
+      return <Redirect to='/active' />
+    } else {
+      return (
+        <form id='login' onSubmit={this.handleSubmit}>
+          <h1>Login Form</h1>
+          <label>Username: <input
+            name="username"
+            type="text"
+            placeholder="Username"
+            ref={(input) => { this.username = input }}
           /></label>
 
-        <label className='single top'><input
-          className='btn'
-          name="submit"
-          type="submit"
-          value="Log In" /></label>
+          <label>Password:
+        <input
+              name="password"
+              type="password"
+              placeholder="Password"
+            /></label>
 
-        <label className='single'><Link to='/signup'>New User?</Link></label>
+          <label className='single top'><input
+            className='btn'
+            name="submit"
+            type="submit"
+            value="Log In" /></label>
 
-      </form>
-    )
+          <label className='single'><Link to='/signup'>New User?</Link></label>
 
+        </form>
+      )
+    }
   }
 }
 

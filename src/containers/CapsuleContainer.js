@@ -55,6 +55,8 @@ class CapsuleContainer extends React.Component {
 
           </div >
         )
+      } else {
+        return <Redirect to='/' />
       }
     } else {
       return <Redirect to='/' />
