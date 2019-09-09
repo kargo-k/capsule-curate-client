@@ -44,7 +44,7 @@ class SignupForm extends React.Component {
     }
     try {
       this.props.createUser(payload)
-      setTimeout(() => this.props.history.push('/main'), 1000)
+      setTimeout(() => this.props.history.push('/active'), 1000)
     } catch (e) {
       console.log(e.message)
     }

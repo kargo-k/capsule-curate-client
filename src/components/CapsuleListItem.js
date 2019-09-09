@@ -18,7 +18,7 @@ class CapsuleListItem extends React.Component {
 
   render() {
     return (
-      <li><Link to='/main' onClick={() => this.handleOnClick(this.props.capsule)}>
+      <li><Link to='/capsule' onClick={() => this.handleOnClick(this.props.capsule)}>
         {this.props.capsule.title}
       </Link></li>
     )

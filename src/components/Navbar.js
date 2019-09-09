@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { showCapsule, activeCapsule } from '../actions'
+import { showCapsule } from '../actions'
 import CapsuleListItem from './CapsuleListItem';
 
 const mapStateToProps = state => {
@@ -71,7 +71,7 @@ class Navbar extends React.Component {
                 </li>
 
                 <li>
-                  <NavLink to='/main'>Capsules</NavLink>
+                  <NavLink to='/capsule'>Capsules</NavLink>
                   <ul>
                     <li><Link to='/new' id='curate-new'> + New Capsule</Link></li>
                     {this.props.capsules_list

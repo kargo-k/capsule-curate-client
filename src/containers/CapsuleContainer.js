@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { toggleCapsule, updateItem } from '../actions';
 import ItemsContainer from './ItemsContainer';
 import Header from '../components/Header'
+import UploadItemForm from '../components/UploadItemForm';
 
 const mapStateToProps = state => {
   return {
@@ -22,10 +23,18 @@ const mapDispatchToProps = dispatch => {
 
 class CapsuleContainer extends React.Component {
 
-  // handleClick = id => {
-  //   this.props.toggleCapsule(id)
-  //   setTimeout(() => this.props.history.push('/deleted'), 500)
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      show_add_form: false
+    }
+
+  }
+
+  handleShow = () => {
+    this.setState({ show_add_form: !this.state.show_add_form })
+    console.log('toggle the show_Add_form');
+  }
 
   splitColors = (cap_colors) => {
     let colors = cap_colors.split(";")
@@ -49,10 +58,13 @@ class CapsuleContainer extends React.Component {
         return (
           <div id='capsule-show' className='container'>
 
-            <Header />
+            <Header handleShow={this.handleShow} />
+            <div id='capsule-body'>
+              <ItemsContainer capsule_id={capsule.id} updateItem={this.props.updateItem} />
 
-            <ItemsContainer capsule_id={capsule.id} updateItem={this.props.updateItem} />
+              {this.state.show_add_form ? <UploadItemForm /> : null}
 
+            </div>
           </div >
         )
       } else {

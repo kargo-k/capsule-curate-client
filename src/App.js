@@ -1,6 +1,6 @@
 import React from 'react';
 import './scss/main.scss';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux'
 import store from './store'
 import Landing from './components/Landing';
@@ -16,7 +16,6 @@ import CapsuleContainer from './containers/CapsuleContainer';
 import Delete from './components/Delete';
 import ShowItem from './components/ShowItem';
 import ActiveCapsuleContainer from './containers/ActiveCapsuleContainer';
-import Upload from './components/Upload';
 
 function App() {
   return (
@@ -24,10 +23,9 @@ function App() {
       <Router>
         <Switch>
           <Route exact path='/' component={Landing} />
-          <Route path='/upload' component={Upload} />
           <Route path='/'>
             <Route path='/' component={Navbar} />
-            <Route path='/main' component={CapsuleContainer} />
+            <Route path='/capsule' component={CapsuleContainer} />
             <Route path='/active' component={ActiveCapsuleContainer} />
             <Route path='/login' component={LoginForm} />
             <Route path='/signup' component={SignupForm} />
