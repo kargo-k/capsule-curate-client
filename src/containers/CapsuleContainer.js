@@ -33,7 +33,6 @@ class CapsuleContainer extends React.Component {
 
   handleShow = () => {
     this.setState({ show_add_form: !this.state.show_add_form })
-    console.log('toggle the show_Add_form');
   }
 
   render() {
