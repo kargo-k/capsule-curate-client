@@ -59,6 +59,7 @@
   }
   ul > li:hover ul li {
     height: auto;
+    z-index: 2;
   }
   #curate-new {
     background: $color-light2;

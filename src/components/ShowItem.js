@@ -20,8 +20,6 @@ const mapDispatchToProps = dispatch => {
 
 const ShowItem = ({ item, capsules_list, updateItem, active_capsule }) => {
 
-  let style
-
   const handleSubmit = e => {
     e.preventDefault()
     let payload = {
@@ -34,42 +32,41 @@ const ShowItem = ({ item, capsules_list, updateItem, active_capsule }) => {
   if (!item) {
     return <Redirect to='/discover' />
   } else {
-    style = { display: 'none' }
     return (
       <div id='item-details' className='container'>
-        <h1>{item.name} // {item.brand}</h1>
+        <h1>{item.name} {item.brand ? `// ${item.brand}` : null}</h1>
         <div className='wrapper' >
 
-        <img src={item.image} alt={item.name} />
+          <img src={item.image} alt={item.name} />
 
-        <div className='right'>
-        <div className='text'>Color: {item.color}</div>
-        <div className='text'>Price: {item.price}</div>
+          <div className='right'>
+            <div className='text'>{item.color ? `Color: ${item.color}` : null}</div>
+            <div className='text'>{item.price ? `Price: ${item.price}` : null}</div>
+            <div className='text'>{item.description ? `Description: ${item.description}` : null}</div>
 
-        <form onSubmit={handleSubmit} id='show-item-form'>
+            <form onSubmit={handleSubmit} id='show-item-form'>
 
-          {/* active capsule is the default selected capsule */}
-          <div className='custom-select'>
-            <label>Add this to a capsule:
+              <div className='custom-select'>
+                <label>Add this to a capsule:
               <select name='capsule' defaultValue={active_capsule.id}>
-                {capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
-              </select>
-            </label>
+                    {capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
+                  </select>
+                </label>
+              </div>
+
+              <label><input
+                className='btn accent'
+                name="submit"
+                type="submit"
+                value="Add" /></label>
+
+              <h1>{item.personal}</h1>
+
+              {!item.personal ? <label><a target='_blank' rel="noopener noreferrer" className='btn' id="purchase" href={`https://${item.shop_link}`}>Purchase at {item.brand}</a></label> : null}
+
+            </form>
+
           </div>
-
-          <label><input
-            className='btn accent'
-            name="submit"
-            type="submit"
-            value="Add" /></label>
-
-        <label><a target='_blank' rel="noopener noreferrer" className='btn' id="purchase" href={`https://${item.shop_link}`}>Purchase at {item.brand}</a></label>
-
-        </form>
-
-
-        <div className='added-message' style={style}>Added Item!</div>
-        </div>
 
         </div>
       </div >
