@@ -1,140 +1,134 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCollection } from '../actions';
-import Item from '../components/Item';
 
 const mapStateToProps = state => {
   return { collection: state.collection }
 }
 
-const mapDispatchToProps = dispatch => {
-  return { fetchCollection: () => dispatch(fetchCollection()) }
+const Browse = props => {
+  return (
+    <div id='browse'>
+      <h1>Browse the Curated Collection</h1>
+      <form id='filter'>
+        <input
+          name='search'
+          type='text'
+          placeholder='Search by Keyword'
+        // onChange={this.handleChange}
+        />
+
+        <select
+          name='category'
+        // value={this.state.category} 
+        // onChange={this.handleChange}
+        >
+          <option value="all">All</option>
+          <option value="bottoms">Bottoms</option>
+          <option value="denim">Denim</option>
+          <option value="one piece">One Pieces</option>
+          <option value="outerwear">Outwear</option>
+          <option value="pants">Pants</option>
+          <option value="shorts">Shorts</option>
+          <option value="sweater">Sweaters</option>
+          <option value="tee">Tees</option>
+          <option value="top">Tops</option>
+        </select>
+
+      </form>
+    </div>
+  )
 }
 
-class CollectionContainer extends React.Component {
+export default connect(mapStateToProps)(Browse)
 
-  state = {
-    all: [],
-    search: "",
-    price: "",
-    color: "",
-    category: "all",
-    collection_page: 0,
-    results_page: 0,
-    showCollection: true
-  }
+// class Browse extends React.Component {
 
-  componentDidMount() {
-    this.props.fetchCollection()
-  }
+//   state = {
+//     all: [],
+//     search: "",
+//     price: "",
+//     color: "",
+//     category: "all",
+//     collection_page: 0,
+//     results_page: 0,
+//     showCollection: true
+//   }
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+//   componentDidMount() {
+//     this.props.fetchCollection()
+//   }
 
-  handleNext = e => {
-    let prevPage = this.state[e.target.name]
-    this.setState({ [e.target.name]: prevPage + 1 })
-  }
+//   handleChange = e => {
+//     this.setState({ [e.target.name]: e.target.value })
+//   }
 
-  filterCollection = e => {
-    e.preventDefault()
-    this.setState(prevState => {
-      let str = prevState.search
-      let cat = prevState.category
-      let results = this.props.collection.filter(item => {
-        if (str === "" && cat === 'all') {
-          return this.props.collection
-        } else if (str === "") {
-          return (item.category === cat || item.category2 === cat)
-        } else if (cat === 'all') {
-          return item.name.toLowerCase().includes(str)
-        } else {
-          return (item.name.toLowerCase().includes(str) && (item.category === cat || item.category2 === cat))
-        }
-      })
-      return { all: results, showCollection: false }
-    })
-  }
+//   handleNext = e => {
+//     let prevPage = this.state[e.target.name]
+//     this.setState({ [e.target.name]: prevPage + 1 })
+//   }
 
-  render() {
+//   filterCollection = e => {
+//     e.preventDefault()
+//     this.setState(prevState => {
+//       let str = prevState.search
+//       let cat = prevState.category
+//       let results = this.props.collection.filter(item => {
+//         if (str === "" && cat === 'all') {
+//           return this.props.collection
+//         } else if (str === "") {
+//           return (item.category === cat || item.category2 === cat)
+//         } else if (cat === 'all') {
+//           return item.name.toLowerCase().includes(str)
+//         } else {
+//           return (item.name.toLowerCase().includes(str) && (item.category === cat || item.category2 === cat))
+//         }
+//       })
+//       return { all: results, showCollection: false }
+//     })
+//   }
 
-    // pagination increments
-    let n_items = 16;
+//   render() {
 
-    let initialState = {
-      search: "",
-      price: "",
-      color: "",
-      category: "all",
-      collection_page: 0,
-      results_page: 0,
-      showCollection: true
-    }
+//     // pagination increments
+//     let n_items = 16;
 
-    const reset = () => {
-      this.setState({ ...initialState })
-    }
+//     let initialState = {
+//       search: "",
+//       price: "",
+//       color: "",
+//       category: "all",
+//       collection_page: 0,
+//       results_page: 0,
+//       showCollection: true
+//     }
 
-    return (
-      <div id='browse'>
-        <h1>Browse the Collection</h1>
+//     const reset = () => {
+//       this.setState({ ...initialState })
+//     }
 
-        <div>
-          <form id='filter' onSubmit={this.filterCollection}>
-            <input
-              name='search'
-              value={this.state.search}
-              type='text'
-              onChange={this.handleChange}
-              placeholder='Search by Keyword'
-            />
+//     return (
+//       <div id='browse'>
+//         <h1>Browse the Collection</h1>
 
-            <label>Category:
-              <select name='category' value={this.state.category} onChange={this.handleChange}>
-                <option value="all">All</option>
-                <option value="top">Tops</option>
-                <option value="bottoms">Bottoms</option>
-                <option value="one piece">One Pieces</option>
-                <option value="denim">Denim</option>
-                <option value="pants">Pants</option>
-                <option value="shorts">Shorts</option>
-                <option value="tee">Tees</option>
-                <option value="sweater">Sweaters</option>
-                <option value="outerwear">Outwear</option>
-              </select>
-            </label>
-
-            <input className='btn' type='submit' value='Search' />
-            <button className='btn' id='reset' onClick={reset}>Reset</button>
-          </form>
-        </div>
-
-        <div className='flex collection'>
-          {this.props.collection && this.state.showCollection === true &&
-            this.props.collection.slice((this.state.collection_page * n_items), (this.state.collection_page * n_items) + n_items).map(item =>
-              <Item key={item.id} item={item} />
-            )
-          }
-
-          {this.props.collection && this.state.showCollection === true && this.props.collection.length > n_items &&
-            <button id='next' name='collection_page' onClick={this.handleNext} className='btn overlay'>Next Page</button>
-          }
-
-          {this.state.all &&
-            this.state.all.slice((this.state.results_page * n_items), (this.state.results_page * n_items) + n_items).map(item =>
-              <Item key={item.id} item={item} />
-            )}
-
-          {this.state.all && this.state.all.length > n_items &&
-            <button id='next' name='results_page' onClick={this.handleNext} className='btn overlay'>Next Page</button>
-          }
-        </div>
+//         <div>
+//           <form id='filter' onSubmit={this.filterCollection}>
+//             <input
+//               name='search'
+//               value={this.state.search}
+//               type='text'
+//               onChange={this.handleChange}
+//               placeholder='Search by Keyword'
+//             />
 
 
-      </div>
-    )
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(CollectionContainer)
+//             <input className='btn' type='submit' value='Search' />
+//             <button className='btn' id='reset' onClick={reset}>Reset</button>
+//           </form>
+//         </div>
+//         </div>
+//         )
+//       }
+//     }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Browse)

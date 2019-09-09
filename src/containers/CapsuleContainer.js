@@ -45,7 +45,7 @@ class CapsuleContainer extends React.Component {
 
             <Header handleShow={this.handleShow} />
             <div id='capsule-body'>
-              <ItemsContainer capsule_id={capsule.id} updateItem={this.props.updateItem} />
+              <ItemsContainer capsule_id={capsule.id} updateItem={this.props.updateItem} items={this.props.show_capsule.items} />
 
               {this.state.show_add_form ? <UploadItemForm /> : null}
 

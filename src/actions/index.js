@@ -225,6 +225,7 @@ export const showItem = payload => {
 export const updateItem = payload => {
   // adds or removes an item from a capsule
   return (dispatch, getState) => {
+    debugger
     fetch(API + `/capsules/${payload.capsule_id}`, {
       method: 'PATCH',
       headers: {
