@@ -24,19 +24,18 @@ class LoginForm extends React.Component {
 
     try {
       this.props.logInUser(credentials)
-      setTimeout(() => this.props.history.push('/active'), 0)
     } catch (e) {
       console.log('frontend login post error', e.message)
     }
   }
 
   componentDidMount() {
-    this.username.focus()
+    !this.props.user && this.username.focus()
   }
 
   render() {
-    if (!this.props.user) {
-      return <Redirect to='/main' />
+    if (this.props.user) {
+      return <Redirect to='/active' />
     } else {
       return (
         <form id='login' onSubmit={this.handleSubmit}>

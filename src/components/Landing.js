@@ -1,17 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const Landing = props => {
-  return (
-    <header id="landing">
-      <h1>capsule curate</h1>
-      <span>
-        <Link to='/login'>Login</Link>
-        <Link to='/signup'>Signup</Link>
-        <Link to='/about'>About</Link>
-      </span>
-    </header>
-  )
+const mapStateToProps = state => {
+  return { user: state.user }
 }
 
-export default Landing
+const Landing = props => {
+  if (props.user && props.user.username) {
+    return <Redirect to='/active' />
+  } else {
+    return (
+      <header id="landing">
+        <h1>capsule curate</h1>
+        <span>
+          <Link to='/login'>Login</Link>
+          <Link to='/signup'>Signup</Link>
+          <Link to='/about'>About</Link>
+        </span>
+      </header>
+    )
+  }
+
+}
+
+export default connect(mapStateToProps)(Landing);

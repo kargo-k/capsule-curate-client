@@ -1,17 +1,24 @@
 import React from 'react';
+import { Redirect, Link } from 'react-router-dom';
 import Weather from '../components/Weather';
 import { connect } from 'react-redux';
 import ItemsContainer from './ItemsContainer';
 import Outfit from '../components/Outfit';
 import { WEATHER } from '../constants/api-url';
-import { updateItem } from '../actions';
+import { updateItem, fetchCapsules } from '../actions';
 
 const mapStateToProps = state => {
-  return { active_capsule: state.active_capsule }
+  return {
+    active_capsule: state.active_capsule,
+    user: state.user
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-  return { updateItem: payload => dispatch(updateItem(payload)) }
+  return {
+    updateItem: payload => dispatch(updateItem(payload)),
+    fetchCapsules: () => dispatch(fetchCapsules())
+  }
 }
 
 class ActiveCapsuleContainer extends React.Component {
@@ -26,6 +33,8 @@ class ActiveCapsuleContainer extends React.Component {
   // const WEATHER_ENDPOINT = `/weather?loc=${latitude}_${longitude}`;
 
   componentDidMount() {
+    this.props.fetchCapsules()
+
     fetch(WEATHER + `/location/${this.location}`)
       .then(res => res.json())
       .then(json => {
@@ -55,25 +64,69 @@ class ActiveCapsuleContainer extends React.Component {
   }
 
   render() {
-    if (this.state.fetchComplete) {
+    // debugger
+    if (!this.props.user) {
+      // if there is no user signed in, redirect to root
+      return <Redirect to='/' />
+    } else {
+      // if there is a user signed in, fetch capsules happening in component did mount
       return (
         <div className='container' id='active-container' >
           <div id='active-left' className='flex'>
+            <h1>Welcome back, {this.props.user.username} </h1>
             <Weather data={this.state} />
-            <Outfit
-              hi={this.state.day.apparentTemperatureHigh}
-              lo={this.state.day.apparentTemperatureLow}
-              precip={this.state.current.precipProbability} />
+            {this.state.fetchComplete ?
+              <Outfit weather_data={this.state} /> : null}
           </div>
-          <div id='active-right' className='flex'>
-            <h1>{this.props.active_capsule.title}</h1>
+
+          <div className='flex' id='active-right'>
+            <h1>{this.props.active_capsule && this.props.active_capsule.title}</h1>
             <ItemsContainer updateItem={this.props.updateItem} />
           </div>
+
         </div>
       )
-    } else {
-      return null
     }
+
+
+
+    // if (this.state.fetchComplete && this.props.active_capsule) {
+    //   console.log('inside active capsule if fetch done and active_capsule exists');
+    //   return (
+    //     <div className='container' id='active-container' >
+    //       <div id='active-left' className='flex'>
+    //         <Weather data={this.state} />
+    //         <Outfit
+    //           hi={this.state.day.apparentTemperatureHigh}
+    //           lo={this.state.day.apparentTemperatureLow}
+    //           precip={this.state.current.precipProbability} />
+    //       </div>
+    //       <div id='active-right' className='flex'>
+    //         <h1>{this.props.active_capsule.title}</h1>
+    //         <ItemsContainer updateItem={this.props.updateItem} />
+    //       </div>
+    //     </div>
+    //   )
+    // } else if (!this.props.active_capsule) {
+    //   // debugger
+    //   console.log('inside active capsule if username exists', this.props);
+    //   return (
+    //     <div className='container'>
+    //       <h3>Welcome back, {this.user.username}</h3>
+    //       <p>Looks like you don't have an active capsule. Activate an existing capsule, or <Link to='/new'>curate a new one!</Link></p>
+    //     </div>
+    //   )
+    // } else if (!this.user) {
+    //   // debugger
+    //   return <Redirect to='/' />
+    // } else {
+    //   // debugger
+    //   return <h1>i don't know then</h1>
+    // }
+  }
+
+  shouldComponentUpdate() {
+    return true
   }
 }
 

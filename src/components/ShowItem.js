@@ -25,14 +25,14 @@ const ShowItem = ({ item, capsules_list, updateItem, active_capsule }) => {
   const handleSubmit = e => {
     e.preventDefault()
     let payload = {
-      capsule_id: e.target.capsule.value.id,
+      capsule_id: e.target.capsule.value,
       item_id: item.id
     }
     updateItem(payload)
   }
 
   if (!item) {
-    return <Redirect to='/explore' />
+    return <Redirect to='/discover' />
   } else {
     style = { display: 'none' }
     return (
@@ -52,7 +52,7 @@ const ShowItem = ({ item, capsules_list, updateItem, active_capsule }) => {
           <div className='custom-select'>
             <label>Add this to a capsule:
               <select name='capsule' defaultValue={active_capsule.id}>
-                {capsules_list.map(capsule => <option key={capsule.id} value={capsule} >{capsule.title}</option>)}
+                {capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
               </select>
             </label>
           </div>

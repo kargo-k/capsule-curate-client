@@ -1,10 +1,9 @@
 import {
   SHOW_CAPSULE, SET_CAPSULES, ACTIVE_CAPSULE,
-  SHOW_USER, LOG_OUT,
+  SET_USER, LOG_OUT,
   SET_COLLECTION,
   SHOW_ITEM
 } from '../constants/action-types';
-
 import { API } from '../constants/api-url';
 
 export const createUser = payload => {
@@ -26,10 +25,10 @@ export const createUser = payload => {
           console.log('failed to create user...', json)
         } else {
           console.log('successfully created user', json)
+          // when user is logged in or created, store token and user information in local storage and set the user information in state
           localStorage.setItem('token', json.jwt)
-          localStorage.setItem('user_id', json.user.id)
-          localStorage.setItem('username', json.user.username)
-          localStorage.setItem('location', json.user.location)
+          localStorage.setItem('user', JSON.stringify(json.user))
+          dispatch(setUser(json.user))
         }
       })
   }
@@ -54,25 +53,22 @@ export const logInUser = credentials => {
           console.log('post request to login - error', json)
           localStorage.clear()
         } else {
-          console.log('after login res', json)
+          // set's the user information in state and localStorage
+          // when user is logged in or created, store token and user information in local storage and set the user information in state
           localStorage.setItem('token', json.jwt)
-          localStorage.setItem('user_id', json.user.id)
-          localStorage.setItem('username', json.user.username)
-          localStorage.setItem('location', json.user.location)
-          localStorage.setItem('active_capsule', JSON.stringify(json.capsule))
-          dispatch(showUser(json.user))
-          dispatch(showCapsule(json.capsule))
-          dispatch(fetchCapsules())
+          localStorage.setItem('user', JSON.stringify(json.user))
+          dispatch(setUser(json.user))
         }
       })
   }
 }
 
-export const showUser = payload => {
-  return { type: SHOW_USER, payload }
+export const setUser = payload => {
+  return { type: SET_USER, payload }
 }
 
 export const logOutUser = () => {
+  // upon log out, local storage is cleared and set all of state to null
   localStorage.clear()
   return { type: LOG_OUT }
 }
@@ -94,6 +90,8 @@ export const deleteUser = () => {
 }
 
 export const fetchCapsules = () => {
+  // every time fetchCapsules is called, it fetches all of the capsules for the user and resets the capsules list and active_capsule in state.  if the user does not have any active capsule, the active_capsule in state will be null
+  console.log('fetching capsules happening!');
   return (dispatch, getState) => {
     fetch(API + '/capsules', {
       method: 'GET',
@@ -104,10 +102,14 @@ export const fetchCapsules = () => {
       .then(res => res.json())
       .then(data => {
         localStorage.setItem('capsules_list', JSON.stringify(data))
-        let active = data.filter(capsule => capsule.active === true)[0]
-        localStorage.setItem('active_capsule', JSON.stringify(active))
-        dispatch(activeCapsule(active))
-        dispatch(showCapsule(active))
+        // filters all the user's capsules for their active capsule
+        let active = data.filter(capsule => capsule.active === true)
+        // debugger
+        if (active !== []) {
+          dispatch(activeCapsule(active[0]))
+        } else {
+          dispatch(activeCapsule(null))
+        }
         dispatch(setCapsules(data))
       })
       .catch(e => console.log('error in get request', e))
@@ -116,6 +118,7 @@ export const fetchCapsules = () => {
 
 export const activeCapsule = payload => {
   // sets the user's active capsule to state
+  console.log('!!!setting the active capsule to state!!!: ', payload);
   return { type: ACTIVE_CAPSULE, payload }
 }
 
@@ -137,8 +140,9 @@ export const createCapsule = payload => {
         if (json.error) {
           console.log('Failed to create capsule.', json)
         } else {
+          // once the new capsule is made, set the new capsule to the show_capsule in state
           dispatch(showCapsule(json.capsule))
-          dispatch(activeCapsule(json.capsule))
+          // execute another fetch to refresh the capsules list
           dispatch(fetchCapsules())
         }
       })
@@ -151,7 +155,31 @@ export const setCapsules = payload => {
 }
 
 export const showCapsule = payload => {
+  // sets the payload (a specific capsule object) to the show_capsule in state
   return { type: SHOW_CAPSULE, payload }
+}
+
+export const toggleCapsule = id => {
+  // activates or inactivates a capsule. a user can have only 1 active capsule at a time
+  return (dispatch, getState) => {
+    fetch(API + `/capsules/activate/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(json => {
+        // sets the updated capsule to the show_capsule in state
+        dispatch(showCapsule(json.capsule))
+        // if (json.capsule.active) {
+        //   dispatch(activeCapsule(json.capsule))
+        // }
+        // does a fetch for the updated capsule list
+        dispatch(fetchCapsules())
+      })
+      .catch(e => console.log('Error in delete request.', e))
+  }
 }
 
 export const deleteCapsule = id => {
@@ -180,6 +208,7 @@ export const fetchCollection = () => {
     })
       .then(res => res.json())
       .then(items => {
+        // saves the collection items in state
         dispatch(setCollection(items))
       })
   }
@@ -194,6 +223,7 @@ export const showItem = payload => {
 }
 
 export const updateItem = payload => {
+  // adds or removes an item from a capsule
   return (dispatch, getState) => {
     fetch(API + `/capsules/${payload.capsule_id}`, {
       method: 'PATCH',
