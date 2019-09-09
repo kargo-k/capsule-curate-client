@@ -211,13 +211,13 @@ div.collection {
         text-decoration: underline;
         margin: 5px;
       }
-      a {
+      a.btn {
         background-color: $color-light2;
         padding: 5px 20px;
         color: $color-dark;
         box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
       }
-      a:hover {
+      a.btn:hover {
         background-color: $color-accent;
         color: $color-light;
       }
@@ -225,7 +225,9 @@ div.collection {
     #ootd-div {
       display: flex;
       img {
-        max-height: 250px;
+        max-width: 100%;
+        width: auto;
+        height: auto;
       }
       span.item-details {
         display: flex;
