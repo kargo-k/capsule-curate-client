@@ -25,10 +25,8 @@ class Navbar extends React.Component {
     this.props.showCapsule(this.props.active_capsule)
   }
 
-  user = JSON.parse(localStorage.getItem('user'))
-
   render() {
-    if (!this.user) {
+    if (!this.props.user) {
       // if the user is not logged in (no data in localstorage)
       return (
         <div id='nav-container'>
@@ -85,7 +83,7 @@ class Navbar extends React.Component {
                   </ul>
                 </li>
                 <li>
-                  <NavLink to='/active' onClick={this.handleOnClick}>{this.user.username}</NavLink>
+                  <NavLink to='/active' onClick={this.handleOnClick}>{this.props.user.username}</NavLink>
                   <ul>
                     <li><Link to='/account'>Account</Link></li>
                     <li><Link to='/logout' >Logout</Link></li>

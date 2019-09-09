@@ -16,6 +16,7 @@ import CapsuleContainer from './containers/CapsuleContainer';
 import Delete from './components/Delete';
 import ShowItem from './components/ShowItem';
 import ActiveCapsuleContainer from './containers/ActiveCapsuleContainer';
+import Upload from './components/Upload';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path='/' component={Landing} />
+          <Route path='/upload' component={Upload} />
           <Route path='/'>
             <Route path='/' component={Navbar} />
             <Route path='/main' component={CapsuleContainer} />

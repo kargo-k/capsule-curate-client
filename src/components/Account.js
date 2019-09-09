@@ -15,13 +15,13 @@ const mapDispatchToProps = dispatch => {
 
 const Account = props => {
 
-  if (!localStorage.getItem('username')) {
+  if (!JSON.parse(localStorage.getItem('user'))) {
     return (
       // Redirect to root if the user is not logged in
       <Redirect to='/' />
     )
   } else {
-    // If the user is logged in (in localstorage) then show user details
+    // If the user is logged inthen show user details
     return (<div className='user container'>
       <h1>{props.user.username}</h1>
       <h3>{props.user.location}</h3>
