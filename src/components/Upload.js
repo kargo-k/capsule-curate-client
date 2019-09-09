@@ -3,7 +3,7 @@ import React from 'react';
 const Upload = props => {
 
   const cloudName = 'kargostack';
-  // const unsignedUploadPreset = 'ybsm8vzs'
+  const unsignedUploadPreset = process.env.REACT_APP_CLOUD_PRESET
 
   const handleFiles = e => {
     let files = e.target.files;
@@ -43,6 +43,7 @@ const Upload = props => {
   return (
     <div className='container'>
       <form>
+        <h1>{process.env.REACT_APP_CLOUD_PRESET}</h1>
         <input type='file' id='fileUp' accept='image/*' onChange={handleFiles} />
       </form>
 
