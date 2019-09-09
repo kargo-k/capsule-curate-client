@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import ItemsContainer from './ItemsContainer';
 import Outfit from '../components/Outfit';
 import { WEATHER } from '../constants/api-url';
-import { updateItem } from '../actions';
+import { updateItem, fetchCapsules } from '../actions';
 
 const mapStateToProps = state => {
   return {
@@ -15,7 +15,10 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return { updateItem: payload => dispatch(updateItem(payload)) }
+  return {
+    updateItem: payload => dispatch(updateItem(payload)),
+    fetchCapsules: () => dispatch(fetchCapsules())
+  }
 }
 
 class ActiveCapsuleContainer extends React.Component {
@@ -30,64 +33,94 @@ class ActiveCapsuleContainer extends React.Component {
   // const WEATHER_ENDPOINT = `/weather?loc=${latitude}_${longitude}`;
 
   componentDidMount() {
-    if (this.props.username) {
-      fetch(WEATHER + `/location/${this.location}`)
-        .then(res => res.json())
-        .then(json => {
-          let lat_lng = json.results[0].geometry.location;
-          fetch(WEATHER + `/weather?loc=${lat_lng.lat}_${lat_lng.lng}`)
-            .then(res => res.json())
-            .then(json => {
-              let current = json.currently
-              let summary = json.hourly.summary
-              let morning = json.hourly.data[8]
-              let noon = json.hourly.data[12]
-              let evening = json.hourly.data[17]
-              let night = json.hourly.data[21]
-              let day = json.daily.data[0]
-              this.setState({
-                current: current,
-                summary: summary,
-                day: day,
-                morning: morning,
-                noon: noon,
-                evening: evening,
-                night: night,
-                fetchComplete: true
-              })
+    this.props.fetchCapsules()
+
+    fetch(WEATHER + `/location/${this.location}`)
+      .then(res => res.json())
+      .then(json => {
+        let lat_lng = json.results[0].geometry.location;
+        fetch(WEATHER + `/weather?loc=${lat_lng.lat}_${lat_lng.lng}`)
+          .then(res => res.json())
+          .then(json => {
+            let current = json.currently
+            let summary = json.hourly.summary
+            let morning = json.hourly.data[8]
+            let noon = json.hourly.data[12]
+            let evening = json.hourly.data[17]
+            let night = json.hourly.data[21]
+            let day = json.daily.data[0]
+            this.setState({
+              current: current,
+              summary: summary,
+              day: day,
+              morning: morning,
+              noon: noon,
+              evening: evening,
+              night: night,
+              fetchComplete: true
             })
-        })
-    }
+          })
+      })
   }
 
   render() {
-    if (this.state.fetchComplete && this.props.active_capsule) {
+    // debugger
+    if (!this.props.user) {
+      // if there is no user signed in, redirect to root
+      return <Redirect to='/' />
+    } else {
+      // if there is a user signed in, fetch capsules happening in component did mount
       return (
         <div className='container' id='active-container' >
           <div id='active-left' className='flex'>
+            <h1>Welcome back, {this.props.user.username} </h1>
             <Weather data={this.state} />
-            <Outfit
-              hi={this.state.day.apparentTemperatureHigh}
-              lo={this.state.day.apparentTemperatureLow}
-              precip={this.state.current.precipProbability} />
-          </div>
-          <div id='active-right' className='flex'>
-            <h1>{this.props.active_capsule.title}</h1>
-            <ItemsContainer updateItem={this.props.updateItem} />
+            {this.state.fetchComplete ?
+              <Outfit weather_data={this.state} /> : null}
           </div>
         </div>
       )
-    } else if (this.props.user.username) {
-      console.log('inside active capsule', this.props);
-      return (
-        <div className='container'>
-          <h3>Welcome back, {this.props.user.username}</h3>
-          <p>Looks like you don't have an active capsule. Activate an existing capsule, or <Link to='/new'>curate a new one!</Link></p>
-        </div>
-      )
-    } else {
-      return <Redirect to='/' />
     }
+
+
+
+    // if (this.state.fetchComplete && this.props.active_capsule) {
+    //   console.log('inside active capsule if fetch done and active_capsule exists');
+    //   return (
+    //     <div className='container' id='active-container' >
+    //       <div id='active-left' className='flex'>
+    //         <Weather data={this.state} />
+    //         <Outfit
+    //           hi={this.state.day.apparentTemperatureHigh}
+    //           lo={this.state.day.apparentTemperatureLow}
+    //           precip={this.state.current.precipProbability} />
+    //       </div>
+    //       <div id='active-right' className='flex'>
+    //         <h1>{this.props.active_capsule.title}</h1>
+    //         <ItemsContainer updateItem={this.props.updateItem} />
+    //       </div>
+    //     </div>
+    //   )
+    // } else if (!this.props.active_capsule) {
+    //   // debugger
+    //   console.log('inside active capsule if username exists', this.props);
+    //   return (
+    //     <div className='container'>
+    //       <h3>Welcome back, {this.user.username}</h3>
+    //       <p>Looks like you don't have an active capsule. Activate an existing capsule, or <Link to='/new'>curate a new one!</Link></p>
+    //     </div>
+    //   )
+    // } else if (!this.user) {
+    //   // debugger
+    //   return <Redirect to='/' />
+    // } else {
+    //   // debugger
+    //   return <h1>i don't know then</h1>
+    // }
+  }
+
+  shouldComponentUpdate() {
+    return true
   }
 }
 

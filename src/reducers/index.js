@@ -2,7 +2,8 @@ import { SHOW_CAPSULE, SET_USER, SET_CAPSULES, SET_COLLECTION, LOG_OUT, DELETE_U
 
 const initialState = {
   user: JSON.parse(localStorage.getItem('user')),
-  capsules_list: JSON.parse(localStorage.getItem('capsules_list')),
+  // capsules_list: JSON.parse(localStorage.getItem('capsules_list')),
+  capsules_list: [],
   show_capsule: null,
   active_capsule: null,
   collection: null,
@@ -12,12 +13,16 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch (action.type) {
     case ACTIVE_CAPSULE:
+      console.log('active capsule set to', action.payload);
       return { ...state, active_capsule: action.payload }
     case SHOW_CAPSULE:
+      console.log('show capsule set');
       return { ...state, show_capsule: action.payload }
     case SET_USER:
+      console.log('set user action done. setting user to: ', action.payload);
       return { ...state, user: action.payload }
     case SET_CAPSULES:
+      console.log('capsules list set');
       return { ...state, capsules_list: action.payload }
     case SHOW_ITEM:
       return { ...state, show_item: action.payload }

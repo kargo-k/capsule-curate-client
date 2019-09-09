@@ -27,9 +27,7 @@ export const createUser = payload => {
           console.log('successfully created user', json)
           // when user is logged in or created, store token and user information in local storage and set the user information in state
           localStorage.setItem('token', json.jwt)
-          localStorage.setItem('user_id', json.user.id)
-          localStorage.setItem('username', json.user.username)
-          localStorage.setItem('location', json.user.location)
+          localStorage.setItem('user', JSON.stringify(json.user))
           dispatch(setUser(json.user))
         }
       })
@@ -58,11 +56,8 @@ export const logInUser = credentials => {
           // set's the user information in state and localStorage
           // when user is logged in or created, store token and user information in local storage and set the user information in state
           localStorage.setItem('token', json.jwt)
-          localStorage.setItem('user_id', json.user.id)
-          localStorage.setItem('username', json.user.username)
-          localStorage.setItem('location', json.user.location)
+          localStorage.setItem('user', JSON.stringify(json.user))
           dispatch(setUser(json.user))
-          dispatch(fetchCapsules())
         }
       })
   }
@@ -109,6 +104,7 @@ export const fetchCapsules = () => {
         localStorage.setItem('capsules_list', JSON.stringify(data))
         // filters all the user's capsules for their active capsule
         let active = data.filter(capsule => capsule.active === true)
+        // debugger
         if (active !== []) {
           dispatch(activeCapsule(active[0]))
         } else {
@@ -122,7 +118,7 @@ export const fetchCapsules = () => {
 
 export const activeCapsule = payload => {
   // sets the user's active capsule to state
-  console.log('setting the active capsule to state: ', payload);
+  console.log('!!!setting the active capsule to state!!!: ', payload);
   return { type: ACTIVE_CAPSULE, payload }
 }
 

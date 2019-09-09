@@ -30,12 +30,10 @@ class LoginForm extends React.Component {
   }
 
   componentDidMount() {
-    console.log('inside component did mount of login form, ', this.props);
     !this.props.user && this.username.focus()
   }
 
   render() {
-    console.log('inside render of login form', this.props);
     if (this.props.user) {
       return <Redirect to='/active' />
     } else {
