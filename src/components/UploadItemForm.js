@@ -1,4 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createItem } from '../actions';
+
+const mapDispatchToProps = dispatch => {
+  return { createItem: (payload) => dispatch(createItem(payload)) }
+}
+
+const mapStateToProps = state => {
+  return { show_capsule: state.show_capsule }
+}
 
 const UploadItemForm = props => {
 
@@ -8,10 +18,37 @@ const UploadItemForm = props => {
   const handleSubmit = e => {
     e.preventDefault()
     // debugger
-    let files = e.target.fileUp.files;
     let item_name = e.target.item_name.value
-    console.log('Uploading file...', item_name, files, '...');
-    // uploadFile(files[0])
+    let item_brand = e.target.item_brand.value
+    let item_description = e.target.item_description.value
+    let item_category2 = e.target.item_category2.value
+    let item_category = e.target.item_category.value
+    debugger
+    let files = e.target.fileUp.files
+    let image
+    if (e.target.item_URL.value !== "") {
+      // if the URL of the image is added
+      debugger
+      image = e.target.item_URL.value
+    } else if (files !== []) {
+      // if a file is selected for uploading
+      console.log('Uploading file...', item_name, files, '...');
+      // image = uploadFile(files[0])
+    }
+
+    let payload = {
+      item: {
+        name: item_name,
+        brand: item_brand,
+        description: item_description,
+        category: item_category,
+        category2: item_category2,
+        capsule_id: props.show_capsule.id,
+        image: image
+      }
+    }
+    props.createItem(payload)
+
   }
 
   const uploadFile = file => {
@@ -33,7 +70,10 @@ const UploadItemForm = props => {
         let img = new Image()
         img.src = url
         img.alt = res.public_id
-        document.getElementById('gallery').appendChild(img)
+        // should add item to capsule's item container in the current view
+        document.getElementById('items-container').appendChild(img)
+
+        return url
       }
     }
 
@@ -62,8 +102,8 @@ const UploadItemForm = props => {
         </label>
 
         <label>Category:
-        <select name='item_category'>
-            <option disabled defaultValue>Select a Category </option>
+        <select name='item_category2' defaultValue='Select a Category'>
+            <option disabled>Select a Category </option>
             <option value="top">Tops</option>
             <option value="bottoms">Bottoms</option>
             <option value="one piece">One Pieces</option>
@@ -72,14 +112,17 @@ const UploadItemForm = props => {
         </label>
 
         <label>Subcategory:
-        <select name='item_category2'>
-            <option disabled defaultValue>Select a Subcategory </option>
+        <select name='item_category' defaultValue='Select a Subcategory'>
+            <option disabled>Select a Subcategory </option>
             <option value="denim">Denim</option>
             <option value="pants">Pants</option>
             <option value="shorts">Shorts</option>
             <option value="tee">Tees</option>
             <option value="top">Shirt/Blouse</option>
             <option value="sweater">Sweaters</option>
+            <option value="dress">Dresses</option>
+            <option value="romper">Rompers</option>
+            <option value="one piece">One Pieces</option>
           </select>
         </label>
 
@@ -94,10 +137,9 @@ const UploadItemForm = props => {
         <input type='submit' value="Add Item" className='btn' />
       </form>
 
-      <div id="gallery" />
     </div >
   )
 
 }
 
-export default UploadItemForm;
+export default connect(mapStateToProps, mapDispatchToProps)(UploadItemForm);
