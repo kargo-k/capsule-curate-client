@@ -225,7 +225,6 @@ export const showItem = payload => {
 export const updateItem = payload => {
   // adds or removes an item from a capsule
   return (dispatch, getState) => {
-    debugger
     fetch(API + `/capsules/${payload.capsule_id}`, {
       method: 'PATCH',
       headers: {
@@ -239,7 +238,10 @@ export const updateItem = payload => {
       })
     })
       .then(res => res.json())
-      .then(data => dispatch(fetchCapsules()))
+      .then(data => {
+        dispatch(showCapsule(data.capsule))
+      })
+      .then(dispatch(fetchCapsules()))
       .catch(e => console.log('error in patch request', e))
   }
 }
