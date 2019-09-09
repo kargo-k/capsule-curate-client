@@ -1,4 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createItem } from '../actions';
+
+const mapDispatchToProps = dispatch => {
+  return { createItem: (payload) => dispatch(createItem(payload)) }
+}
+
+const mapStateToProps = state => {
+  return { show_capsule: state.show_capsule }
+}
 
 const UploadItemForm = props => {
 
@@ -8,13 +18,47 @@ const UploadItemForm = props => {
   const handleSubmit = e => {
     e.preventDefault()
     // debugger
-    let files = e.target.fileUp.files;
     let item_name = e.target.item_name.value
-    console.log('Uploading file...', item_name, files, '...');
-    // uploadFile(files[0])
+    let item_brand = e.target.item_brand.value
+    let item_description = e.target.item_description.value
+    let item_category2 = e.target.item_category2.value
+    let item_category = e.target.item_category.value
+    let files = e.target.fileUp.files
+    let image
+    if (e.target.item_URL.value !== "") {
+      // if the URL of the image is added
+      image = e.target.item_URL.value
+      let payload = {
+        item: {
+          name: item_name,
+          brand: item_brand,
+          description: item_description,
+          category: item_category,
+          category2: item_category2,
+          capsule_id: props.show_capsule.id,
+          image: image
+        }
+      }
+      props.createItem(payload)
+    } else if (files !== []) {
+      // if a file is selected for uploading, upload the item first
+      let payload = {
+        item: {
+          name: item_name,
+          brand: item_brand,
+          description: item_description,
+          category: item_category,
+          category2: item_category2,
+          capsule_id: props.show_capsule.id,
+          image: ""
+        }
+      }
+      image = uploadFile(files[0], payload)
+    }
   }
 
-  const uploadFile = file => {
+
+  const uploadFile = (file, payload) => {
     // debugger
     let url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`
     let xhr = new XMLHttpRequest()
@@ -30,10 +74,10 @@ const UploadItemForm = props => {
         let url = res.secure_url
         let tokens = url.split('/')
         tokens.splice(-2, 0, 'c_fill,g_center,h_453,w_362')
-        let img = new Image()
-        img.src = url
-        img.alt = res.public_id
-        document.getElementById('gallery').appendChild(img)
+        payload.item.image = url
+
+        // once the file is uploaded to the cloud, create the item in the rails backend with the returned url
+        props.createItem(payload)
       }
     }
 
@@ -62,8 +106,8 @@ const UploadItemForm = props => {
         </label>
 
         <label>Category:
-        <select name='item_category'>
-            <option disabled defaultValue>Select a Category </option>
+        <select name='item_category2' defaultValue='Select a Category'>
+            <option disabled>Select a Category </option>
             <option value="top">Tops</option>
             <option value="bottoms">Bottoms</option>
             <option value="one piece">One Pieces</option>
@@ -72,14 +116,17 @@ const UploadItemForm = props => {
         </label>
 
         <label>Subcategory:
-        <select name='item_category2'>
-            <option disabled defaultValue>Select a Subcategory </option>
+        <select name='item_category' defaultValue='Select a Subcategory'>
+            <option disabled>Select a Subcategory </option>
             <option value="denim">Denim</option>
             <option value="pants">Pants</option>
             <option value="shorts">Shorts</option>
             <option value="tee">Tees</option>
             <option value="top">Shirt/Blouse</option>
             <option value="sweater">Sweaters</option>
+            <option value="dress">Dresses</option>
+            <option value="romper">Rompers</option>
+            <option value="one piece">One Pieces</option>
           </select>
         </label>
 
@@ -94,10 +141,9 @@ const UploadItemForm = props => {
         <input type='submit' value="Add Item" className='btn' />
       </form>
 
-      <div id="gallery" />
     </div >
   )
 
 }
 
-export default UploadItemForm;
+export default connect(mapStateToProps, mapDispatchToProps)(UploadItemForm);

@@ -242,3 +242,29 @@ export const updateItem = payload => {
       .catch(e => console.log('error in patch request', e))
   }
 }
+
+export const createItem = payload => {
+  return (dispatch, getState) => {
+    fetch(API + '/items', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json.error) {
+          console.log('Failed to create item.', json)
+        } else {
+          debugger
+          console.log('Creating item!!!', json.item);
+          dispatch(showCapsule(json.capsule))
+          console.log('dispatching show capsule action to show', json.capsule);
+        }
+      })
+      .then(data => dispatch(fetchCapsules()))
+  }
+}
