@@ -7,7 +7,8 @@ import CapsuleListItem from './CapsuleListItem';
 const mapStateToProps = state => {
   return {
     capsules_list: state.capsules_list,
-    active_capsule: state.active_capsule
+    active_capsule: state.active_capsule,
+    user: state.user
   }
 }
 
@@ -24,8 +25,10 @@ class Navbar extends React.Component {
     this.props.showCapsule(this.props.active_capsule)
   }
 
+  user = JSON.parse(localStorage.getItem('user'))
+
   render() {
-    if (!localStorage.getItem('username')) {
+    if (!this.user) {
       // if the user is not logged in (no data in localstorage)
       return (
         <div id='nav-container'>
@@ -82,7 +85,7 @@ class Navbar extends React.Component {
                   </ul>
                 </li>
                 <li>
-                  <NavLink to='/active' onClick={this.handleOnClick}>{localStorage.getItem('username')}</NavLink>
+                  <NavLink to='/active' onClick={this.handleOnClick}>{this.user.username}</NavLink>
                   <ul>
                     <li><Link to='/account'>Account</Link></li>
                     <li><Link to='/logout' >Logout</Link></li>

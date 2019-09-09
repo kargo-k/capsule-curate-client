@@ -78,6 +78,12 @@ class ActiveCapsuleContainer extends React.Component {
             {this.state.fetchComplete ?
               <Outfit weather_data={this.state} /> : null}
           </div>
+
+          <div className='flex' id='active-right'>
+            <h1>{this.props.active_capsule && this.props.active_capsule.title}</h1>
+            <ItemsContainer updateItem={this.props.updateItem} />
+          </div>
+
         </div>
       )
     }
