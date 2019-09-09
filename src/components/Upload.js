@@ -3,7 +3,7 @@ import React from 'react';
 const Upload = props => {
 
   const cloudName = 'kargostack';
-  const unsignedUploadPreset = 'ybsm8vzs'
+  // const unsignedUploadPreset = 'ybsm8vzs'
 
   const handleFiles = e => {
     let files = e.target.files;
