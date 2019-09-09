@@ -1,9 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-
-const mapStateToProps = state => {
-  return { collection: state.collection }
-}
 
 const Browse = props => {
   return (
@@ -14,13 +9,14 @@ const Browse = props => {
           name='search'
           type='text'
           placeholder='Search by Keyword'
-        // onChange={this.handleChange}
+          value={props.search}
+          onChange={props.onChange}
         />
 
         <select
           name='category'
-        // value={this.state.category} 
-        // onChange={this.handleChange}
+          value={props.sel}
+          onChange={props.onSelect}
         >
           <option value="all">All</option>
           <option value="bottoms">Bottoms</option>
@@ -39,7 +35,7 @@ const Browse = props => {
   )
 }
 
-export default connect(mapStateToProps)(Browse)
+export default Browse;
 
 // class Browse extends React.Component {
 
