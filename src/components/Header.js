@@ -22,9 +22,42 @@ const Header = props => {
 
   }
 
+  let swatchStyle
+  let colors = []
+  if (props.show_capsule.colors) {
+    colors = props.show_capsule.colors.split(";")
+    swatchStyle = [{
+      height: '20px',
+      width: '20px',
+      backgroundColor: `${colors[0]}`
+    }, {
+      height: '20px',
+      width: '20px',
+      backgroundColor: `${colors[1]}`
+    }, {
+      height: '20px',
+      width: '20px',
+      backgroundColor: `${colors[2]}`
+    }, {
+      height: '20px',
+      width: '20px',
+      backgroundColor: `${colors[3]}`
+    }]
+  } else {
+    swatchStyle = {
+      display: 'none'
+    }
+  }
+
   return (
     <div className='header'>
       <h1>{props.show_capsule.title} {props.show_capsule == props.active_capsule ? '(Active)' : null}</h1>
+
+      <div style={swatchStyle[0]}></div>
+      <div style={swatchStyle[1]}></div>
+      <div style={swatchStyle[2]}></div>
+      <div style={swatchStyle[3]}></div>
+
       <h3>{props.show_capsule.season} Season </h3>
       <h3>{props.show_capsule.items.length} of 36 Hangers Filled</h3>
 
