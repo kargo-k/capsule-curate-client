@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { showCapsule, activeCapsule } from '../actions'
+import { showCapsule } from '../actions'
 import CapsuleListItem from './CapsuleListItem';
 
 const mapStateToProps = state => {
@@ -25,10 +25,8 @@ class Navbar extends React.Component {
     this.props.showCapsule(this.props.active_capsule)
   }
 
-  user = JSON.parse(localStorage.getItem('user'))
-
   render() {
-    if (!this.user) {
+    if (!this.props.user) {
       // if the user is not logged in (no data in localstorage)
       return (
         <div id='nav-container'>
@@ -73,7 +71,7 @@ class Navbar extends React.Component {
                 </li>
 
                 <li>
-                  <NavLink to='/main'>Capsules</NavLink>
+                  <NavLink to='/capsule'>Capsules</NavLink>
                   <ul>
                     <li><Link to='/new' id='curate-new'> + New Capsule</Link></li>
                     {this.props.capsules_list
@@ -85,7 +83,7 @@ class Navbar extends React.Component {
                   </ul>
                 </li>
                 <li>
-                  <NavLink to='/active' onClick={this.handleOnClick}>{this.user.username}</NavLink>
+                  <NavLink to='/active' onClick={this.handleOnClick}>{this.props.user.username}</NavLink>
                   <ul>
                     <li><Link to='/account'>Account</Link></li>
                     <li><Link to='/logout' >Logout</Link></li>

@@ -2,7 +2,7 @@ import React from 'react';
 
 
 const Weather = ({ data }) => {
-  let location = localStorage.getItem('location')
+  let location = JSON.parse(localStorage.getItem('user')).location
   if (data.fetchComplete) {
     return (
       <div id='weather'>

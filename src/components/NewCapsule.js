@@ -93,7 +93,7 @@ class NewCapsule extends React.Component {
       active: e.target.isActive.value
     }
     this.props.createCapsule(payload)
-    this.props.history.push('/main')
+    this.props.history.push('/capsule')
   }
 
   rgb_to_s = rgb => {

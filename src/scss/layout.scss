@@ -271,3 +271,20 @@ div.collection {
     }
   }
 }
+#capsule-body {
+  display: flex;
+  align-items: flex-start;
+  form {
+    max-width: 20vw;
+    margin: 0px;
+    padding: 20px 20px;
+    font-size: calc(10pt + 0.2vw);
+    label {
+      display: block;
+    }
+    input, select {
+      font-size: calc(10pt + 0.2vw);
+      width: fill;
+    }
+  }
+}

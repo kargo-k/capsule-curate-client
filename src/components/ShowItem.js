@@ -63,7 +63,7 @@ const ShowItem = ({ item, capsules_list, updateItem, active_capsule }) => {
             type="submit"
             value="Add" /></label>
 
-        <label><a target='_blank' className='btn' id="purchase" href={`https://${item.shop_link}`}>Purchase at {item.brand}</a></label>
+        <label><a target='_blank' rel="noopener noreferrer" className='btn' id="purchase" href={`https://${item.shop_link}`}>Purchase at {item.brand}</a></label>
 
         </form>
 
