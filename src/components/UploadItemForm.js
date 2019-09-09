@@ -23,35 +23,42 @@ const UploadItemForm = props => {
     let item_description = e.target.item_description.value
     let item_category2 = e.target.item_category2.value
     let item_category = e.target.item_category.value
-    debugger
     let files = e.target.fileUp.files
     let image
     if (e.target.item_URL.value !== "") {
       // if the URL of the image is added
-      debugger
       image = e.target.item_URL.value
-    } else if (files !== []) {
-      // if a file is selected for uploading
-      console.log('Uploading file...', item_name, files, '...');
-      // image = uploadFile(files[0])
-    }
-
-    let payload = {
-      item: {
-        name: item_name,
-        brand: item_brand,
-        description: item_description,
-        category: item_category,
-        category2: item_category2,
-        capsule_id: props.show_capsule.id,
-        image: image
+      let payload = {
+        item: {
+          name: item_name,
+          brand: item_brand,
+          description: item_description,
+          category: item_category,
+          category2: item_category2,
+          capsule_id: props.show_capsule.id,
+          image: image
+        }
       }
+      props.createItem(payload)
+    } else if (files !== []) {
+      // if a file is selected for uploading, upload the item first
+      let payload = {
+        item: {
+          name: item_name,
+          brand: item_brand,
+          description: item_description,
+          category: item_category,
+          category2: item_category2,
+          capsule_id: props.show_capsule.id,
+          image: ""
+        }
+      }
+      image = uploadFile(files[0], payload)
     }
-    props.createItem(payload)
-
   }
 
-  const uploadFile = file => {
+
+  const uploadFile = (file, payload) => {
     // debugger
     let url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`
     let xhr = new XMLHttpRequest()
@@ -67,13 +74,10 @@ const UploadItemForm = props => {
         let url = res.secure_url
         let tokens = url.split('/')
         tokens.splice(-2, 0, 'c_fill,g_center,h_453,w_362')
-        let img = new Image()
-        img.src = url
-        img.alt = res.public_id
-        // should add item to capsule's item container in the current view
-        document.getElementById('items-container').appendChild(img)
+        payload.item.image = url
 
-        return url
+        // once the file is uploaded to the cloud, create the item in the rails backend with the returned url
+        props.createItem(payload)
       }
     }
 

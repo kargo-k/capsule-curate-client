@@ -260,8 +260,9 @@ export const createItem = payload => {
           console.log('Failed to create item.', json)
         } else {
           debugger
-
+          console.log('Creating item!!!', json.item);
           dispatch(showCapsule(json.capsule))
+          console.log('dispatching show capsule action to show', json.capsule);
         }
       })
       .then(data => dispatch(fetchCapsules()))
