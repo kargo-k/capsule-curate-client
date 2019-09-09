@@ -29,6 +29,28 @@ class ActiveCapsuleContainer extends React.Component {
     fetchComplete: false
   }
 
+  getSwatches() {
+    let swatchStyle
+    let colors = []
+    if (this.props.active_capsule && this.props.active_capsule.colors) {
+      colors = this.props.active_capsule.colors.split(";")
+      swatchStyle = [{
+        backgroundColor: `${colors[0]}`
+      }, {
+        backgroundColor: `${colors[1]}`
+      }, {
+        backgroundColor: `${colors[2]}`
+      }, {
+        backgroundColor: `${colors[3]}`
+      }]
+    } else {
+      swatchStyle = {
+        display: 'none'
+      }
+    }
+    return swatchStyle
+  }
+
   // const LOCATION_ENDPOINT = `/location/${location}`;
   // const WEATHER_ENDPOINT = `/weather?loc=${latitude}_${longitude}`;
 
@@ -70,6 +92,7 @@ class ActiveCapsuleContainer extends React.Component {
       return <Redirect to='/' />
     } else {
       // if there is a user signed in, fetch capsules happening in component did mount
+      let swatchStyle = this.getSwatches()
       return (
         <div className='container' id='active-container' >
           <div id='active-left' className='flex'>
@@ -81,6 +104,14 @@ class ActiveCapsuleContainer extends React.Component {
 
           <div className='flex' id='active-right'>
             <h1>{this.props.active_capsule && this.props.active_capsule.title}</h1>
+
+            <div id='swatch-div'>
+              <div className='swatch' style={swatchStyle[0]}></div>
+              <div className='swatch' style={swatchStyle[1]}></div>
+              <div className='swatch' style={swatchStyle[2]}></div>
+              <div className='swatch' style={swatchStyle[3]}></div>
+            </div>
+
             <ItemsContainer updateItem={this.props.updateItem} />
           </div>
 

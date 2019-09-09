@@ -105,21 +105,6 @@ class CollectionContainer extends React.Component {
               </select>
             </label>
 
-            {/* <label>Color Family:
-              <select name='color' value={this.state.color} onChange={this.handleChange}>
-                <option value="all">All</option>
-                <option value="red">Red</option>
-                <option value="orange">Orange</option>
-                <option value="yellow">Yellow</option>
-                <option value="green">Green</option>
-                <option value="blue">Blue</option>
-                <option value="violet">Violet</option>
-                <option value="white">White</option>
-                <option value="gray">Gray</option>
-                <option value="black">Black</option>
-              </select>
-            </label> */}
-
             <input className='btn' type='submit' value='Search' />
             <button className='btn' id='reset' onClick={reset}>Reset</button>
           </form>

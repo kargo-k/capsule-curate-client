@@ -264,7 +264,9 @@ div.collection {
     flex-shrink: 1;
     flex-basis: 5;
     flex-direction: column;
-
+    h1 {
+      margin-bottom: 0;
+    }
     div.flex {
       width: 100%;
       justify-content: center;

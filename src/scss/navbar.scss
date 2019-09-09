@@ -54,11 +54,11 @@
     font-size: calc(12px + 0.2vw);
   }
   ul > li > a {
-    // width: 100%;
-    // word-wrap: normal;
   }
   ul > li:hover ul li {
     height: auto;
+    z-index: 2;
+    width: 100%;
   }
   #curate-new {
     background: $color-light2;

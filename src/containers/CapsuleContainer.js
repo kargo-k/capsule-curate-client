@@ -36,22 +36,7 @@ class CapsuleContainer extends React.Component {
     console.log('toggle the show_Add_form');
   }
 
-  splitColors = (cap_colors) => {
-    let colors = cap_colors.split(";")
-    let styles = {
-      backgroundColor: `${colors[0]}`,
-      backgroundImage:
-        `linear-gradient(225deg, 
-        ${colors[0]} 0%, 
-        ${colors[1]} 25%, 
-        ${colors[2]} 50%,
-        ${colors[3]} 75%)`
-    }
-    return styles
-  }
-
   render() {
-
     if (this.props.user) {
       let capsule = this.props.show_capsule
       if (capsule) {
