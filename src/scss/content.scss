@@ -27,7 +27,7 @@ a.item-link {
   width: auto;
   margin: 3px;
   padding: 3px;
-  z-index: 10;
+  z-index: 3;
 }
 #item-details {
   div.text {
@@ -95,4 +95,7 @@ p, li {
     margin: 5px;
     display: 'inline-block';
   }
+}
+#close:hover {
+  cursor: pointer;
 }

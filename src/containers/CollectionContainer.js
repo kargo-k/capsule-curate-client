@@ -2,15 +2,10 @@ import React from 'react';
 import Browse from '../components/Browse';
 import { connect } from 'react-redux';
 import ItemsContainer from './ItemsContainer';
-import ShowItem from '../components/ShowItem';
 import { API } from '../constants/api-url'
 
 const mapStateToProps = state => {
   return { collection: state.collection }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {}
 }
 
 class CollectionContainer extends React.Component {
@@ -161,4 +156,4 @@ class CollectionContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CollectionContainer);
+export default connect(mapStateToProps)(CollectionContainer);
