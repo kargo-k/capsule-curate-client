@@ -2,14 +2,14 @@ import React from 'react';
 import Browse from '../components/Browse';
 import { connect } from 'react-redux';
 import ItemsContainer from './ItemsContainer';
-import { fetchCollection } from '../actions';
+import { API } from '../constants/api-url'
 
 const mapStateToProps = state => {
   return { collection: state.collection }
 }
 
 const mapDispatchToProps = dispatch => {
-  return { fetchCollection: () => dispatch(fetchCollection()) }
+  return {}
 }
 
 class CollectionContainer extends React.Component {
@@ -19,14 +19,25 @@ class CollectionContainer extends React.Component {
 
     this.state = {
       keyword: "",
-      category: null,
+      category: "",
       page: 0,
       items: null
     }
   }
 
   componentDidMount() {
-    this.props.fetchCollection()
+    console.log('component did mount');
+    return fetch(API + '/items', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(items => {
+        // saves the collection of items in state
+        this.setState({ items: items })
+      })
   }
 
   handleChange = e => {
@@ -36,6 +47,14 @@ class CollectionContainer extends React.Component {
       keyword: e.target.value,
       items: filtered_items
     })
+    // this.setState(prevState => {
+    //   let prev_items = prevState.items
+    //   let new_items = prev_items.filter(i => i.name.toLowerCase().includes(e.target.value.toLowerCase()))
+    //   return {
+    //     keyword: e.target.value,
+    //     items: new_items
+    //   }
+    // })
   }
 
   handleSelect = e => {
@@ -47,13 +66,26 @@ class CollectionContainer extends React.Component {
     })
   }
 
+  handleReset = e => {
+    e.preventDefault()
+    console.log('reset the search');
+    this.setState({
+      keyword: "",
+      category: 'all',
+      page: 0,
+      items: this.props.collection
+    })
+  }
+
   render() {
     return (
       <div className='container flex' id='collection'>
-        <Browse search={this.state.keyword} onChange={this.handleChange} sel={this.state.category} onSelect={this.handleSelect} />
+        <Browse search={this.state.keyword} onChange={this.handleChange} sel={this.state.category} onSelect={this.handleSelect} onReset={this.handleReset} />
 
-        <ItemsContainer items={this.state.items ? this.state.items.slice(0, 36) : null} />
-        {/* <ItemsContainer items={this.state.items || this.props.collection} /> */}
+        <ItemsContainer items={this.state.items ? this.state.items.slice(0, 40) : null} />
+        {/* <ItemsContainer items={this.state.items} /> */}
+
+        {/* <ItemsContainer items={this.state.items || (this.props.collection && this.props.collection.slice(0, 40))} /> */}
       </div>
     )
   }

@@ -17,9 +17,8 @@ const Browse = props => {
           name='category'
           value={props.sel}
           onChange={props.onSelect}
-          defaultValue="all"
         >
-          <option value="all">Search by Category</option>
+          <option value="">Search by Category</option>
           <option value="bottoms">Bottoms</option>
           <option value="denim">Denim</option>
           <option value="one piece">One Pieces</option>
@@ -31,7 +30,7 @@ const Browse = props => {
           <option value="top">Tops</option>
         </select>
 
-        <button className='btn' id='reset'>Reset</button>
+        <button className='btn' id='reset' onClick={props.onReset}>Reset</button>
 
       </form>
     </div>
