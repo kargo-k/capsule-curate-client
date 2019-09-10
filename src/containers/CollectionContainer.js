@@ -54,7 +54,8 @@ class CollectionContainer extends React.Component {
         return {
           keyword: e.target.value,
           items: new_items,
-          n_results: new_items.length
+          n_results: new_items.length,
+          page: 0
         }
       } else {
         // if a category is selected, search through the already categorically filtered items
@@ -62,7 +63,8 @@ class CollectionContainer extends React.Component {
         return {
           keyword: e.target.value,
           items: new_items,
-          n_results: new_items.length
+          n_results: new_items.length,
+          page: 0
         }
       }
     })
@@ -78,7 +80,8 @@ class CollectionContainer extends React.Component {
           items: prevState.all_items,
           category_items: prevState.all_items,
           category: e.target.value,
-          n_results: prevState.all_items.length
+          n_results: prevState.all_items.length,
+          page: 0
         }
       } else {
         // if a category is selected, change the items shown to match that category and set a new value in state called category_items, which the keyword search filter will filter through
@@ -87,7 +90,8 @@ class CollectionContainer extends React.Component {
           items: new_items,
           category_items: new_items,
           category: e.target.value,
-          n_results: new_items.length
+          n_results: new_items.length,
+          page: 0
         }
       }
     })
@@ -110,6 +114,22 @@ class CollectionContainer extends React.Component {
     this.setState({ n_item: e.target.value })
   }
 
+  handleBack = e => {
+    e.preventDefault()
+    console.log('go back to prev results');
+    this.setState(prevState => {
+      return { page: prevState.page - 1 }
+    })
+  }
+
+  handleNext = e => {
+    e.preventDefault()
+    console.log('go to next page');
+    this.setState(prevState => {
+      return { page: prevState.page + 1 }
+    })
+  }
+
   render() {
     return (
       <div className='container flex' id='collection'>
@@ -123,9 +143,14 @@ class CollectionContainer extends React.Component {
           nItemSelect={this.nItemSelect}
           page={this.state.page}
           n_results={this.state.n_results}
+          back={this.handleBack}
+          next={this.handleNext}
         />
 
-        <ItemsContainer items={this.state.items ? this.state.items.slice(0, this.state.n_item) : null} />
+        <ItemsContainer
+          items={this.state.items
+            ? this.state.items.slice(this.state.page * this.state.n_item, (this.state.page * this.state.n_item) + this.state.n_item)
+            : null} />
       </div>
     )
   }

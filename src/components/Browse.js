@@ -51,11 +51,14 @@ const Browse = props => {
           className='btn page'
           id='back'
           disabled={props.page === 0}
+          onClick={props.back}
         >{`<<`}</button>
+
         <button
           className='btn page'
           id='next'
           disabled={props.page === Math.floor(props.n_results / props.n_item)}
+          onClick={props.next}
         >{`>>`}</button>
 
       </form>
