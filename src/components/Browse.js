@@ -32,6 +32,23 @@ const Browse = props => {
 
         <button className='btn' id='reset' onClick={props.onReset}>Reset</button>
 
+
+        <label id='n_item'>Results:
+        <select
+            id='n_item'
+            name='n_item'
+            value={props.n_item}
+            onChange={props.nItemSelect}
+          >
+            <option value="20">20</option>
+            <option value="40">40</option>
+            <option value="60">60</option>
+            <option value="80">80</option>
+          </select>
+        </label>
+        <button className='btn page' id='back'>{`<<`}</button>
+        <button className='btn page' id='next'>{`>>`}</button>
+
       </form>
     </div>
   )

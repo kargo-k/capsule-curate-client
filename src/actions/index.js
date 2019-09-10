@@ -1,7 +1,6 @@
 import {
   SHOW_CAPSULE, SET_CAPSULES, ACTIVE_CAPSULE,
   SET_USER, LOG_OUT,
-  SET_COLLECTION,
   SHOW_ITEM
 } from '../constants/action-types';
 import { API } from '../constants/api-url';

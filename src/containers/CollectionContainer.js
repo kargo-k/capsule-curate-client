@@ -21,7 +21,8 @@ class CollectionContainer extends React.Component {
       keyword: "",
       category: "",
       page: 0,
-      items: null
+      items: null,
+      n_items: 40
     }
   }
 
@@ -44,28 +45,45 @@ class CollectionContainer extends React.Component {
   }
 
   handleChange = e => {
-    console.log('searching bye keyword...');
     e.persist()
     this.setState(prevState => {
-      let prev_items = prevState.items
-      let new_items = prev_items.filter(i => i.name.toLowerCase().includes(e.target.value.toLowerCase()))
-      return {
-        keyword: e.target.value,
-        items: new_items
+      if (prevState.category === "") {
+        // if there is no category selected, search through all_items
+        let new_items = prevState.all_items.filter(i => i.name.toLowerCase().includes(e.target.value.toLowerCase()))
+        return {
+          keyword: e.target.value,
+          items: new_items
+        }
+      } else {
+        // if a category is selected, search through the already categorically filtered items
+        let new_items = prevState.category_items.filter(i => i.name.toLowerCase().includes(e.target.value.toLowerCase()))
+        return {
+          keyword: e.target.value,
+          items: new_items
+        }
       }
     })
   }
 
   handleSelect = e => {
-    console.log('selection made', e.target.value);
     e.persist()
 
     this.setState(prevState => {
-      let prev_items = prevState.items
-      let new_items = prev_items.filter(i => i.category === e.target.value || i.category2 === e.target.value)
-      return {
-        category: e.target.value,
-        items: new_items
+      if (e.target.value === "") {
+        // resets the items shown to be all items if no category is selected
+        return {
+          items: prevState.all_items,
+          category_items: prevState.all_items,
+          category: e.target.value
+        }
+      } else {
+        // if a category is selected, change the items shown to match that category and set a new value in state called category_items, which the keyword search filter will filter through
+        let new_items = prevState.all_items.filter(i => i.category === e.target.value || i.category2 === e.target.value)
+        return {
+          items: new_items,
+          category_items: new_items,
+          category: e.target.value
+        }
       }
     })
   }
@@ -76,7 +94,7 @@ class CollectionContainer extends React.Component {
     this.setState(prevState => {
       return {
         keyword: "",
-        category: 'all',
+        category: "",
         page: 0,
         items: prevState.all_items
       }
@@ -86,9 +104,15 @@ class CollectionContainer extends React.Component {
   render() {
     return (
       <div className='container flex' id='collection'>
-        <Browse search={this.state.keyword} onChange={this.handleChange} sel={this.state.category} onSelect={this.handleSelect} onReset={this.handleReset} />
+        <Browse
+          search={this.state.keyword}
+          onChange={this.handleChange}
+          sel={this.state.category}
+          onSelect={this.handleSelect}
+          onReset={this.handleReset}
+        />
 
-        <ItemsContainer items={this.state.items ? this.state.items.slice(0, 40) : null} />
+        <ItemsContainer items={this.state.items ? this.state.items.slice(0, this.state.n_items) : null} />
       </div>
     )
   }
