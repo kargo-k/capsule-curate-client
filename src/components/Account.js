@@ -21,14 +21,16 @@ const Account = props => {
       <Redirect to='/' />
     )
   } else {
-    // If the user is logged inthen show user details
+    // If the user is logged in, show user details
     return (<div className='user container'>
-      <h1>{props.user.username}</h1>
-      <h3>{props.user.location}</h3>
+      <form>
+        <h1><u>Account</u></h1>
 
-      <h1>Account Settings</h1>
-      <Link to='#' >Update Profile</Link>
-      <Link to='#' onClick={props.delete_user}>Delete Account</Link>
+        <h3>{props.user.username}</h3>
+        <h3>Location: {props.user.location}</h3>
+
+        <Link className='btn' onClick={props.delete_user}>Delete Account</Link>
+      </form>
     </div>)
   }
 }

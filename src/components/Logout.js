@@ -13,8 +13,10 @@ const Logout = props => {
 
   return (
     <div className='container'>
-      <h4>You are Logged out</h4>
-      <Link to='/' className='btn'>Home</Link>
+      <form>
+        <h4>Log Out Successful</h4>
+        <Link to='/' className='btn'>Home</Link>
+      </form>
     </div>
   )
 }
