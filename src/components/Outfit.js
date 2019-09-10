@@ -113,6 +113,8 @@ class Outfit extends React.Component {
         cold_layers !== [] && ootd.push(cold_layers[Math.floor(Math.random() * cold_layers.length)])
 
         bottoms = bottoms.filter(i => i.category !== 'shorts')
+      } else if (this.props.weather_data.day.apparentTemperatureLow > 70) {
+        bottoms = bottoms.filter(i => i.category === 'shorts')
       }
 
       tops !== [] && ootd.push(tops[Math.floor(Math.random() * tops.length)])
