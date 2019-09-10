@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateItem, fetchCapsules } from '../actions';
+import { updateItem } from '../actions';
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateItem: (payload) => dispatch(updateItem(payload)),
-    fetchCapsules: () => dispatch(fetchCapsules())
+    updateItem: (payload) => dispatch(updateItem(payload))
   }
 }
 
@@ -53,18 +52,22 @@ class ShowItem extends React.Component {
                     </select>
                   </label>
 
-                  <button
-                    className='btn accent'
-                    id='add-item-btn'
-                    disabled={this.state.clicked}
-                    onClick={this.handleSubmit}
-                  >
-                    {this.state.clicked ? 'saved' : 'Add to Capsule'}
-                  </button>
+
+                  {this.props.active_capsule.items.includes(this.props.item)
+                    ? <button
+                      className='btn accent'
+                      id='add-item-btn'
+                      disabled={this.state.clicked}
+                      onClick={this.handleSubmit}
+                    >{this.state.clicked ? 'saved' : 'Remove from Capsule'}</button>
+                    : <button
+                      className='btn accent'
+                      id='add-item-btn'
+                      disabled={this.state.clicked}
+                      onClick={this.handleSubmit}
+                    >{this.state.clicked ? 'saved' : 'Add to Capsule'}</button>}
 
                 </div>}
-
-              <h1>{this.props.item.personal}</h1>
 
               {!this.props.item.personal ? <label><a target='_blank' rel="noopener noreferrer" className='btn' id="purchase" href={`https://${this.props.item.shop_link}`}>Purchase at {this.props.item.brand}</a></label> : null}
 
