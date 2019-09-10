@@ -110,7 +110,6 @@ class CollectionContainer extends React.Component {
 
   handleBack = e => {
     e.preventDefault()
-    console.log('go back to prev results');
     this.setState(prevState => {
       return { page: prevState.page - 1 }
     })
@@ -118,7 +117,6 @@ class CollectionContainer extends React.Component {
 
   handleNext = e => {
     e.preventDefault()
-    console.log('go to next page');
     this.setState(prevState => {
       return { page: prevState.page + 1 }
     })
