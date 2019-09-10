@@ -24,7 +24,7 @@ const Browse = props => {
           <option value="one piece">One Pieces</option>
           <option value="outerwear">Outwear</option>
           <option value="pants">Pants</option>
-          <option value="shorts">Shorts</option>
+          <option value="shorts">Skirts/Shorts</option>
           <option value="sweater">Sweaters</option>
           <option value="tee">Tees</option>
           <option value="top">Tops</option>
