@@ -46,8 +46,17 @@ const Browse = props => {
             <option value="80">80</option>
           </select>
         </label>
-        <button className='btn page' id='back'>{`<<`}</button>
-        <button className='btn page' id='next'>{`>>`}</button>
+
+        <button
+          className='btn page'
+          id='back'
+          disabled={props.page === 0}
+        >{`<<`}</button>
+        <button
+          className='btn page'
+          id='next'
+          disabled={props.page === Math.floor(props.n_results / props.n_item)}
+        >{`>>`}</button>
 
       </form>
     </div>

@@ -145,3 +145,12 @@ button#next {
   padding: 0 5px;
   font-size: calc(12px + 0.2vw);
 }
+#back.btn:disabled, #next.btn:disabled {
+  width: auto;
+  height: 100%;
+  margin: 0 5px;
+  padding: 0 5px;
+  font-size: calc(12px + 0.2vw);
+  background-color: $color-light2;
+  color: #ccc;
+}
