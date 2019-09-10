@@ -195,26 +195,6 @@ export const deleteCapsule = id => {
   }
 }
 
-// export const fetchCollection = () => {
-//   return (dispatch, getState) => {
-//     fetch(API + '/items', {
-//       method: 'GET',
-//       headers: {
-//         'Authorization': `Bearer ${localStorage.getItem('token')}`
-//       }
-//     })
-//       .then(res => res.json())
-//       .then(items => {
-//         // saves the collection items in state
-//         dispatch(setCollection(items))
-//       })
-//   }
-// }
-
-// export const setCollection = payload => {
-//   return { type: SET_COLLECTION, payload }
-// }
-
 export const showItem = payload => {
   return { type: SHOW_ITEM, payload }
 }

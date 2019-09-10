@@ -1,12 +1,8 @@
 import React from 'react';
 import Browse from '../components/Browse';
-import { connect } from 'react-redux';
 import ItemsContainer from './ItemsContainer';
 import { API } from '../constants/api-url'
 
-const mapStateToProps = state => {
-  return { collection: state.collection }
-}
 
 class CollectionContainer extends React.Component {
 
@@ -23,7 +19,6 @@ class CollectionContainer extends React.Component {
   }
 
   componentDidMount() {
-    console.log('component did mount');
     return fetch(API + '/items', {
       method: 'GET',
       headers: {
@@ -156,4 +151,4 @@ class CollectionContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(CollectionContainer);
+export default CollectionContainer;

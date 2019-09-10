@@ -25,12 +25,11 @@ class ShowItem extends React.Component {
       capsule_id: e.target.capsule.value,
       item_id: this.props.item.id
     }
-    updateItem(payload)
+    this.props.updateItem(payload)
     this.setState({ clicked: true })
   }
 
   render() {
-
     return (
       <div id='item-details' className='container'>
         <h1>{this.props.item.name} {this.props.item.brand ? `// ${this.props.item.brand}` : null}</h1>
@@ -49,17 +48,17 @@ class ShowItem extends React.Component {
                 <div className='custom-select'>
                   <label>Add this to your capsule:
               <select name='capsule' defaultValue={this.props.active_capsule.id}>
-                      {this.props.capsules_list.map(capsule => <option key={this.props.capsule.id} value={this.props.capsule.id} >{this.props.capsule.title}</option>)}
+                      {this.props.capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
                     </select>
                   </label>
 
-                  <input
+                  <button
                     className='btn accent'
                     name="submit"
                     id='add-item-btn'
                     type="submit"
-                    disabled={this.state.clicked}
-                    value="Add" />
+                    disabled={this.state.clicked}>{this.state.click ? 'Saved!' : 'Add to Capsule'}
+                  </button>
                 </div>}
 
               <h1>{this.props.item.personal}</h1>
