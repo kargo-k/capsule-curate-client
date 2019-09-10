@@ -8,7 +8,7 @@ class ItemsContainer extends React.Component {
     if (this.props.items === null) {
       return (
         <div className='container'>
-          <h1>Add items to your capsule to get started</h1>
+          <h1>No Items to Show</h1>
         </div>
       )
     } else {

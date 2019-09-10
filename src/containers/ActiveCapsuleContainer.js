@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Weather from '../components/Weather';
 import { connect } from 'react-redux';
 import ItemsContainer from './ItemsContainer';
