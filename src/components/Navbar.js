@@ -71,7 +71,7 @@ class Navbar extends React.Component {
                 </li>
 
                 <li>
-                  <NavLink to='/capsule'>Capsules</NavLink>
+                  <NavLink to='/active'>Capsules</NavLink>
                   <ul>
                     <li><Link to='/new' id='curate-new'> + New Capsule</Link></li>
                     {this.props.capsules_list
@@ -85,6 +85,7 @@ class Navbar extends React.Component {
                 <li>
                   <NavLink to='/active' onClick={this.handleOnClick}>{this.props.user.username}</NavLink>
                   <ul>
+                    <li><Link to='/active'>Home</Link></li>
                     <li><Link to='/account'>Account</Link></li>
                     <li><Link to='/logout' >Logout</Link></li>
                   </ul>

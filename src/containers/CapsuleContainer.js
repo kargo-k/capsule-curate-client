@@ -42,7 +42,7 @@ class CapsuleContainer extends React.Component {
         return (
           <div id='capsule-show' className='container'>
 
-            <Header handleShow={this.handleShow} />
+            <Header handleShow={this.handleShow} showForm={this.state.show_add_form} />
             <div id='capsule-body'>
               <ItemsContainer capsule_id={capsule.id} updateItem={this.props.updateItem} items={this.props.show_capsule.items} />
 
