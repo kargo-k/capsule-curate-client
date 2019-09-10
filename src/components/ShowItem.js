@@ -20,9 +20,10 @@ class ShowItem extends React.Component {
   }
 
   handleSubmit = e => {
-    e.preventDefault()
+    // e.preventDefault()
+    let form_element = document.getElementById('show-item-form')
     let payload = {
-      capsule_id: e.target.capsule.value,
+      capsule_id: form_element.capsule.value,
       item_id: this.props.item.id
     }
     this.props.updateItem(payload)
@@ -42,7 +43,7 @@ class ShowItem extends React.Component {
             <div className='text'>{this.props.item.price ? `Price: ${this.props.item.price}` : null}</div>
             <div className='text'>{this.props.item.description ? `Description: ${this.props.item.description}` : null}</div>
 
-            <form onSubmit={this.handleSubmit} id='show-item-form'>
+            <form id='show-item-form'>
 
               {!this.props.active_capsule ? null :
                 <div className='custom-select'>
@@ -54,11 +55,13 @@ class ShowItem extends React.Component {
 
                   <button
                     className='btn accent'
-                    name="submit"
                     id='add-item-btn'
-                    type="submit"
-                    disabled={this.state.clicked}>{this.state.click ? 'Saved!' : 'Add to Capsule'}
+                    disabled={this.state.clicked}
+                    onClick={this.handleSubmit}
+                  >
+                    {this.state.clicked ? 'saved' : 'Add to Capsule'}
                   </button>
+
                 </div>}
 
               <h1>{this.props.item.personal}</h1>
