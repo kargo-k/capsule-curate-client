@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { SEASONS } from '../constants';
 import { createCapsule, showCapsule } from '../actions';
 import reactCSS from 'reactcss';
-import { ChromePicker, SliderPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 
 const mapDispatchToProps = dispatch => {
   return {

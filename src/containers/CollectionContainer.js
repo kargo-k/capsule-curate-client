@@ -2,6 +2,7 @@ import React from 'react';
 import Browse from '../components/Browse';
 import { connect } from 'react-redux';
 import ItemsContainer from './ItemsContainer';
+import ShowItem from '../components/ShowItem';
 import { API } from '../constants/api-url'
 
 const mapStateToProps = state => {
@@ -40,7 +41,8 @@ class CollectionContainer extends React.Component {
         this.setState({
           items: items,
           all_items: items,
-          n_results: items.length
+          n_results: items.length,
+          details: false
         })
       })
   }
@@ -81,7 +83,8 @@ class CollectionContainer extends React.Component {
           category_items: prevState.all_items,
           category: e.target.value,
           n_results: prevState.all_items.length,
-          page: 0
+          page: 0,
+          keyword: ""
         }
       } else {
         // if a category is selected, change the items shown to match that category and set a new value in state called category_items, which the keyword search filter will filter through
@@ -91,7 +94,8 @@ class CollectionContainer extends React.Component {
           category_items: new_items,
           category: e.target.value,
           n_results: new_items.length,
-          page: 0
+          page: 0,
+          keyword: ""
         }
       }
     })
@@ -151,6 +155,7 @@ class CollectionContainer extends React.Component {
           items={this.state.items
             ? this.state.items.slice(this.state.page * this.state.n_item, (this.state.page * this.state.n_item) + this.state.n_item)
             : null} />
+
       </div>
     )
   }

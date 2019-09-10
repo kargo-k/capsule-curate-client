@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createUser } from '../actions';
@@ -12,7 +11,7 @@ const mapDispatchToProps = dispatch => {
 
 class SignupForm extends React.Component {
 
-  passwordMin = 4
+  passwordMin = 8
 
   state = {
     username: "",
@@ -44,7 +43,7 @@ class SignupForm extends React.Component {
     }
     try {
       this.props.createUser(payload)
-      setTimeout(() => this.props.history.push('/active'), 1000)
+      setTimeout(() => this.props.history.push('/new'), 1000)
     } catch (e) {
       console.log(e.message)
     }
@@ -141,7 +140,8 @@ class SignupForm extends React.Component {
           className='btn'
           type="submit"
           value="Create Account"
-          disabled={!(this.state.validUsername && this.state.validPassword)}
+          disabled={!(this.state.validUsername && this.state.validPassword && this.state.location)}
+        // user can only sign up when username and password are valid.  location must also be present, but there is not validity check on this
         /></label>
 
         <label className='single'><Link to='/login'>Already Have An Account?</Link></label>

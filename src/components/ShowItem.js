@@ -18,60 +18,74 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const ShowItem = ({ item, capsules_list, updateItem, active_capsule }) => {
+class ShowItem extends React.Component {
+  // = ({ item, capsules_list, updateItem, active_capsule }) =>
 
-  const handleSubmit = e => {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      clicked: false
+    }
+  }
+
+  handleSubmit = e => {
     e.preventDefault()
     let payload = {
       capsule_id: e.target.capsule.value,
-      item_id: item.id
+      item_id: this.props.item.id
     }
     updateItem(payload)
+    this.setState({ clicked: true })
   }
 
-  if (!item) {
-    return <Redirect to='/discover' />
-  } else {
-    return (
-      <div id='item-details' className='container'>
-        <h1>{item.name} {item.brand ? `// ${item.brand}` : null}</h1>
-        <div className='wrapper' >
+  render() {
+    if (!this.props.item) {
+      return <Redirect to='/discover' />
+    } else {
+      return (
+        <div id='item-details' className='container'>
+          <h1>{this.props.item.name} {this.props.item.brand ? `// ${this.props.item.brand}` : null}</h1>
+          <div className='wrapper' >
 
-          <img src={item.image} alt={item.name} />
+            <img src={this.props.item.image} alt={this.props.item.name} />
 
-          <div className='right'>
-            <div className='text'>{item.color ? `Color: ${item.color}` : null}</div>
-            <div className='text'>{item.price ? `Price: ${item.price}` : null}</div>
-            <div className='text'>{item.description ? `Description: ${item.description}` : null}</div>
+            <div className='right'>
+              <div className='text'>{this.props.item.color ? `Color: ${this.props.item.color}` : null}</div>
+              <div className='text'>{this.props.item.price ? `Price: ${this.props.item.price}` : null}</div>
+              <div className='text'>{this.props.item.description ? `Description: ${this.props.item.description}` : null}</div>
 
-            <form onSubmit={handleSubmit} id='show-item-form'>
+              <form onSubmit={this.handleSubmit} id='show-item-form'>
 
-              {!active_capsule ? null :
-                <div className='custom-select'>
-                  <label>Add this to your capsule:
-              <select name='capsule' defaultValue={active_capsule.id}>
-                      {capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
-                    </select>
-                  </label>
+                {!this.props.active_capsule ? null :
+                  <div className='custom-select'>
+                    <label>Add this to your capsule:
+              <select name='capsule' defaultValue={this.props.active_capsule.id}>
+                        {this.props.capsules_list.map(capsule => <option key={this.props.capsule.id} value={this.props.capsule.id} >{this.props.capsule.title}</option>)}
+                      </select>
+                    </label>
 
-                  <input
-                    className='btn accent'
-                    name="submit"
-                    type="submit"
-                    value="Add" />
-                </div>}
+                    <input
+                      className='btn accent'
+                      name="submit"
+                      id='add-item-btn'
+                      type="submit"
+                      disabled={this.state.clicked}
+                      value="Add" />
+                  </div>}
 
-              <h1>{item.personal}</h1>
+                <h1>{this.props.item.personal}</h1>
 
-              {!item.personal ? <label><a target='_blank' rel="noopener noreferrer" className='btn' id="purchase" href={`https://${item.shop_link}`}>Purchase at {item.brand}</a></label> : null}
+                {!this.props.item.personal ? <label><a target='_blank' rel="noopener noreferrer" className='btn' id="purchase" href={`https://${this.props.item.shop_link}`}>Purchase at {this.props.item.brand}</a></label> : null}
 
-            </form>
+              </form>
+
+            </div>
 
           </div>
-
-        </div>
-      </div >
-    )
+        </div >
+      )
+    }
   }
 }
 

@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => {
 
 class ActiveCapsuleContainer extends React.Component {
 
-  location = localStorage.getItem('location')
+  location = JSON.parse(localStorage.getItem('user')).location
 
   state = {
     fetchComplete: false
@@ -90,15 +90,29 @@ class ActiveCapsuleContainer extends React.Component {
     if (!this.props.user) {
       // if there is no user signed in, redirect to root
       return <Redirect to='/' />
+    } else if (!this.props.active_capsule) {
+      // if there is no active_capsule
+      return (
+        <div className='container' id='active-container'>
+          <div id='active-left' className='flex'>
+            <h1>Welcome back, {this.props.user.username} </h1>
+            <Weather data={this.state} />
+          </div>
+          <div id='active-right'>
+            <h1>Create a new active capsule or pull out an existing capsule</h1>
+          </div>
+        </div>
+      )
     } else {
       // if there is a user signed in, fetch capsules happening in component did mount
       let swatchStyle = this.getSwatches()
+      // debugger
       return (
         <div className='container' id='active-container' >
           <div id='active-left' className='flex'>
             <h1>Welcome back, {this.props.user.username} </h1>
             <Weather data={this.state} />
-            {this.state.fetchComplete ?
+            {this.state.fetchComplete && this.props.active_capsule.items !== [] ?
               <Outfit weather_data={this.state} /> : null}
           </div>
 

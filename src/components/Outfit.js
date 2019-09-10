@@ -21,54 +21,23 @@ class Outfit extends React.Component {
   }
 
   render() {
-    // debugger
     return (
       <div id='ootd-container'>
         <h1>#OOTD</h1>
         <div id='ootd-div'>
-          {this.state.outfit && this.state.outfit.map(item => <Item key={item.id + 9000} item={item} />)}
+          {!this.state.outfit === [] ? this.state.outfit.map(item => <Item key={item.id + 9000} item={item} />) : <p>Add Items to Get an OOTD</p>}
         </div>
       </div>
     )
-
-    // if (this.state.items === []) {
-    //   return (
-    //     <div id='ootd-container'>
-    //       <h1>Add items to get an #OOTD</h1>
-    //       <div id='ootd-div'>
-    //         <Link className='btn' to='/discover'>Browse Collection</Link>
-    //       </div>
-    //     </div >
-    //   )
-    // } else {
-    //   let ootd = this.pickOutfit()
-    //   if (ootd) {
-    //     ootd = ootd.filter(el => el != null)
-    //     return (
-    //       <div id='ootd-container'>
-    //         <h1>#OOTD</h1>
-    //         <div id='ootd-div'>
-    //           {ootd.map(item => <Item key={item.id} item={item} />)}
-    //         </div>
-    //       </div>
-    //     )
-    //   } else {
-    //     return (
-    //       <div id='ootd-container'>
-    //         <h1>no outfits to show</h1>
-    //       </div>
-    //     )
-    //   }
-    // }
   }
 
   pickOutfit() {
-    // debugger
     let items = this.props.active_capsule.items
     let ootd, ootd_date
     ootd = JSON.parse(localStorage.getItem('ootd'))
 
     if (ootd) {
+      ootd = ootd.filter(i => i !== null)
       // if the ootd is stored in local storage, get the date it was stored and then check to see if the date is less than today's date
       ootd_date = ootd.pop()
 
@@ -123,11 +92,14 @@ class Outfit extends React.Component {
 
     // if the probability of rain is greater than 60%, suggest a rain item if the user has one
     if (this.props.weather_data.day.precipProbability > .6) {
-      let rain_gear = this.props.items.filter(i => i.name.includes('rain'))
+      let rain_gear = items.filter(i => i.name.includes('rain'))
       if (rain_gear !== []) {
         ootd.push(rain_gear[Math.floor(Math.random() * rain_gear.length)])
       }
     }
+
+    // remove any null values in case there are missing categories of items
+    ootd = ootd.filter(i => i !== null)
 
     // store the ootd in local storage for 24 hours
     let today = new Date()
