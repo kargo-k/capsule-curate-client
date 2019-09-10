@@ -25,8 +25,8 @@ function App() {
           <Route exact path='/' component={Landing} />
           <Route path='/'>
             <Route path='/' component={Navbar} />
-            <Route path='/capsule' component={CapsuleContainer} />
             <Route path='/active' component={ActiveCapsuleContainer} />
+            <Route path='/capsule' component={CapsuleContainer} />
             <Route path='/login' component={LoginForm} />
             <Route path='/signup' component={SignupForm} />
             <Route path='/about' component={About} />

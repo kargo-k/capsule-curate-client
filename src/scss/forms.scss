@@ -15,9 +15,9 @@ form {
     font-family: $font-serif;
     padding: 5px 10px;
     margin-left: 10px;
-    font-size: calc(16px + 0.2vw);
+    font-size: calc(12px + 0.2vw);
     width: 25vw;
-    height: 30px;
+    height: auto;
   }
   label {
     margin: 5px 0px;
@@ -28,7 +28,6 @@ form {
   span.radio {
     font-size: calc(12px + 0.2vw);
     input {
-      width: auto;
       display: inline;
     }
   }
@@ -84,13 +83,15 @@ form {
   border: 0px;
   flex-direction: row;
   align-content: flex-start;
+  align-items: center;
+
   input {
     font-family: $font-serif;
     padding: 5px 10px;
     margin-left: 10px;
-    font-size: calc(16px + 0.2vw);
-    width: 25vw;
-    height: 30px;
+    font-size: calc(12px + 0.2vw);
+    width: 250px;
+    height: auto;
   }
   .btn, a {
     background: $color-med;
@@ -127,4 +128,29 @@ button#next {
 }
 #show-item-form {
   border: 0;
+}
+#reset.btn {
+  margin: 0 20px;
+}
+#n_item {
+  width: auto;
+  height: 100%;
+  margin: 0 5px;
+  font-size: calc(12px + 0.2vw);
+}
+#back.btn, #next.btn {
+  width: auto;
+  height: 100%;
+  margin: 0;
+  padding: 0 5px;
+  font-size: calc(12px + 0.2vw);
+}
+#back.btn:disabled, #next.btn:disabled {
+  width: auto;
+  height: 100%;
+  margin: 0 5px;
+  padding: 0 5px;
+  font-size: calc(12px + 0.2vw);
+  background-color: $color-light2;
+  color: #ccc;
 }

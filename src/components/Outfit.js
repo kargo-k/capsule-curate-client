@@ -24,7 +24,7 @@ class Outfit extends React.Component {
     // debugger
     return (
       <div id='ootd-container'>
-        <h1>ootd container</h1>
+        <h1>#OOTD</h1>
         <div id='ootd-div'>
           {this.state.outfit && this.state.outfit.map(item => <Item key={item.id + 9000} item={item} />)}
         </div>

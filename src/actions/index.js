@@ -1,7 +1,6 @@
 import {
   SHOW_CAPSULE, SET_CAPSULES, ACTIVE_CAPSULE,
   SET_USER, LOG_OUT,
-  SET_COLLECTION,
   SHOW_ITEM
 } from '../constants/action-types';
 import { API } from '../constants/api-url';
@@ -91,7 +90,6 @@ export const deleteUser = () => {
 
 export const fetchCapsules = () => {
   // every time fetchCapsules is called, it fetches all of the capsules for the user and resets the capsules list and active_capsule in state.  if the user does not have any active capsule, the active_capsule in state will be null
-  console.log('fetching capsules happening!');
   return (dispatch, getState) => {
     fetch(API + '/capsules', {
       method: 'GET',
@@ -118,7 +116,6 @@ export const fetchCapsules = () => {
 
 export const activeCapsule = payload => {
   // sets the user's active capsule to state
-  console.log('!!!setting the active capsule to state!!!: ', payload);
   return { type: ACTIVE_CAPSULE, payload }
 }
 
@@ -198,25 +195,25 @@ export const deleteCapsule = id => {
   }
 }
 
-export const fetchCollection = () => {
-  return (dispatch, getState) => {
-    fetch(API + '/items', {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-      .then(res => res.json())
-      .then(items => {
-        // saves the collection items in state
-        dispatch(setCollection(items))
-      })
-  }
-}
+// export const fetchCollection = () => {
+//   return (dispatch, getState) => {
+//     fetch(API + '/items', {
+//       method: 'GET',
+//       headers: {
+//         'Authorization': `Bearer ${localStorage.getItem('token')}`
+//       }
+//     })
+//       .then(res => res.json())
+//       .then(items => {
+//         // saves the collection items in state
+//         dispatch(setCollection(items))
+//       })
+//   }
+// }
 
-export const setCollection = payload => {
-  return { type: SET_COLLECTION, payload }
-}
+// export const setCollection = payload => {
+//   return { type: SET_COLLECTION, payload }
+// }
 
 export const showItem = payload => {
   return { type: SHOW_ITEM, payload }
@@ -238,7 +235,10 @@ export const updateItem = payload => {
       })
     })
       .then(res => res.json())
-      .then(data => dispatch(fetchCapsules()))
+      .then(data => {
+        dispatch(showCapsule(data.capsule))
+      })
+      .then(dispatch(fetchCapsules()))
       .catch(e => console.log('error in patch request', e))
   }
 }
@@ -259,10 +259,7 @@ export const createItem = payload => {
         if (json.error) {
           console.log('Failed to create item.', json)
         } else {
-          debugger
-          console.log('Creating item!!!', json.item);
           dispatch(showCapsule(json.capsule))
-          console.log('dispatching show capsule action to show', json.capsule);
         }
       })
       .then(data => dispatch(fetchCapsules()))

@@ -33,7 +33,6 @@ class CapsuleContainer extends React.Component {
 
   handleShow = () => {
     this.setState({ show_add_form: !this.state.show_add_form })
-    console.log('toggle the show_Add_form');
   }
 
   render() {
@@ -43,9 +42,9 @@ class CapsuleContainer extends React.Component {
         return (
           <div id='capsule-show' className='container'>
 
-            <Header handleShow={this.handleShow} />
+            <Header handleShow={this.handleShow} showForm={this.state.show_add_form} />
             <div id='capsule-body'>
-              <ItemsContainer capsule_id={capsule.id} updateItem={this.props.updateItem} />
+              <ItemsContainer capsule_id={capsule.id} updateItem={this.props.updateItem} items={this.props.show_capsule.items} />
 
               {this.state.show_add_form ? <UploadItemForm /> : null}
 

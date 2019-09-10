@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Weather from '../components/Weather';
 import { connect } from 'react-redux';
 import ItemsContainer from './ItemsContainer';
@@ -51,11 +51,11 @@ class ActiveCapsuleContainer extends React.Component {
     return swatchStyle
   }
 
-  // const LOCATION_ENDPOINT = `/location/${location}`;
-  // const WEATHER_ENDPOINT = `/weather?loc=${latitude}_${longitude}`;
-
   componentDidMount() {
     this.props.fetchCapsules()
+
+    // const LOCATION_ENDPOINT = `/location/${location}`;
+    // const WEATHER_ENDPOINT = `/weather?loc=${latitude}_${longitude}`;
 
     fetch(WEATHER + `/location/${this.location}`)
       .then(res => res.json())
@@ -112,48 +112,12 @@ class ActiveCapsuleContainer extends React.Component {
               <div className='swatch' style={swatchStyle[3]}></div>
             </div>
 
-            <ItemsContainer updateItem={this.props.updateItem} />
+            {this.props.active_capsule ? <ItemsContainer updateItem={this.props.updateItem} capsule_id={this.props.active_capsule.id} items={this.props.active_capsule.items} /> : null}
           </div>
 
         </div>
       )
     }
-
-
-
-    // if (this.state.fetchComplete && this.props.active_capsule) {
-    //   console.log('inside active capsule if fetch done and active_capsule exists');
-    //   return (
-    //     <div className='container' id='active-container' >
-    //       <div id='active-left' className='flex'>
-    //         <Weather data={this.state} />
-    //         <Outfit
-    //           hi={this.state.day.apparentTemperatureHigh}
-    //           lo={this.state.day.apparentTemperatureLow}
-    //           precip={this.state.current.precipProbability} />
-    //       </div>
-    //       <div id='active-right' className='flex'>
-    //         <h1>{this.props.active_capsule.title}</h1>
-    //         <ItemsContainer updateItem={this.props.updateItem} />
-    //       </div>
-    //     </div>
-    //   )
-    // } else if (!this.props.active_capsule) {
-    //   // debugger
-    //   console.log('inside active capsule if username exists', this.props);
-    //   return (
-    //     <div className='container'>
-    //       <h3>Welcome back, {this.user.username}</h3>
-    //       <p>Looks like you don't have an active capsule. Activate an existing capsule, or <Link to='/new'>curate a new one!</Link></p>
-    //     </div>
-    //   )
-    // } else if (!this.user) {
-    //   // debugger
-    //   return <Redirect to='/' />
-    // } else {
-    //   // debugger
-    //   return <h1>i don't know then</h1>
-    // }
   }
 
   shouldComponentUpdate() {

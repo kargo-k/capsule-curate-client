@@ -46,19 +46,20 @@ const ShowItem = ({ item, capsules_list, updateItem, active_capsule }) => {
 
             <form onSubmit={handleSubmit} id='show-item-form'>
 
-              <div className='custom-select'>
-                <label>Add this to a capsule:
+              {!active_capsule ? null :
+                <div className='custom-select'>
+                  <label>Add this to your capsule:
               <select name='capsule' defaultValue={active_capsule.id}>
-                    {capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
-                  </select>
-                </label>
-              </div>
+                      {capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
+                    </select>
+                  </label>
 
-              <label><input
-                className='btn accent'
-                name="submit"
-                type="submit"
-                value="Add" /></label>
+                  <input
+                    className='btn accent'
+                    name="submit"
+                    type="submit"
+                    value="Add" />
+                </div>}
 
               <h1>{item.personal}</h1>
 
