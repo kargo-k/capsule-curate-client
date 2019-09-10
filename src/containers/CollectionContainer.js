@@ -21,7 +21,7 @@ class CollectionContainer extends React.Component {
       keyword: "",
       category: null,
       page: 0,
-      items: []
+      items: null
     }
   }
 
@@ -31,12 +31,20 @@ class CollectionContainer extends React.Component {
 
   handleChange = e => {
     console.log('searching...');
-    this.setState({ keyword: e.target.value })
+    let filtered_items = this.props.collection.filter(i => i.name.toLowerCase().includes(e.target.value.toLowerCase()))
+    this.setState({
+      keyword: e.target.value,
+      items: filtered_items
+    })
   }
 
   handleSelect = e => {
     console.log('selection made', e.target.value);
-    this.setState({ category: e.target.value })
+    let category_items = this.props.collection.filter(i => i.category === e.target.value || i.category2 === e.target.value)
+    this.setState({
+      category: e.target.value,
+      items: category_items
+    })
   }
 
   render() {
@@ -44,7 +52,8 @@ class CollectionContainer extends React.Component {
       <div className='container flex' id='collection'>
         <Browse search={this.state.keyword} onChange={this.handleChange} sel={this.state.category} onSelect={this.handleSelect} />
 
-        <ItemsContainer items={this.state.items} />
+        <ItemsContainer items={this.state.items ? this.state.items.slice(0, 36) : null} />
+        {/* <ItemsContainer items={this.state.items || this.props.collection} /> */}
       </div>
     )
   }
