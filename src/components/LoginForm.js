@@ -38,7 +38,7 @@ class LoginForm extends React.Component {
       return <Redirect to='/active' />
     } else {
       return (
-        <form id='login' onSubmit={this.handleSubmit}>
+        <form id='login' className='flex col' onSubmit={this.handleSubmit}>
           <h1>Login Form</h1>
           <label>Username: <input
             name="username"
@@ -54,13 +54,13 @@ class LoginForm extends React.Component {
               placeholder="Password"
             /></label>
 
-          <label className='single top'><input
+          <input
             className='btn'
             name="submit"
             type="submit"
-            value="Log In" /></label>
+            value="Log In" />
 
-          <label className='single'><Link to='/signup'>New User?</Link></label>
+          <Link to='/signup'>New User?</Link>
 
         </form>
       )

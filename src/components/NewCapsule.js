@@ -227,13 +227,13 @@ class NewCapsule extends React.Component {
             </span>
           </label>
 
-          <label className='single top'><input
+          <input
             name="submit"
             className='btn'
             type="submit"
             value="Start Curating"
             disabled={!(this.state.title)}
-          /></label>
+          />
 
         </form >
       )

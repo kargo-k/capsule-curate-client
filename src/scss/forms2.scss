@@ -1,50 +1,19 @@
 form {
-  margin: 50px;
-  padding: 5vw 15vw;
-  border: 1px solid $color-med;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-content: center;
 
-  h1 {
-    font-family: $font-sans-serif;
-    padding-bottom: 10px;
-  }
-  input, select {
-    font-family: $font-serif;
-    padding: 5px 10px;
-    margin-left: 10px;
-    font-size: calc(12px + 0.2vw);
-    width: 25vw;
-    height: auto;
-  }
-  label {
-    margin: 5px 0px;
-    display: flex;
-    justify-content: space-between;
-    text-align: left;
-  }
   span.radio {
     font-size: calc(12px + 0.2vw);
     input {
       display: inline;
     }
   }
-  label.single {
-    justify-content: center;
-  }
-  .top {
+  .submit-btn {
     padding-top: 20px;
   }
   .left {
     display: flex;
     flex-direction: column;
   }
-  .subtext {
-    font-size: 8pt;
-    text-align: left;
-  }
+  
   .btn, a {
     background: $color-med;
     color: $color-dark;
@@ -68,13 +37,7 @@ form {
     background-color: $color-light2;
     color: #ccc;
   }
-  .color-picker {
-    width: 10%;
-    height: 30px;
-  }
-  select {
-    text-transform: capitalize;
-  }
+
 }
 #filter {
   margin: 0px;

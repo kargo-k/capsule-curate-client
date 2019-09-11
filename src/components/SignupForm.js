@@ -114,7 +114,7 @@ class SignupForm extends React.Component {
     } else {
 
       return (
-        <form id="signup" onSubmit={this.handleSubmit}>
+        <form id="signup" className='flex col' onSubmit={this.handleSubmit}>
           <h1>Create an Account</h1>
 
           <label><span className='left'><span>Select a Username:</span>
@@ -170,16 +170,16 @@ class SignupForm extends React.Component {
             {this.state.submitError ? this.state.submitError : null}
           </span>
 
-          <label className='single top'><input
+          <input
             name="submit"
             className='btn'
             type="submit"
             value="Create Account"
             disabled={!(this.state.validUsername && this.state.validPassword && this.state.location)}
           // user can only sign up when username and password are valid.  location must also be present, but there is not validity check on this
-          /></label>
+          />
 
-          <label className='single'><Link to='/login'>Already Have An Account?</Link></label>
+          <Link to='/login'>Already Have An Account?</Link>
 
         </form>
       )

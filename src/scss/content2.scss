@@ -1,0 +1,102 @@
+.error {
+  color: $color-error;
+}
+div.text {
+  font-size: calc(13px + 0.2vw);
+  font-family: $font-sans-serif;
+  font-weight: 600;
+  margin: 10px;
+  text-align: left;
+  .subtext {
+    color: $color-light;
+    text-align: left;
+  }
+}
+a.item-link {
+  margin: 0;
+  padding: 0;
+  color: $color-dark;
+}
+.remove-btn {
+  position: fixed;
+  float: right;
+  font-family: $font-sans-serif;
+  background: $color-accent;
+  color: $color-light;
+  border-radius: 4px;
+  border: 0px;
+  width: auto;
+  margin: 3px;
+  padding: 3px;
+  z-index: 50;
+}
+#item-details {
+  div.text {
+    font-family: $font-serif;
+    font-weight: normal;
+  }
+  .btn, a {
+    background: $color-med;
+    color: $color-dark;
+    border-radius: 4px;
+    width: 20vw;
+    border-radius: 6px;
+    font-family: $font-sans-serif;
+    font-weight: 900;
+    font-size: calc(16px + 0.2vw);
+    margin: 10px 20px;
+    padding: 5px 0px;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
+    display: inline-block;
+  }
+  .added-message {
+    color: $color-accent;
+    font-weight: 600;
+    font-size: calc(12px + 0.2vw);
+  }
+}
+p, li {
+  font-size: calc(14px + 0.2vw);
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h3 {
+    font-size: calc(14px + 0.2vw);
+    margin: 0;
+  }
+  .btn, a {
+    background: $color-med;
+    color: $color-dark;
+    border-radius: 4px;
+    width: auto;
+    border-radius: 6px;
+    font-family: $font-sans-serif;
+    font-weight: 900;
+    font-size: calc(10px + 0.2vw);
+    margin: 10px 20px;
+    padding: 5px 10px;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
+    display: inline-block;
+  }
+  .btn:enabled:hover, a:hover {
+    background: $color-accent;
+  }
+}
+#swatch-div {
+  display: flex;
+  div.swatch {
+    height: 20px;
+    width: 5vw;
+    margin: 5px;
+    display: 'inline-block';
+  }
+}
+#close:hover {
+  cursor: pointer;
+}
