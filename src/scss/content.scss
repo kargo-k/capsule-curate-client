@@ -34,7 +34,6 @@
     background-color: $color-med;
   }
 }
-
 .nav { 
   ul {
     *zoom: 1;
@@ -86,8 +85,6 @@
   }
 }
 
-
-
 form {
   border: 1px solid $color-med;
 }
@@ -96,4 +93,189 @@ input, select {
 }
 h1, h2, h3 {
   font-family: $font-sans-serif;
+}
+
+.error {
+  color: $color-error;
+}
+
+// ----items container ------
+
+.flex {
+  span.slider {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    height: 0px;
+    z-index: 2;
+    opacity: 0.9;
+    padding: 20px 20px -10px 20px;
+    -webkit-transition: height .2s;
+    transition: height 1s;
+    background: linear-gradient(to bottom, $color-med 10%, rgba(255,255,255,0));
+    font-family: $font-sans-serif;
+    font-weight: 600;
+    font-size: $font-size-small;
+  }
+  span.item-details:hover {
+    span.slider {
+      display: inline-block;
+      height: 100%;
+    }
+    cursor: zoom-in;
+  }
+}
+
+
+
+#item-details {
+  border: 1px $color-med solid;
+}
+
+#active-container {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-content: stretch;
+  align-items: stretch;
+
+  #active-left {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    height: 100%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 1;
+    padding-right: 20px;
+    max-width: 30vw;
+
+    #weather {
+      background: $color-med;
+      color: $color-light;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
+      margin: 20px 0 20px 0;
+      padding: 10px;
+      width: 100%;
+      h1 {
+        text-decoration: underline;
+        margin: 5px;
+      }
+      p {
+        padding: 10px;
+        color: $color-dark;
+        margin: 0;
+        font-size: calc(14px + 0.2vw)
+      }
+      table {
+        color: $color-dark;
+        width: 100%;
+        font-size: calc(12px + 0.2vw)
+      }
+      th, td {
+        text-align: center;
+      }
+      table#hilo {
+        width: auto;
+        font-weight: 300;
+      }
+    }
+    #ootd-container {
+      border: 0px $color-accent solid;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: $color-light;
+      background: $color-med;
+      margin: 20px 0 20px 0;
+      padding: 10px;
+      // box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
+      width: 100%;
+      h1 {
+        text-decoration: underline;
+        margin: 5px;
+      }
+      a.btn {
+        background-color: $color-light2;
+        padding: 5px 20px;
+        color: $color-dark;
+        box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
+      }
+      a.btn:hover {
+        background-color: $color-accent;
+        color: $color-light;
+      }
+    }
+    #ootd-div {
+      display: flex;
+      img {
+        max-width: 100%;
+        width: auto;
+        height: auto;
+      }
+      span.item-details {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+      }
+      span.slider {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        height: 0px;
+        z-index: 2;
+        opacity: 0.9;
+        padding: 20px 20px -10px 20px;
+        -webkit-transition: height .2s;
+        transition: height 1s;
+        background: linear-gradient(to bottom, $color-med 10%, rgba(255,255,255,0));
+      }
+      span.item-details:hover {
+        span.slider {
+          display: inline-block;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  #active-right {
+    display: flex;
+    height: 100%;
+    flex-grow: 3;
+    flex-shrink: 1;
+    flex-basis: 5;
+    flex-direction: column;
+    h1 {
+      margin-bottom: 0;
+    }
+    div.flex {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+#capsule-body {
+  display: flex;
+  align-items: flex-start;
+  form {
+    max-width: 20vw;
+    margin: 0px;
+    padding: 20px 20px;
+    font-size: calc(10pt + 0.2vw);
+    label {
+      display: block;
+    }
+    input, select {
+      font-size: calc(10pt + 0.2vw);
+      width: fill;
+    }
+  }
 }

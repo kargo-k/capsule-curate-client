@@ -69,8 +69,84 @@ form {
     height: 30px;
   }
 }
-
 h1 {
   padding-bottom: 10px;
   max-width: 40vw;
+}
+.container {
+  padding: 20px;
+  align-items: center;
+}
+div.main {
+  display: flex;
+}
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  span.item-details {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    img {
+      width: auto;
+      max-height: 200px;
+      min-height: 100px;
+      // TODO - media queries for resizing?
+    }
+  }
+}
+
+#collection {
+  #browse {
+    align-self: flex-start;
+    width: 100%;
+  }
+  #filter {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+#item-details {
+  display: flex;
+  margin: 20px;
+  flex-direction: column;
+  form#show-item-form {
+    width: 100%;
+    margin: 0;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    label {
+      margin: 0;
+      padding: 0;
+      width: auto;
+    }
+    .btn:enabled:hover, a:hover {
+      background: $color-accent;
+    }
+  }
+  div.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  div.text {
+    display: block;
+  }
+  img {
+    display: block;
+    max-width: 50vw;
+    max-height: 80vh;
+  }
+  div.right {
+    min-width: 40%;
+    max-width: 50%;
+    width: auto;
+    label {
+      display: block;
+    }
+  }
 }

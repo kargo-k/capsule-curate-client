@@ -3,22 +3,11 @@
   display: flex;
   flex-direction: column;
 }
-#navbar {
-  display: flex;
-  justify-content: space-between;
-} 
-#capsule-list {
-  flex-direction: column-reverse;
-}
-#account-menu {
-}
+
 div.main {
   display: flex;
 }
-.container {
-  padding: 20px;
-  align-items: center;
-}
+
 .flex {
   display: flex;
   flex-wrap: wrap;
