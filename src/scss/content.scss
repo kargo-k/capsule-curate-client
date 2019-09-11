@@ -138,8 +138,6 @@ h1, h2, h3 {
 }
 
 #active-container {
-
-
   #active-left {
 
     #weather {
@@ -180,8 +178,21 @@ h1, h2, h3 {
   }
 }
 .container {
-    p, li {
+  p, li {
     font-size: $font-size-header;
+  }
+  .btn {
+    background: $color-med;
+    color: $color-dark;
+    font-family: $font-sans-serif;
+    font-weight: 900;
+    font-size: $font-size-text;
+    border-radius: 6pt;
+    margin-bottom: 10px;
+    box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
+  }
+  .btn:hover {
+    background: $color-accent;
   }
 }
 

@@ -15,16 +15,14 @@ class ShowItem extends React.Component {
 
     this.state = {
       clicked: false,
-      sel_capsule: this.props.active_capsule.id,
-      item_in_capsule: this.props.active_capsule.items.includes(this.props.item)
+      sel_capsule: this.props.active_capsule ? this.props.active_capsule : this.props.capsules_list[0],
+      item_in_capsule: false
     }
   }
 
   handleSelect = e => {
-    console.log('selection made', e.target.value);
     let target_capsule = this.props.capsules_list.filter(capsule => capsule.id === Number(e.target.value))[0]
     let result = target_capsule.items.includes(this.props.item)
-    console.log('is the item in the capsule? ', result);
     this.setState({
       sel_capsule: e.target.value,
       item_in_capsule: result
@@ -40,6 +38,10 @@ class ShowItem extends React.Component {
     }
     this.props.updateItem(payload)
     this.setState({ clicked: true })
+  }
+
+  componentDidMount() {
+    this.setState({ item_in_capsule: this.state.sel_capsule.items.includes(this.props.item) })
   }
 
   render() {
@@ -59,10 +61,10 @@ class ShowItem extends React.Component {
 
             <form id='show-item-form'>
 
-              {!this.props.active_capsule ? null :
+              {!this.state.sel_capsule ? null :
                 <React.Fragment>
-                  <label>Add this to a capsule:
-              <select name='capsule' defaultValue={this.props.active_capsule.id} onChange={this.handleSelect}>
+                  <label>Select Capsule:
+              <select name='capsule' defaultValue={this.state.sel_capsule.id} onChange={this.handleSelect}>
                       {this.props.capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
                     </select>
                   </label>

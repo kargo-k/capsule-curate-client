@@ -67,6 +67,14 @@ form {
     width: 10%;
     height: 30px;
   }
+
+  label.radio {
+    display: block;
+  }
+  input.radio {
+    width: auto;
+  }
+
 }
 h1 {
   padding-bottom: 10px;
@@ -109,13 +117,13 @@ div.main {
   
 }
 
-#item-details {
-  display: flex;
+div#item-details.container {
   margin: 20px;
   padding: 20px;
+  width: auto;
   flex-direction: column;
   form#show-item-form {
-    width: auto;
+    width: 100%;
     border: 0;
     margin: 0;
     display: flex;
@@ -133,6 +141,7 @@ div.main {
     min-width: 15vw;
     max-width: 40vw;
     height: auto;
+    margin-right: 20px;
   }
   div.right {
     min-width: 40%;
@@ -160,7 +169,6 @@ div.main {
 
 #active-container {
   display: flex;
-  
   height: 100%;
   align-items: stretch;
 
@@ -217,11 +225,21 @@ div.main {
     }
   }
 
-  #active-right {
+  div#active-right.flex {
     height: 100%;
+    width: 100%;
+    max-width: 70vw;
     flex-direction: column;
     h1 {
       margin-bottom: 0;
+    }
+  }
+  div#item-details.container {
+    img {
+      max-width: 50%;
+    }
+    label {
+      display: flex;
     }
   }
 }
@@ -239,6 +257,7 @@ div.main {
 #capsule-body {
   display: flex;
   align-items: flex-start;
+  justify-content: center;
 }
 
 #filter {
@@ -276,5 +295,8 @@ div.main {
   .btn, a {
     padding-right: 10px;
     padding-left: 10px;
+  }
+  h3 {
+    margin: 0 10px;
   }
 }
