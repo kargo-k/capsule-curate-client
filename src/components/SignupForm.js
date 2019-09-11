@@ -1,17 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createUser } from '../actions';
+import { setUser } from '../actions';
+import { API } from '../constants/api-url';
 
 const mapDispatchToProps = dispatch => {
   return {
-    createUser: (user) => dispatch(createUser(user))
+    setUser: (user) => dispatch(setUser(user))
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
   }
 }
 
 class SignupForm extends React.Component {
 
-  passwordMin = 8
+  passwordMin = 4
 
   state = {
     username: "",
@@ -41,12 +48,32 @@ class SignupForm extends React.Component {
       password: e.target.password.value,
       location: e.target.location.value
     }
-    try {
-      this.props.createUser(payload)
-      setTimeout(() => this.props.history.push('/new'), 1000)
-    } catch (e) {
-      console.log(e.message)
-    }
+    return fetch(API + '/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        user: payload
+      })
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json.status === 422) {
+          this.setState({ submitError: 'Username already exists. Please select a new username.' })
+        } else if (json.status === 201) {
+          console.log('Created User', json)
+          // when user is logged in or created, store token and user information in local storage and set the user information in state
+          localStorage.setItem('token', json.jwt)
+          localStorage.setItem('user', JSON.stringify(json.user))
+          this.props.setUser(json.user)
+        } else {
+          this.setState({ submitError: 'Something went wrong. Please try again.' })
+        }
+      })
+      .catch(e => console.log('error in create user request', e))
+
   }
 
   handleChange = e => {
@@ -81,80 +108,84 @@ class SignupForm extends React.Component {
   }
 
   render() {
-    return (
-      <form id="signup" onSubmit={this.handleSubmit}>
-        <h1>Create an Account</h1>
 
-        <label><span className='left'><span>Select a Username:</span>
-          <span className='subtext'>minimum 3 characters</span></span>
-          <input
-            name="username"
-            type="text"
-            placeholder="Username"
-            value={this.state.username}
-            onChange={this.handleChange}
-            ref={input => { this.username = input }}
-          />
-        </label>
+    if (this.props.user) {
+      return <Redirect to='/new' />
+    } else {
 
-        <label><span className='left'><span>Select a Password:</span>
-          <span className='subtext'>minimum {this.passwordMin} characters</span></span>
+      return (
+        <form id="signup" onSubmit={this.handleSubmit}>
+          <h1>Create an Account</h1>
+
+          <label><span className='left'><span>Select a Username:</span>
+            <span className='subtext'>minimum 3 characters</span></span>
+            <input
+              name="username"
+              type="text"
+              placeholder="Username"
+              value={this.state.username}
+              onChange={this.handleChange}
+              ref={input => { this.username = input }}
+            />
+          </label>
+
+          <label><span className='left'><span>Select a Password:</span>
+            <span className='subtext'>minimum {this.passwordMin} characters</span></span>
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={this.state.password}
+              onChange={this.matchPassword}
+            /></label>
+
+
+          <label>Confirm Password:
           <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.matchPassword}
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirm Password"
+              value={this.state.confirmPassword}
+              onChange={this.matchPassword}
+            />
+          </label>
+
+          <label>Location:
+          <input
+              name="location"
+              type="text"
+              placeholder="ZIP or City, State"
+              value={this.state.location}
+              onChange={this.handleChange}
+            />
+          </label>
+
+          {/* shows error for password if invalid */}
+          <span className='error'>
+            {this.state.validUsername ? null : this.state.userMsg}
+            <br />
+            {this.state.validPassword ? null : this.state.errorMsg}
+            <br />
+            {/* shows error after submit if user cannot be created */}
+            {this.state.submitError ? this.state.submitError : null}
+          </span>
+
+          <label className='single top'><input
+            name="submit"
+            className='btn'
+            type="submit"
+            value="Create Account"
+            disabled={!(this.state.validUsername && this.state.validPassword && this.state.location)}
+          // user can only sign up when username and password are valid.  location must also be present, but there is not validity check on this
           /></label>
 
+          <label className='single'><Link to='/login'>Already Have An Account?</Link></label>
 
-        <label>Confirm Password:
-          <input
-            name="confirmPassword"
-            type="password"
-            placeholder="Confirm Password"
-            value={this.state.confirmPassword}
-            onChange={this.matchPassword}
-          />
-        </label>
-
-        <label>Location:
-          <input
-            name="location"
-            type="text"
-            placeholder="ZIP or City, State"
-            value={this.state.location}
-            onChange={this.handleChange}
-          />
-        </label>
-
-        {/* shows error for password if invalid */}
-        <span className='error'>
-          {this.state.validUsername ? null : this.state.userMsg}
-          <br />
-          {this.state.validPassword ? null : this.state.errorMsg}
-        </span>
-
-        <label className='single top'><input
-          name="submit"
-          className='btn'
-          type="submit"
-          value="Create Account"
-          disabled={!(this.state.validUsername && this.state.validPassword && this.state.location)}
-        // user can only sign up when username and password are valid.  location must also be present, but there is not validity check on this
-        /></label>
-
-        <label className='single'><Link to='/login'>Already Have An Account?</Link></label>
-
-        {/* shows error after submit if user cannot be created */}
-        <span className='error'>
-          {this.state.submitError ? this.state.submitError : null}
-        </span>
-
-      </form>
-    )
+        </form>
+      )
+    }
   }
 }
 
 
-export default connect(null, mapDispatchToProps)(SignupForm)
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);
