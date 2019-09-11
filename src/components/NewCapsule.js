@@ -220,9 +220,9 @@ class NewCapsule extends React.Component {
 
           <span className='radio text'>
 
-              <div><input name='isActive' type='radio' value={true} className='radio' /> Yes, starting today!</div>
+              <label className='radio'><input name='isActive' type='radio' value={true} className='radio' /> Yes, starting today!</label>
 
-              <div><input name='isActive' type='radio' value={false} className='radio text' defaultChecked /> Nope, just planning ahead!</div>
+              <label className='radio'><input name='isActive' type='radio' value={false} className='radio text' defaultChecked /> Nope, just planning ahead!</label>
 
             </span>
           </label>
