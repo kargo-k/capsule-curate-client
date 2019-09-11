@@ -88,15 +88,4 @@ p, li {
     background: $color-accent;
   }
 }
-#swatch-div {
-  display: flex;
-  div.swatch {
-    height: 20px;
-    width: 5vw;
-    margin: 5px;
-    display: 'inline-block';
-  }
-}
-#close:hover {
-  cursor: pointer;
-}
+

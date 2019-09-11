@@ -115,38 +115,133 @@ div.main {
   flex-direction: column;
   form#show-item-form {
     width: 100%;
+    border: 0;
     margin: 0;
-    padding: 20px 0;
     display: flex;
     align-items: center;
-    label {
-      margin: 0;
-      padding: 0;
-      width: auto;
-    }
-    .btn:enabled:hover, a:hover {
-      background: $color-accent;
-    }
+    justify-content: center;
+    align-content: center;
   }
   div.wrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
-  div.text {
-    display: block;
-  }
   img {
     display: block;
-    max-width: 50vw;
-    max-height: 80vh;
+    min-width: 15vw;
+    max-width: 40vw;
+    height: auto;
   }
   div.right {
     min-width: 40%;
     max-width: 50%;
     width: auto;
-    label {
-      display: block;
+  }
+}
+
+#active-container {
+  display: flex;
+  height: 100%;
+  align-items: stretch;
+
+  #active-left {
+    align-self: flex-start;
+    height: 100%;
+    flex-grow: 1;
+    padding-right: 20px;
+    max-width: 30vw;
+
+    #weather {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0 20px 0;
+      padding: 10px;
+      width: 100%;
+    }
+
+    h1 {
+      margin: 5px;
+    }
+    p {
+      padding: 10px;
+      margin: 0;
+    }
+    table {
+      min-width: 20vw;
+      width: 100%;
+    }
+    th, td {
+      text-align: center;
+    }
+
+    #ootd-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0 20px 0;
+      padding: 10px 0px;
+      width: 100%;
+    }
+    #ootd-div {
+      display: flex;
+    }
+    img {
+      max-width: 100%;
+      width: auto;
+      height: auto;
     }
   }
+
+  #active-right {
+    height: 100%;
+    h1 {
+      margin-bottom: 0;
+    }
+  }
+}
+
+#swatch-div {
+  display: flex;
+  margin: 0 10px;
+  div.swatch {
+    height: 20px;
+    width: 5vw;
+    margin: 2px;
+  }
+}
+
+#capsule-body {
+  display: flex;
+  align-items: flex-start;
+}
+
+#filter {
+  margin: 0px 0px;
+  padding: 0px 0px 10px 0px;
+  display: flex;
+  border: 0px;
+  flex-direction: row;
+  align-content: flex-start;
+  align-items: center;
+  max-width: 100%;
+  justify-content: space-around;
+  label#n_item {
+    min-width: auto;
+    max-width: auto;
+    width: auto;
+    display: inline;
+    text-align: right;
+    #sel_n {
+      width: auto;
+    }
+  }
+  .btn, a {
+    border-radius: 6px;
+    font-size: $font-size-text;
+    padding: 5px 10px;
+    margin: 0 5px;
+  }
+  
 }

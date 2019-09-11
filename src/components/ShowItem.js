@@ -32,7 +32,7 @@ class ShowItem extends React.Component {
   }
 
   handleSubmit = e => {
-    // e.preventDefault()
+    e.preventDefault()
     let form_element = document.getElementById('show-item-form')
     let payload = {
       capsule_id: form_element.capsule.value,
@@ -45,6 +45,8 @@ class ShowItem extends React.Component {
   render() {
     return (
       <div id='item-details' className='container'>
+        <span className='close' onClick={this.props.onClose}>close</span>
+
         <h1>{this.props.item.name} {this.props.item.brand ? `// ${this.props.item.brand}` : null}</h1>
         <div className='wrapper' >
 
@@ -84,7 +86,7 @@ class ShowItem extends React.Component {
 
               {!this.props.item.personal ? <label><a target='_blank' rel="noopener noreferrer" className='btn' id="purchase" href={`https://${this.props.item.shop_link}`}>Purchase at {this.props.item.brand}</a></label> : null}
 
-              <span className='btn' onClick={this.props.onClose} id='close'>Close</span>
+              <button type='submit' onClick={this.props.onClose} id='close'>Close</button>
 
             </form>
 
