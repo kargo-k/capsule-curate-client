@@ -3,44 +3,47 @@ import React from 'react';
 const About = () => {
   return (
     <div className='container'>
-      <h1>About Capsule Curate</h1>
+      <h1>About Capsule Curate: Less is More</h1>
       <p>
-        Capsule Curate is a tool for building and visualizing your own capsule wardrobe, which is a technique for honing in on your personal style so that you can wear clothing that you enjoy wearing.
+        Capsule Curate is a tool for building and visualizing your own capsule wardrobe, which is a minimalist technique for tidying your closet and honing in on your personal style.
       </p>
 
+      <h1>What is a Capsule Wardrobe?</h1>
       <p>
-        Capsules typically have between 30-35 items of clothing, which are the only clothes that you wear for a specific season.  Because capsules have a limited number of items, this helps you to choose articles that you truly enjoy wearing.  No more feeling guilty about wearing that expensive top that you don't actually like wearing!
+        Capsule Wardrobes are pretty much a minified wardrobe made up of extremely versatile pieces that can mix and match with each other to maximize the number of outfit combinations.  They typically have about 35 or so items, which are the only clothes that you wear for a specific season.  Because capsules have a limited number of items, this helps you to choose articles that you truly enjoy wearing.  No more feeling guilty about wearing that expensive top that you bought on a whim but turns out it's not particularly flattering.
       </p>
 
-      <h2>Benefits of Capsule Wardrobes</h2>
+      <h1>Benefits</h1>
 
       <ul>
-        <li>Only wear clothes that you like</li>
-        <li>Be more selective in clothing purchases, which saves you money in the long run</li>
+        <li>Only wear clothes that you like, which helps you to hone in on your style</li>
+        <li>Taking less time to choose what to wear in the mornings</li>
         <li>Coordinate the items you have so everything goes together</li>
         <li>Maximize the number of outfits you can wear with limited pieces of clothing</li>
         <li>Helps to minimize clothing and fast fashion waste</li>
+        <li>Saves money in the long run but preventing unintentional clothing purchases</li>
       </ul>
 
-      <h2>Capsule Guidelines</h2>
+      <h1>Capsule Guidelines</h1>
       <ul>
-        <li>Typically contains between 30-35 items of clothing</li>
-        <li>Counts main pieces of clothing including tops, bottoms, sweaters, outwear, and dresses</li>
-        <li>Does not include workout clothing (but does include yoga leggings you wear out running errands), underwear, shoes, purses, or accessories</li>
-        <li>Sticks to a cohesive color palette to maximize the number of outfits that can be composed</li>
+        <li>Typically contains about 35 items of clothing.  36 is what Capsule Curate recommends.</li>
+        <li>Count main pieces of clothing including tops, bottoms, sweaters, outwear, and dresses</li>
+        <li>Does not include workout clothing (but does include those yoga leggings you wear out running errands), underwear, shoes, purses, or accessories</li>
+        <li>Stick to a cohesive color palette to maximize the number of outfits that can be composed</li>
+        <li>Only wear the clothing in your capsule for the given season</li>
+        <li>Towards the end of the current season, start planning and shopping for your next capsule</li>
       </ul>
 
-      <h2>How to Begin</h2>
+      <h1>How to Begin</h1>
 
       <ol>
         <li>Create an account</li>
         <li>Create a new capsule</li>
-        <li>Add your own favorite pieces of clothing that you have</li>
-        <li>Browse our collection of items to add to your capsule</li>
+        <li>Add your own favorite pieces of clothing that you have that you want to include in your very first capsule</li>
+        <li>Browse our collection of items to add to your capsule or start planning for next season's capsule</li>
       </ol>
 
-      <h2>About the Creator of Capsule Curate</h2>
-
+      <h1>About the Creator of Capsule Curate</h1>
       <p>
         Karen Go is a full-stack software engineer based in Seattle, WA.  Her inspiration for this web app comes from her own closet and capsule struggles.  As a very visual person, she built this app as a tool helping herself reach her capsule wardrobe goals and hopes that someone else will find this tool useful.
       </p>
