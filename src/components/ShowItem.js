@@ -63,7 +63,7 @@ class ShowItem extends React.Component {
 
               {!this.state.sel_capsule ? null :
                 <React.Fragment>
-                  <label>Add this to a capsule:
+                  <label>Select Capsule:
               <select name='capsule' defaultValue={this.state.sel_capsule.id} onChange={this.handleSelect}>
                       {this.props.capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
                     </select>
