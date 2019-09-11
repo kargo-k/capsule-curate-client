@@ -18,7 +18,7 @@ const mapStateToProps = state => {
 
 class SignupForm extends React.Component {
 
-  passwordMin = 4
+  passwordMin = 8
 
   state = {
     username: "",

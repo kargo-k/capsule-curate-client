@@ -17,6 +17,7 @@ class Outfit extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({ items: this.props.active_capsule.items })
     this.pickOutfit()
   }
 
@@ -25,7 +26,7 @@ class Outfit extends React.Component {
       <div id='ootd-container'>
         <h1>#OOTD</h1>
         <div id='ootd-div'>
-          {!this.state.outfit === [] ? this.state.outfit.map(item => <Item key={item.id + 9000} item={item} />) : <p>Add Items to Get an OOTD</p>}
+          {this.state.outfit ? this.state.outfit.map(item => <Item key={`ootd${item.id}`} item={item} />) : <p>Add Items to Get an OOTD</p>}
         </div>
       </div>
     )
@@ -37,26 +38,26 @@ class Outfit extends React.Component {
     ootd = JSON.parse(localStorage.getItem('ootd'))
 
     if (ootd) {
-      ootd = ootd.filter(i => i !== null)
       // if the ootd is stored in local storage, get the date it was stored and then check to see if the date is less than today's date
       ootd_date = ootd.pop()
 
       if (ootd_date < new Date()) {
-        // generate a new ootd
+        // generate a new ootd if the stored ootd is more than a day old
         this.newOOTD(items)
       } else {
         // if the ootd's date is the same as today's date, return the current ootd
         this.setState({ outfit: ootd })
-        return ootd
       }
 
     } else {
-      // if the ootd is not stored in local storage, generate a new ootd
+      // if the ootd is not stored in local storage, generate a new ootd using items
       this.newOOTD(items)
     }
   }
 
   newOOTD = (items) => {
+
+    debugger
 
     let one_piece_outfits = items.filter(i => i.category2 === 'one piece')
     let bottoms = items.filter(i => i.category2 === 'bottoms')
@@ -100,6 +101,7 @@ class Outfit extends React.Component {
 
     // remove any null values in case there are missing categories of items
     ootd = ootd.filter(i => i !== null)
+    this.setState({ outfit: ootd })
 
     // store the ootd in local storage for 24 hours
     let today = new Date()
@@ -109,8 +111,6 @@ class Outfit extends React.Component {
       localStorage.setItem('ootd', JSON.stringify(ootd))
     }
     catch (e) { console.log(e) }
-    this.setState({ outfit: ootd })
-    return ootd
 
   }
 
