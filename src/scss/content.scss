@@ -150,6 +150,7 @@ h1, h2, h3 {
       }
       p {
         color: $color-dark;
+        font-size: $font-size-text;
       }
       table {
         color: $color-dark;
@@ -178,6 +179,12 @@ h1, h2, h3 {
     color: #ccc
   }
 }
+.container {
+    p, li {
+    font-size: $font-size-header;
+  }
+}
+
 
 
 
