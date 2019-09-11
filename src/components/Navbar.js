@@ -31,7 +31,7 @@ class Navbar extends React.Component {
       return (
         <div id='nav-container'>
           <div id='navbar' className='nav'>
-            <h1><Link to='/'>capsule curate</Link></h1>
+            <Link to='/'><h1>capsule curate</h1></Link>
             <div className='links'>
               <ul>
                 <li>

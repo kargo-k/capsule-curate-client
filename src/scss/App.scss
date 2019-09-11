@@ -4,56 +4,25 @@ body {
   background: $color-light-bg;
   background: -webkit-linear-gradient(to right, $color-light,$color-light-bg);
   background: linear-gradient(to right, $color-light, $color-light-bg);
-  font-size: calc(15px + 0.5vw);
+  font-size: $font-size-text;
   font-family: $font-serif, "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-#landing {
-  background-image: url('../assets/bg.jpg');
-  position: 0% 0%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;  
-  
-  h1 {
-    color: $color-dark;
-    font-family: $font-cursive;
-    font-size: calc(100px + 0.5vw);
-    text-align: center;
-    text-shadow: 3px 2px rgba(0,0,0,0.15);
-  }
-  span {
-    margin: 40px;
-  }
-  a {
-    background: $color-med;
-    margin-bottom: 20px;
-    width: 20vw;
-    display: block;
-    color: $color-light;
-    box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
-  }
-  a:hover {
-    background: $color-accent;
-  }
-}
-a {
+a, input[type="submit"] {
+  background: $color-med;
+  color: $color-dark;
+  box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
   border-radius: 6px;
   font-family: $font-sans-serif;
   font-weight: 900;
-  margin: 10px 20px;
   text-decoration: none;
-  padding: 5px 0px;
+  padding: 3px 0px;
+  margin: 5px;
   text-align: center;
 }
-
-h1, h2, h3, h4 {
-  font-family: $font-sans-serif;
-  font-size: calc(20px + 0.2vw)
+a:hover {
+  background-color: $color-accent;
 }

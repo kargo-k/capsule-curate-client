@@ -2,6 +2,12 @@ $font-cursive: 'Mrs Saint Delafield', cursive;
 $font-sans-serif: 'Unica One', cursive;
 $font-serif: 'PT Serif', serif;
 
+$font-size-title: calc(100px + 2.5vw);
+$font-size-header: calc(16px + 0.2vw);
+$font-size-text: calc(12px + 0.2vw);
+$font-size-small: calc(10px + 0.2vw);
+$font-size-subtext: calc(8px + 0.2vw);
+
 $color-dark: rgba(47, 45, 44, 1);
 $color-med: rgba(199, 188, 177, 1);
 $color-light: rgba(247, 245, 240, 1);

@@ -57,8 +57,6 @@ class Outfit extends React.Component {
 
   newOOTD = (items) => {
 
-    debugger
-
     let one_piece_outfits = items.filter(i => i.category2 === 'one piece')
     let bottoms = items.filter(i => i.category2 === 'bottoms')
     let tops = items.filter(i => i.category2 === 'top')
