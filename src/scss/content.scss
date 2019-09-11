@@ -81,7 +81,7 @@
   }
   #curate-new {
     background: $color-light2;
-    border-radius: 6%;
+    border-radius: 6pt;
   }
 }
 
@@ -125,6 +125,9 @@ h1, h2, h3 {
       height: 100%;
     }
     cursor: zoom-in;
+  }
+  .text {
+    padding: 10px;
   }
 }
 
@@ -175,3 +178,4 @@ h1, h2, h3 {
     color: #ccc
   }
 }
+

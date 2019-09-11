@@ -60,7 +60,7 @@ class ShowItem extends React.Component {
             <form id='show-item-form'>
 
               {!this.props.active_capsule ? null :
-                <div className='custom-select'>
+                <React.Fragment>
                   <label>Add this to a capsule:
               <select name='capsule' defaultValue={this.props.active_capsule.id} onChange={this.handleSelect}>
                       {this.props.capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
@@ -70,23 +70,26 @@ class ShowItem extends React.Component {
 
                   {this.state.item_in_capsule
                     ? <button
-                      className='btn accent'
+                      className='update-button'
                       id='add-item-btn'
                       disabled={this.state.clicked}
                       onClick={this.handleSubmit}
                     >{this.state.clicked ? 'Removed!' : 'Remove from Capsule'}</button>
                     : <button
-                      className='btn accent'
+                      className='update-button'
                       id='add-item-btn'
                       disabled={this.state.clicked}
                       onClick={this.handleSubmit}
                     >{this.state.clicked ? 'Added!' : 'Add to Capsule'}</button>}
 
-                </div>}
+                </React.Fragment>}
 
-              {!this.props.item.personal ? <label><a target='_blank' rel="noopener noreferrer" className='btn' id="purchase" href={`https://${this.props.item.shop_link}`}>Purchase at {this.props.item.brand}</a></label> : null}
+              <div className='btn-list'>
+                {!this.props.item.personal ? <a target='_blank' rel="noopener noreferrer" className='btn' id="purchase" href={`https://${this.props.item.shop_link}`}>Purchase at {this.props.item.brand}</a> : null}
 
-              <button type='submit' onClick={this.props.onClose} id='close'>Close</button>
+
+                <button type='submit' onClick={this.props.onClose} id='close'>Close</button>
+              </div>
 
             </form>
 

@@ -60,32 +60,3 @@ a.item-link {
 p, li {
   font-size: calc(14px + 0.2vw);
 }
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  h3 {
-    font-size: calc(14px + 0.2vw);
-    margin: 0;
-  }
-  .btn, a {
-    background: $color-med;
-    color: $color-dark;
-    border-radius: 4px;
-    width: auto;
-    border-radius: 6px;
-    font-family: $font-sans-serif;
-    font-weight: 900;
-    font-size: calc(10px + 0.2vw);
-    margin: 10px 20px;
-    padding: 5px 10px;
-    text-decoration: none;
-    text-align: center;
-    box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
-    display: inline-block;
-  }
-  .btn:enabled:hover, a:hover {
-    background: $color-accent;
-  }
-}
-
