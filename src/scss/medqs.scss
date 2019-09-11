@@ -1,0 +1,24 @@
+@media only screen and (max-width: 845px) {
+  #collection {
+    #filter {
+      flex-direction: column;
+      input, select {
+        max-width: 80vw;
+      }
+    }
+  }
+  #active-container {
+    #active-left {
+      max-width: 50vw;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #active-container {
+    flex-direction: column;
+    #active-left {
+      max-width: 95vw;
+    }
+  }
+}

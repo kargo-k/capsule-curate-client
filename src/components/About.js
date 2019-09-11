@@ -16,8 +16,9 @@ const About = () => {
       <h1>Benefits</h1>
 
       <ul>
+        <li>Taking less time and energy to choose what to wear in the mornings</li>
         <li>Only wear clothes that you like, which helps you to hone in on your style</li>
-        <li>Taking less time to choose what to wear in the mornings</li>
+        <li>Investing in high quality clothing since you're buying less clothing overall</li>
         <li>Coordinate the items you have so everything goes together</li>
         <li>Maximize the number of outfits you can wear with limited pieces of clothing</li>
         <li>Helps to minimize clothing and fast fashion waste</li>

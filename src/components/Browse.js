@@ -32,7 +32,7 @@ const Browse = props => {
 
         <button className='btn' id='reset' onClick={props.onReset}>Reset</button>
 
-        <div>
+        <div id='pages'>
 
           <label id='n_item'>Results:
         <select
