@@ -23,7 +23,6 @@ const mapDispatchToProps = dispatch => {
 
 class ActiveCapsuleContainer extends React.Component {
 
-  location = localStorage.getItem('location')
 
   state = {
     fetchComplete: false
@@ -53,13 +52,14 @@ class ActiveCapsuleContainer extends React.Component {
 
   componentDidMount() {
     this.props.fetchCapsules()
-
+    const location = JSON.parse(localStorage.getItem('user')).location
     // const LOCATION_ENDPOINT = `/location/${location}`;
     // const WEATHER_ENDPOINT = `/weather?loc=${latitude}_${longitude}`;
 
-    fetch(WEATHER + `/location/${this.location}`)
+    fetch(WEATHER + `/location/${location}`)
       .then(res => res.json())
       .then(json => {
+
         let lat_lng = json.results[0].geometry.location;
         fetch(WEATHER + `/weather?loc=${lat_lng.lat}_${lat_lng.lng}`)
           .then(res => res.json())
@@ -87,18 +87,32 @@ class ActiveCapsuleContainer extends React.Component {
 
   render() {
     // debugger
-    if (!this.props.user) {
+    if (!localStorage.getItem('user')) {
       // if there is no user signed in, redirect to root
       return <Redirect to='/' />
+    } else if (!this.props.active_capsule) {
+      // if there is no active_capsule
+      return (
+        <div className='container' id='active-container'>
+          <div id='active-left' className='flex'>
+            <h1>Welcome back, {this.props.user.username} </h1>
+            <Weather data={this.state} />
+          </div>
+          <div id='active-right'>
+            <h1>Create a new active capsule or pull out an existing capsule</h1>
+          </div>
+        </div>
+      )
     } else {
       // if there is a user signed in, fetch capsules happening in component did mount
       let swatchStyle = this.getSwatches()
+      // debugger
       return (
         <div className='container' id='active-container' >
           <div id='active-left' className='flex'>
             <h1>Welcome back, {this.props.user.username} </h1>
             <Weather data={this.state} />
-            {this.state.fetchComplete ?
+            {this.state.fetchComplete && this.props.active_capsule.items !== [] ?
               <Outfit weather_data={this.state} /> : null}
           </div>
 

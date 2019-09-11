@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toggleCapsule } from '../actions';
 
@@ -17,9 +17,8 @@ const mapStateToProps = state => {
 const Header = props => {
 
   const handleClick = id => {
-    console.log('handle click heard -- toggle active status of capsule');
     props.toggleCapsule(id)
-
+    return <Redirect to='/active' />
   }
 
   let swatchStyle

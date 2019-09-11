@@ -5,34 +5,6 @@ import {
 } from '../constants/action-types';
 import { API } from '../constants/api-url';
 
-export const createUser = payload => {
-  localStorage.clear()
-  return (dispatch, getState) => {
-    fetch(API + '/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        user: payload
-      })
-    })
-      .then(res => res.json())
-      .then(json => {
-        if (json.error) {
-          console.log('failed to create user...', json)
-        } else {
-          console.log('successfully created user', json)
-          // when user is logged in or created, store token and user information in local storage and set the user information in state
-          localStorage.setItem('token', json.jwt)
-          localStorage.setItem('user', JSON.stringify(json.user))
-          dispatch(setUser(json.user))
-        }
-      })
-  }
-}
-
 export const logInUser = credentials => {
   localStorage.clear()
   return (dispatch, getState) => {
@@ -59,6 +31,7 @@ export const logInUser = credentials => {
           dispatch(setUser(json.user))
         }
       })
+      .catch(e => console.log('error in login request', e))
   }
 }
 
@@ -70,22 +43,6 @@ export const logOutUser = () => {
   // upon log out, local storage is cleared and set all of state to null
   localStorage.clear()
   return { type: LOG_OUT }
-}
-
-export const deleteUser = () => {
-  return (dispatch, getState) => {
-    fetch(API + '/profile', {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-      .then(res => res.json())
-      .then(json => {
-        localStorage.clear()
-      })
-      .catch(e => console.log('error in delete request', e))
-  }
 }
 
 export const fetchCapsules = () => {
@@ -194,26 +151,6 @@ export const deleteCapsule = id => {
       .catch(e => console.log('Error in delete request.', e))
   }
 }
-
-// export const fetchCollection = () => {
-//   return (dispatch, getState) => {
-//     fetch(API + '/items', {
-//       method: 'GET',
-//       headers: {
-//         'Authorization': `Bearer ${localStorage.getItem('token')}`
-//       }
-//     })
-//       .then(res => res.json())
-//       .then(items => {
-//         // saves the collection items in state
-//         dispatch(setCollection(items))
-//       })
-//   }
-// }
-
-// export const setCollection = payload => {
-//   return { type: SET_COLLECTION, payload }
-// }
 
 export const showItem = payload => {
   return { type: SHOW_ITEM, payload }

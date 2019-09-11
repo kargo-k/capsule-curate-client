@@ -1,69 +1,90 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { updateItem, fetchCapsules } from '../actions';
-
-const mapStateToProps = state => {
-  return {
-    item: state.show_item,
-    capsules_list: state.capsules_list,
-    active_capsule: state.active_capsule
-  }
-}
+import { updateItem } from '../actions';
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateItem: (payload) => dispatch(updateItem(payload)),
-    fetchCapsules: () => dispatch(fetchCapsules())
+    updateItem: (payload) => dispatch(updateItem(payload))
   }
 }
 
-const ShowItem = ({ item, capsules_list, updateItem, active_capsule }) => {
+class ShowItem extends React.Component {
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    let payload = {
-      capsule_id: e.target.capsule.value,
-      item_id: item.id
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      clicked: false,
+      sel_capsule: this.props.active_capsule.id,
+      item_in_capsule: this.props.active_capsule.items.includes(this.props.item)
     }
-    updateItem(payload)
   }
 
-  if (!item) {
-    return <Redirect to='/discover' />
-  } else {
+  handleSelect = e => {
+    console.log('selection made', e.target.value);
+    let target_capsule = this.props.capsules_list.filter(capsule => capsule.id === Number(e.target.value))[0]
+    let result = target_capsule.items.includes(this.props.item)
+    console.log('is the item in the capsule? ', result);
+    this.setState({
+      sel_capsule: e.target.value,
+      item_in_capsule: result
+    })
+  }
+
+  handleSubmit = e => {
+    // e.preventDefault()
+    let form_element = document.getElementById('show-item-form')
+    let payload = {
+      capsule_id: form_element.capsule.value,
+      item_id: this.props.item.id
+    }
+    this.props.updateItem(payload)
+    this.setState({ clicked: true })
+  }
+
+  render() {
     return (
       <div id='item-details' className='container'>
-        <h1>{item.name} {item.brand ? `// ${item.brand}` : null}</h1>
+        <h1>{this.props.item.name} {this.props.item.brand ? `// ${this.props.item.brand}` : null}</h1>
         <div className='wrapper' >
 
-          <img src={item.image} alt={item.name} />
+          <img src={this.props.item.image} alt={this.props.item.name} />
 
           <div className='right'>
-            <div className='text'>{item.color ? `Color: ${item.color}` : null}</div>
-            <div className='text'>{item.price ? `Price: ${item.price}` : null}</div>
-            <div className='text'>{item.description ? `Description: ${item.description}` : null}</div>
+            <div className='text'>{this.props.item.color ? `Color: ${this.props.item.color}` : null}</div>
+            <div className='text'>{this.props.item.price ? `Price: ${this.props.item.price}` : null}</div>
+            <div className='text'>{this.props.item.description ? `Description: ${this.props.item.description}` : null}</div>
 
-            <form onSubmit={handleSubmit} id='show-item-form'>
+            <form id='show-item-form'>
 
-              {!active_capsule ? null :
+              {!this.props.active_capsule ? null :
                 <div className='custom-select'>
-                  <label>Add this to your capsule:
-              <select name='capsule' defaultValue={active_capsule.id}>
-                      {capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
+                  <label>Add this to a capsule:
+              <select name='capsule' defaultValue={this.props.active_capsule.id} onChange={this.handleSelect}>
+                      {this.props.capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
                     </select>
                   </label>
 
-                  <input
-                    className='btn accent'
-                    name="submit"
-                    type="submit"
-                    value="Add" />
+
+                  {this.state.item_in_capsule
+                    ? <button
+                      className='btn accent'
+                      id='add-item-btn'
+                      disabled={this.state.clicked}
+                      onClick={this.handleSubmit}
+                    >{this.state.clicked ? 'Removed!' : 'Remove from Capsule'}</button>
+                    : <button
+                      className='btn accent'
+                      id='add-item-btn'
+                      disabled={this.state.clicked}
+                      onClick={this.handleSubmit}
+                    >{this.state.clicked ? 'Added!' : 'Add to Capsule'}</button>}
+
                 </div>}
 
-              <h1>{item.personal}</h1>
+              {!this.props.item.personal ? <label><a target='_blank' rel="noopener noreferrer" className='btn' id="purchase" href={`https://${this.props.item.shop_link}`}>Purchase at {this.props.item.brand}</a></label> : null}
 
-              {!item.personal ? <label><a target='_blank' rel="noopener noreferrer" className='btn' id="purchase" href={`https://${item.shop_link}`}>Purchase at {item.brand}</a></label> : null}
+              <span className='btn' onClick={this.props.onClose} id='close'>Close</span>
 
             </form>
 
@@ -75,4 +96,4 @@ const ShowItem = ({ item, capsules_list, updateItem, active_capsule }) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowItem)
+export default connect(null, mapDispatchToProps)(ShowItem)

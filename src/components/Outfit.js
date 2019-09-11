@@ -17,53 +17,22 @@ class Outfit extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({ items: this.props.active_capsule.items })
     this.pickOutfit()
   }
 
   render() {
-    // debugger
     return (
       <div id='ootd-container'>
         <h1>#OOTD</h1>
         <div id='ootd-div'>
-          {this.state.outfit && this.state.outfit.map(item => <Item key={item.id + 9000} item={item} />)}
+          {this.state.outfit ? this.state.outfit.map(item => <Item key={`ootd${item.id}`} item={item} />) : <p>Add Items to Get an OOTD</p>}
         </div>
       </div>
     )
-
-    // if (this.state.items === []) {
-    //   return (
-    //     <div id='ootd-container'>
-    //       <h1>Add items to get an #OOTD</h1>
-    //       <div id='ootd-div'>
-    //         <Link className='btn' to='/discover'>Browse Collection</Link>
-    //       </div>
-    //     </div >
-    //   )
-    // } else {
-    //   let ootd = this.pickOutfit()
-    //   if (ootd) {
-    //     ootd = ootd.filter(el => el != null)
-    //     return (
-    //       <div id='ootd-container'>
-    //         <h1>#OOTD</h1>
-    //         <div id='ootd-div'>
-    //           {ootd.map(item => <Item key={item.id} item={item} />)}
-    //         </div>
-    //       </div>
-    //     )
-    //   } else {
-    //     return (
-    //       <div id='ootd-container'>
-    //         <h1>no outfits to show</h1>
-    //       </div>
-    //     )
-    //   }
-    // }
   }
 
   pickOutfit() {
-    // debugger
     let items = this.props.active_capsule.items
     let ootd, ootd_date
     ootd = JSON.parse(localStorage.getItem('ootd'))
@@ -73,21 +42,22 @@ class Outfit extends React.Component {
       ootd_date = ootd.pop()
 
       if (ootd_date < new Date()) {
-        // generate a new ootd
+        // generate a new ootd if the stored ootd is more than a day old
         this.newOOTD(items)
       } else {
         // if the ootd's date is the same as today's date, return the current ootd
         this.setState({ outfit: ootd })
-        return ootd
       }
 
     } else {
-      // if the ootd is not stored in local storage, generate a new ootd
+      // if the ootd is not stored in local storage, generate a new ootd using items
       this.newOOTD(items)
     }
   }
 
   newOOTD = (items) => {
+
+    debugger
 
     let one_piece_outfits = items.filter(i => i.category2 === 'one piece')
     let bottoms = items.filter(i => i.category2 === 'bottoms')
@@ -113,6 +83,8 @@ class Outfit extends React.Component {
         cold_layers !== [] && ootd.push(cold_layers[Math.floor(Math.random() * cold_layers.length)])
 
         bottoms = bottoms.filter(i => i.category !== 'shorts')
+      } else if (this.props.weather_data.day.apparentTemperatureLow > 70) {
+        bottoms = bottoms.filter(i => i.category === 'shorts')
       }
 
       tops !== [] && ootd.push(tops[Math.floor(Math.random() * tops.length)])
@@ -121,11 +93,15 @@ class Outfit extends React.Component {
 
     // if the probability of rain is greater than 60%, suggest a rain item if the user has one
     if (this.props.weather_data.day.precipProbability > .6) {
-      let rain_gear = this.props.items.filter(i => i.name.includes('rain'))
+      let rain_gear = items.filter(i => i.name.includes('rain'))
       if (rain_gear !== []) {
         ootd.push(rain_gear[Math.floor(Math.random() * rain_gear.length)])
       }
     }
+
+    // remove any null values in case there are missing categories of items
+    ootd = ootd.filter(i => i !== null)
+    this.setState({ outfit: ootd })
 
     // store the ootd in local storage for 24 hours
     let today = new Date()
@@ -135,8 +111,6 @@ class Outfit extends React.Component {
       localStorage.setItem('ootd', JSON.stringify(ootd))
     }
     catch (e) { console.log(e) }
-    this.setState({ outfit: ootd })
-    return ootd
 
   }
 

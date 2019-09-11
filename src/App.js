@@ -31,7 +31,6 @@ function App() {
             <Route path='/signup' component={SignupForm} />
             <Route path='/about' component={About} />
             <Route path='/discover' component={CollectionContainer} />
-            <Route path='/item' component={ShowItem} />
             <Route path='/new' component={NewCapsule} />
             <Route path='/account' component={Account} />
             <Route path='/logout' component={Logout} />

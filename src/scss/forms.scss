@@ -65,8 +65,8 @@ form {
     background: $color-accent;
   }
   .btn:disabled {
-    background: $color-light;
-    color: rgba(0,0,0,0.24);
+    background-color: $color-light2;
+    color: #ccc;
   }
   .color-picker {
     width: 10%;

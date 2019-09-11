@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
-import { deleteUser } from '../actions'
+import { Redirect } from 'react-router-dom';
+import { API } from '../constants/api-url';
+import { logOutUser } from '../actions';
 
 const mapStateToProps = state => {
   return {
@@ -10,12 +11,29 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return { delete_user: () => dispatch(deleteUser()) }
+  return {
+    logout_user: () => dispatch(logOutUser())
+  }
 }
 
 const Account = props => {
 
-  if (!JSON.parse(localStorage.getItem('user'))) {
+  const destroyUser = e => {
+    e.preventDefault()
+    return fetch(API + '/delete', {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then(res => res.json())
+      .then(json => {
+        props.logout_user()
+      })
+      .catch(e => console.log('error in delete request', e))
+  }
+
+  if (!props.user) {
     return (
       // Redirect to root if the user is not logged in
       <Redirect to='/' />
@@ -29,7 +47,8 @@ const Account = props => {
         <h3>{props.user.username}</h3>
         <h3>Location: {props.user.location}</h3>
 
-        <Link className='btn' onClick={props.delete_user}>Delete Account</Link>
+        <button className='btn' onClick={destroyUser}>Delete Account</button>
+        <div>Note: this cannot be undone!</div>
       </form>
     </div>)
   }
