@@ -141,6 +141,7 @@ div.main {
     min-width: 15vw;
     max-width: 40vw;
     height: auto;
+    margin-right: 20px;
   }
   div.right {
     min-width: 40%;
@@ -247,6 +248,7 @@ div.main {
 #capsule-body {
   display: flex;
   align-items: flex-start;
+  justify-content: center;
 }
 
 #filter {
