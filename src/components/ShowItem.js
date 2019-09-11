@@ -14,8 +14,21 @@ class ShowItem extends React.Component {
     super(props);
 
     this.state = {
-      clicked: false
+      clicked: false,
+      sel_capsule: this.props.active_capsule.id,
+      item_in_capsule: this.props.active_capsule.items.includes(this.props.item)
     }
+  }
+
+  handleSelect = e => {
+    console.log('selection made', e.target.value);
+    let target_capsule = this.props.capsules_list.filter(capsule => capsule.id === Number(e.target.value))[0]
+    let result = target_capsule.items.includes(this.props.item)
+    console.log('is the item in the capsule? ', result);
+    this.setState({
+      sel_capsule: e.target.value,
+      item_in_capsule: result
+    })
   }
 
   handleSubmit = e => {
@@ -46,26 +59,26 @@ class ShowItem extends React.Component {
 
               {!this.props.active_capsule ? null :
                 <div className='custom-select'>
-                  <label>Add this to your capsule:
-              <select name='capsule' defaultValue={this.props.active_capsule.id}>
+                  <label>Add this to a capsule:
+              <select name='capsule' defaultValue={this.props.active_capsule.id} onChange={this.handleSelect}>
                       {this.props.capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
                     </select>
                   </label>
 
 
-                  {this.props.active_capsule.items.includes(this.props.item)
+                  {this.state.item_in_capsule
                     ? <button
                       className='btn accent'
                       id='add-item-btn'
                       disabled={this.state.clicked}
                       onClick={this.handleSubmit}
-                    >{this.state.clicked ? 'saved' : 'Remove from Capsule'}</button>
+                    >{this.state.clicked ? 'Removed!' : 'Remove from Capsule'}</button>
                     : <button
                       className='btn accent'
                       id='add-item-btn'
                       disabled={this.state.clicked}
                       onClick={this.handleSubmit}
-                    >{this.state.clicked ? 'saved' : 'Add to Capsule'}</button>}
+                    >{this.state.clicked ? 'Added!' : 'Add to Capsule'}</button>}
 
                 </div>}
 
