@@ -179,3 +179,111 @@ h1, h2, h3 {
   }
 }
 
+
+
+#item-details {
+  display: flex;
+  margin: 20px;
+  padding: 20px;
+  flex-direction: column;
+  form#show-item-form {
+    width: auto;
+    border: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+  }
+  div.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  img {
+    display: block;
+    min-width: 15vw;
+    max-width: 40vw;
+    height: auto;
+  }
+  div.right {
+    min-width: 40%;
+    max-width: 50%;
+    width: auto;
+  }
+  a, button, a#purchase {
+    width: 20vw;
+    margin: 5px;
+    background: $color-med;
+    color: $color-dark;
+    font-family: $font-sans-serif;
+    font-weight: 900;
+    font-size: $font-size-text;
+    box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
+    border-radius: 6pt;
+  }
+  a#purchase:hover, #close:hover, #close-x:hover {
+    background-color: $color-accent;
+    cursor: pointer;
+  }
+  a:hover {
+    background-color: $color-accent;
+  }
+  #add-item-btn:hover {
+    // background-color: $color-med;
+    color: $color-light;
+  }
+  .btn-list {
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+  }
+  #add-item-btn {
+    background-color: $color-accent;
+  }
+  #close-x, #close-x:hover {
+    display: float;
+    float: right;
+    width: 100%;
+    text-align: right;
+    font-family: $font-sans-serif;
+    font-weight: 900;
+    font-size: $font-size-header;
+    background: transparent;
+  }
+}
+
+// -------- item show details
+
+#item-details {
+  a, button, a#purchase {
+    background: $color-med;
+    color: $color-dark;
+    font-family: $font-sans-serif;
+    font-weight: 900;
+    font-size: $font-size-text;
+    box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
+    border-radius: 6pt;
+  }
+  a#purchase:hover, #close:hover, #close-x:hover {
+    background-color: $color-accent;
+    cursor: pointer;
+  }
+  a:hover {
+    background-color: $color-accent;
+  }
+  #add-item-btn:hover {
+    color: $color-light;
+  }
+  #add-item-btn {
+    background-color: $color-accent;
+  }
+  #close-x, #close-x:hover {
+    font-family: $font-sans-serif;
+    font-weight: 900;
+    font-size: $font-size-header;
+    background: transparent;
+  }
+}

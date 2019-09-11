@@ -45,7 +45,7 @@ class ShowItem extends React.Component {
   render() {
     return (
       <div id='item-details' className='container'>
-        <span className='close' onClick={this.props.onClose}>close</span>
+        <div id='close-x' className='close' onClick={this.props.onClose}>X</div>
 
         <h1>{this.props.item.name} {this.props.item.brand ? `// ${this.props.item.brand}` : null}</h1>
         <div className='wrapper' >

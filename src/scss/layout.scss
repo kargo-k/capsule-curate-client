@@ -141,24 +141,6 @@ div.main {
   a, button, a#purchase {
     width: 20vw;
     margin: 5px;
-    background: $color-med;
-    color: $color-dark;
-    font-family: $font-sans-serif;
-    font-weight: 900;
-    font-size: $font-size-text;
-    box-shadow: 0 7px 16px 0 rgba(0,0,0,0.24), 0 7px 80px 0 rgba(0,0,0,0.19);
-    border-radius: 6pt;
-  }
-  a#purchase:hover, #close:hover {
-    background-color: $color-accent;
-    cursor: pointer;
-  }
-  a:hover {
-    background-color: $color-accent;
-  }
-  #add-item-btn:hover {
-    // background-color: $color-med;
-    color: $color-light;
   }
   .btn-list {
     margin-top: 5vh;
@@ -167,10 +149,12 @@ div.main {
     justify-content: space-around;
     height: 100%;
   }
-  #add-item-btn {
-    background-color: $color-accent;
+  #close-x, #close-x:hover {
+    display: float;
+    float: right;
+    width: 100%;
+    text-align: right;
   }
-  
 }
 
 #active-container {
