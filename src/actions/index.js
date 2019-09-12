@@ -174,6 +174,7 @@ export const updateItem = payload => {
       .then(res => res.json())
       .then(data => {
         dispatch(showCapsule(data.capsule))
+        dispatch(fetchCapsules())
       })
       .then(dispatch(fetchCapsules()))
       .catch(e => console.log('error in patch request', e))

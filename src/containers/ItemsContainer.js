@@ -64,17 +64,18 @@ class ItemsContainer extends React.Component {
         return (
           // shows the item details when an item thumbnail is clicked and then hides the rest of the item collections.  when the details are clicked to be hidden, the rest of the items show up again
           <React.Fragment>
-            {this.state.show_item_details ? <ShowItem
-              item={this.state.show_item}
-              onClose={this.handleClose}
-              active_capsule={this.props.active_capsule}
-              capsules_list={this.props.capsules_list} /> :
-              <div className='flex' id='items-container'>
+            {this.state.show_item_details
+              ? <ShowItem
+                item={this.state.show_item}
+                onClose={this.handleClose}
+                active_capsule={this.props.active_capsule}
+                capsules_list={this.props.capsules_list}
+                updateItem={this.props.updateItem} />
+              : <div className='flex' id='items-container'>
                 {items && items.map(item => <Item
                   key={item.id}
                   item={item}
                   capsule_id={this.props.capsule_id}
-                  updateItem={this.props.updateItem}
                   handleClick={this.handleClick}
                 />)}
               </div>}
