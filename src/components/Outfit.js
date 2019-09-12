@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Item from './Item';
+import { Link } from 'react-router-dom';
 
 const mapStateToProps = state => {
   return {
@@ -19,14 +20,18 @@ class Outfit extends React.Component {
   componentDidMount() {
     this.setState({ items: this.props.active_capsule.items })
     this.pickOutfit()
+    // debugger
   }
 
   render() {
+    // debugger
     return (
       <div id='ootd-container'>
         <h1>#OOTD</h1>
         <div id='ootd-div'>
-          {this.state.outfit ? this.state.outfit.map(item => <Item key={`ootd${item.id}`} item={item} />) : <p>Add Items to Get an OOTD</p>}
+          {this.state.outfit.length > 0
+            ? this.state.outfit.map(item => <Item key={`ootd${item.id}`} item={item} />)
+            : <Link className='browse' to='/discover'>Add Items to Get an OOTD</Link>}
         </div>
       </div>
     )
@@ -40,6 +45,8 @@ class Outfit extends React.Component {
     if (ootd) {
       // if the ootd is stored in local storage, get the date it was stored and then check to see if the date is less than today's date
       ootd_date = ootd.pop()
+      ootd = ootd.filter(i => i !== null)
+      ootd = ootd.filter(i => i !== undefined)
 
       if (ootd_date < new Date()) {
         // generate a new ootd if the stored ootd is more than a day old
@@ -99,6 +106,7 @@ class Outfit extends React.Component {
 
     // remove any null values in case there are missing categories of items
     ootd = ootd.filter(i => i !== null)
+    ootd = ootd.filter(i => i !== undefined)
     this.setState({ outfit: ootd })
 
     // store the ootd in local storage for 24 hours

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Weather from '../components/Weather';
 import { connect } from 'react-redux';
 import ItemsContainer from './ItemsContainer';
@@ -118,6 +118,9 @@ class ActiveCapsuleContainer extends React.Component {
 
           <div className='flex' id='active-right'>
             <h1>{this.props.active_capsule && this.props.active_capsule.title}</h1>
+            <h3>{this.props.active_capsule && `${this.props.active_capsule.items.length} out of 36 hangers filled`}</h3>
+
+            <Link to='/discover' className='btn'>Discover Items</Link>
 
             <div id='swatch-div'>
               <div className='swatch' style={swatchStyle[0]}></div>

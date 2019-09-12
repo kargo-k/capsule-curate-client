@@ -36,6 +36,9 @@ form {
     max-width: 25vw;
     width: 100%;
   }
+  select {
+    text-transform: capitalize;
+  }
   a, input[type="submit"] {
     max-width: 25vw;
     min-width: 20vw;
@@ -122,7 +125,8 @@ div#item-details.container {
   width: auto;
   flex-direction: column;
   form#show-item-form {
-    width: 100%;
+    width: auto;
+    padding: 0;
     border: 0;
     margin: 0;
     display: flex;
@@ -151,6 +155,7 @@ div#item-details.container {
     width: 20vw;
     margin: 5px;
   }
+  
   .btn-list {
     margin-top: 5vh;
     display: flex;
@@ -165,7 +170,6 @@ div#item-details.container {
     text-align: right;
   }
 }
-
 #active-container {
   display: flex;
   height: 100%;
@@ -257,6 +261,11 @@ div#item-details.container {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  #upload-item {
+    max-width: 30vw;
+    min-width: 300px;
+    margin: 10px;
+  }
 }
 
 #filter {

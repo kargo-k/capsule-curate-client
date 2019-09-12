@@ -21,7 +21,7 @@ const Browse = props => {
           <option value="">Search by Category</option>
           <option value="bottoms">Bottoms</option>
           <option value="denim">Denim</option>
-          <option value="one piece">One Pieces</option>
+          <option value="one piece">Dresses/Rompers</option>
           <option value="outerwear">Outwear</option>
           <option value="pants">Pants</option>
           <option value="shorts">Skirts/Shorts</option>
