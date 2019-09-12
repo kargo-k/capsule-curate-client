@@ -61,33 +61,33 @@ class ShowItem extends React.Component {
             <div className='text'>{this.props.item.description ? `Description: ${this.props.item.description}` : null}</div>
 
             <form id='show-item-form'>
-
-              {!this.state.sel_capsule ? null :
-                <React.Fragment>
-                  <label>Select Capsule:
-              <select name='capsule' defaultValue={this.state.sel_capsule.id} onChange={this.handleSelect}>
-                      {this.props.capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
-                    </select>
-                  </label>
-
-
-                  {this.state.item_in_capsule
-                    ? <button
-                      className='update-button'
-                      id='add-item-btn'
-                      disabled={this.state.clicked}
-                      onClick={this.handleSubmit}
-                    >{this.state.clicked ? 'Removed!' : 'Remove from Capsule'}</button>
-                    : <button
-                      className='update-button'
-                      id='add-item-btn'
-                      disabled={this.state.clicked}
-                      onClick={this.handleSubmit}
-                    >{this.state.clicked ? 'Added!' : 'Add to Capsule'}</button>}
-
-                </React.Fragment>}
-
               <div className='btn-list'>
+                {!this.state.sel_capsule ? null :
+                  <React.Fragment>
+                    <label>Select Capsule:
+              <select name='capsule' defaultValue={this.state.sel_capsule.id} onChange={this.handleSelect}>
+                        {this.props.capsules_list.map(capsule => <option key={capsule.id} value={capsule.id} >{capsule.title}</option>)}
+                      </select>
+                    </label>
+
+
+                    {this.state.item_in_capsule
+                      ? <button
+                        className='update-button'
+                        id='add-item-btn'
+                        disabled={this.state.clicked}
+                        onClick={this.handleSubmit}
+                      >{this.state.clicked ? 'Removed!' : 'Remove from Capsule'}</button>
+                      : <button
+                        className='update-button'
+                        id='add-item-btn'
+                        disabled={this.state.clicked}
+                        onClick={this.handleSubmit}
+                      >{this.state.clicked ? 'Added!' : 'Add to Capsule'}</button>}
+
+                  </React.Fragment>}
+
+
                 {!this.props.item.personal ? <a target='_blank' rel="noopener noreferrer" className='btn' id="purchase" href={`https://${this.props.item.shop_link}`}>Purchase at {this.props.item.brand}</a> : null}
 
 

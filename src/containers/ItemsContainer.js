@@ -49,7 +49,7 @@ class ItemsContainer extends React.Component {
     if (this.props.items === null) {
       return (
         <div className='container' >
-          <Link className='btn' to='/discover'>Start Curating!</Link>
+          <Link className='btn' id="discover-btn" to='/discover'>Start Curating!</Link>
         </div>
       )
     } else {
