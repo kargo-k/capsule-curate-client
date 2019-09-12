@@ -14,7 +14,6 @@ import Account from './components/Account';
 import Logout from './components/Logout';
 import CapsuleContainer from './containers/CapsuleContainer';
 import Delete from './components/Delete';
-import ShowItem from './components/ShowItem';
 import ActiveCapsuleContainer from './containers/ActiveCapsuleContainer';
 
 function App() {
