@@ -162,6 +162,18 @@ h1, h2, h3 {
       padding: 3px 10px;
     }
   }
+  .browse {
+    padding: 3px 10px;
+    background: $color-accent;
+    color: $color-light;
+  }
+}
+#capsule-body {
+  .browse {
+    padding: 3px 10px;
+    background: $color-accent;
+    color: $color-light;
+  }
 }
 .close:hover {
   cursor: pointer;
@@ -312,4 +324,19 @@ h1, h2, h3 {
     font-size: $font-size-header;
     background: transparent;
   }
+}
+.ar-btn {
+  float: right;
+  font-family: $font-sans-serif;
+  background: $color-accent;
+  color: $color-light;
+  border-radius: 4px;
+  border: 0px;
+  width: auto;
+  margin: 3px;
+  padding: 3px;
+  z-index: 10;
+}
+.ar-btn:visited {
+  background: $color-light;
 }

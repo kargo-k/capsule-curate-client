@@ -49,15 +49,16 @@ class ItemsContainer extends React.Component {
     if (this.props.items === null) {
       return (
         <div className='container' >
-          <Link className='btn' to='/discover'>Browse the Curated Collection</Link>
+          <Link className='btn' to='/discover'>Start Curating!</Link>
         </div>
       )
     } else {
       let items = this.props.items
       if (items.length === 0) {
         return (
-          <div className='container' >
-            <Link className='btn' to='/discover'>Browse the Curated Collection to start adding items to your capsule</Link>
+          <div className='container' style={{ border: '1px solid #ccc' }}>
+            <h1>no items in your capsule.</h1>
+            <Link className='btn browse' to='/discover'>Add Items from the Curated Collection</Link>
           </div>
         )
       } else {
@@ -70,13 +71,17 @@ class ItemsContainer extends React.Component {
                 onClose={this.handleClose}
                 active_capsule={this.props.active_capsule}
                 capsules_list={this.props.capsules_list}
-                updateItem={this.props.updateItem} />
+                updateItem={this.props.updateItem}
+              />
               : <div className='flex' id='items-container'>
                 {items && items.map(item => <Item
                   key={item.id}
                   item={item}
                   capsule_id={this.props.capsule_id}
+                  updateItem={this.props.updateItem}
                   handleClick={this.handleClick}
+                  addItem={this.props.addItem}
+                  active_capsule={this.props.active_capsule}
                 />)}
               </div>}
           </React.Fragment>
