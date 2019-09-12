@@ -246,7 +246,8 @@ h1, h2, h3 {
     width: auto;
   }
   a, button, a#purchase {
-    width: 20vw;
+    max-width: 20vw;
+    width: 100%;
     margin: 5px;
     background: $color-med;
     color: $color-dark;

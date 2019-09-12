@@ -151,21 +151,28 @@ div#item-details.container {
     max-width: 50%;
     width: auto;
   }
-  a, button, a#purchase {
-    width: 20vw;
-    margin: 5px;
-  }
   
   .btn-list {
     margin-top: 5vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
     height: 100%;
+    a, button, a#purchase, button#close {
+      max-width: 20vw;
+      width: 100%;
+      margin: 5px;
+      height: 25px;
+      line-height: 25px;
+      padding: 0px;
+      vertical-align: middle;
+    }
   }
   #close-x, #close-x:hover {
     display: float;
     float: right;
+    margin: 0;
     width: 100%;
     text-align: right;
   }
@@ -307,4 +314,7 @@ div#item-details.container {
   h3 {
     margin: 0 10px;
   }
+}
+#discover-btn {
+  padding: 3px 10px;
 }
