@@ -337,6 +337,7 @@ h1, h2, h3 {
   padding: 3px;
   z-index: 10;
 }
-.ar-btn:visited {
+.ar-btn:disabled {
   background: $color-light;
+  color: $color-dark;
 }
