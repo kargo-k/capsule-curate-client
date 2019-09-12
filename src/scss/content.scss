@@ -251,6 +251,10 @@ h1, h2, h3 {
     // background-color: $color-med;
     color: $color-light;
   }
+  #add-item-btn:disabled, #add-item-btn:disabled:hover {
+    background: $color-light2;
+    color: #ccc;
+  }
   .btn-list {
     margin-top: 5vh;
     display: flex;

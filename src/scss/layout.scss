@@ -155,10 +155,7 @@ div#item-details.container {
     width: 20vw;
     margin: 5px;
   }
-  a:disabled, button:disabled {
-    background: $color-light2;
-    color: #ccc;
-  }
+  
   .btn-list {
     margin-top: 5vh;
     display: flex;

@@ -44,16 +44,11 @@ class ItemsContainer extends React.Component {
     this.setState({ show_item_details: false })
   }
 
-  componentWillMount() {
-    let cont = document.getElementsByClassName('container')
-    cont.addEventListener('click', this.handleClose)
-  }
-
   render() {
 
     if (this.props.items === null) {
       return (
-        <div className='container'>
+        <div className='container' >
           <Link className='btn' to='/discover'>Browse the Curated Collection</Link>
         </div>
       )
@@ -61,7 +56,7 @@ class ItemsContainer extends React.Component {
       let items = this.props.items
       if (items.length === 0) {
         return (
-          <div className='container'>
+          <div className='container' >
             <Link className='btn' to='/discover'>Browse the Curated Collection to start adding items to your capsule</Link>
           </div>
         )
