@@ -44,7 +44,13 @@ class ItemsContainer extends React.Component {
     this.setState({ show_item_details: false })
   }
 
+  componentWillMount() {
+    let cont = document.getElementsByClassName('container')
+    cont.addEventListener('click', this.handleClose)
+  }
+
   render() {
+
     if (this.props.items === null) {
       return (
         <div className='container'>
