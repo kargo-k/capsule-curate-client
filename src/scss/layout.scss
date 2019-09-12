@@ -170,7 +170,6 @@ div#item-details.container {
     text-align: right;
   }
 }
-
 #active-container {
   display: flex;
   height: 100%;
@@ -261,7 +260,12 @@ div#item-details.container {
 #capsule-body {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-between;
+  #upload-item {
+    max-width: 30vw;
+    min-width: 300px;
+    margin: 10px;
+  }
 }
 
 #filter {
