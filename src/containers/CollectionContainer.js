@@ -2,8 +2,16 @@ import React from 'react';
 import Browse from '../components/Browse';
 import ItemsContainer from './ItemsContainer';
 import { API } from '../constants/api-url'
+import { connect } from 'react-redux';
+import { updateItem } from '../actions';
 
+const mapStateToProps = state => {
+  return { active_capsule: state.active_capsule }
+}
 
+const mapDispatchToProps = dispatch => {
+  return { addItem: (payload) => dispatch(updateItem(payload)) }
+}
 class CollectionContainer extends React.Component {
 
   constructor(props) {
@@ -140,6 +148,8 @@ class CollectionContainer extends React.Component {
         />
 
         <ItemsContainer
+          capsule={this.props.active_capsule}
+          addItem={this.props.addItem}
           items={this.state.items
             ? this.state.items.slice(this.state.page * this.state.n_item, (this.state.page * this.state.n_item) + this.state.n_item)
             : null} />
@@ -149,4 +159,4 @@ class CollectionContainer extends React.Component {
   }
 }
 
-export default CollectionContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(CollectionContainer);

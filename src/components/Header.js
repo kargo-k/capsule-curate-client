@@ -54,7 +54,9 @@ const Header = props => {
       <h3>{props.show_capsule.season} Season </h3>
       <h3>{props.show_capsule.items.length} of 36 Hangers Filled</h3>
 
-      <Link to='#' className='btn' onClick={props.handleShow}>{props.showForm ? 'Hide Form' : 'Add A New Item'}</Link>
+      <Link to='/discover' className='btn'>Discover Items</Link>
+
+      <Link to='#' className='btn' onClick={props.handleShow}>{props.showForm ? 'Hide Form' : 'Upload Item'}</Link>
 
       <Link to='#' className='btn' onClick={() => handleClick(props.show_capsule.id)}>{props.show_capsule == props.active_capsule ? 'Put Away' : 'Start Wearing'}</Link>
     </div >

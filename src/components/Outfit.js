@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Item from './Item';
+import { Link } from 'react-router-dom';
 
 const mapStateToProps = state => {
   return {
@@ -19,14 +20,18 @@ class Outfit extends React.Component {
   componentDidMount() {
     this.setState({ items: this.props.active_capsule.items })
     this.pickOutfit()
+    // debugger
   }
 
   render() {
+    // debugger
     return (
       <div id='ootd-container'>
         <h1>#OOTD</h1>
         <div id='ootd-div'>
-          {this.state.outfit !== [] ? this.state.outfit.map(item => <Item key={`ootd${item.id}`} item={item} />) : <p>Add Items to Get an OOTD</p>}
+          {this.state.outfit.length > 0
+            ? this.state.outfit.map(item => <Item key={`ootd${item.id}`} item={item} />)
+            : <Link className='browse' to='/discover'>Add Items to Get an OOTD</Link>}
         </div>
       </div>
     )

@@ -148,7 +148,7 @@ class NewCapsule extends React.Component {
     });
 
     if (!this.props.user.username) {
-      return <Redirect to='/' />
+      return <Redirect to='/capsule' />
     } else {
       return (
         <form id='new-capsule' onSubmit={this.handleSubmit}>
