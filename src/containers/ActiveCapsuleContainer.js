@@ -118,6 +118,7 @@ class ActiveCapsuleContainer extends React.Component {
 
           <div className='flex' id='active-right'>
             <h1>{this.props.active_capsule && this.props.active_capsule.title}</h1>
+            <h3>{this.props.active_capsule && `${this.props.active_capsule.items.length} out of 36 hangers filled`}</h3>
 
             <div id='swatch-div'>
               <div className='swatch' style={swatchStyle[0]}></div>

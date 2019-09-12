@@ -26,7 +26,7 @@ class Outfit extends React.Component {
       <div id='ootd-container'>
         <h1>#OOTD</h1>
         <div id='ootd-div'>
-          {this.state.outfit ? this.state.outfit.map(item => <Item key={`ootd${item.id}`} item={item} />) : <p>Add Items to Get an OOTD</p>}
+          {this.state.outfit !== [] ? this.state.outfit.map(item => <Item key={`ootd${item.id}`} item={item} />) : <p>Add Items to Get an OOTD</p>}
         </div>
       </div>
     )
@@ -40,6 +40,7 @@ class Outfit extends React.Component {
     if (ootd) {
       // if the ootd is stored in local storage, get the date it was stored and then check to see if the date is less than today's date
       ootd_date = ootd.pop()
+      ootd = ootd.filter(i => i !== null)
 
       if (ootd_date < new Date()) {
         // generate a new ootd if the stored ootd is more than a day old
