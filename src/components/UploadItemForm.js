@@ -90,7 +90,7 @@ const UploadItemForm = props => {
 
   return (
     <div className='container'>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} id="upload-item">
         <h1>Add A New Item</h1>
 
         <label>Name:
@@ -108,8 +108,8 @@ const UploadItemForm = props => {
         <label>Category:
         <select name='item_category2' defaultValue='Select a Category'>
             <option disabled>Select a Category </option>
-            <option value="top">Tops</option>
             <option value="bottoms">Bottoms</option>
+            <option value="top">Tops</option>
             <option value="one piece">One Pieces</option>
             <option value="outerwear">Outwear</option>
           </select>
@@ -119,14 +119,15 @@ const UploadItemForm = props => {
         <select name='item_category' defaultValue='Select a Subcategory'>
             <option disabled>Select a Subcategory </option>
             <option value="denim">Denim</option>
-            <option value="pants">Pants</option>
+            <option value="dress">Dresses</option>
             <option value="shorts">Shorts</option>
-            <option value="tee">Tees</option>
+            <option value="one piece">One Pieces</option>
+            <option value="outerwear">Outwear</option>
+            <option value="pants">Pants</option>
+            <option value="romper">Rompers</option>
             <option value="top">Shirt/Blouse</option>
             <option value="sweater">Sweaters</option>
-            <option value="dress">Dresses</option>
-            <option value="romper">Rompers</option>
-            <option value="one piece">One Pieces</option>
+            <option value="tee">Tees</option>
           </select>
         </label>
 

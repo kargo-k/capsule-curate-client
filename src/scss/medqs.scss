@@ -22,8 +22,25 @@
 @media only screen and (max-width: 500px) {
   #active-container {
     flex-direction: column;
+    align-items: center;
     #active-left {
       max-width: 95vw;
     }
+  }
+  #capsule-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    #upload-item {
+      width: auto;
+      margin: 0;
+    }
+  }
+  form#show-item-form {
+    margin: 0;
+  }
+  .header {
+    flex-direction: column;
   }
 }
