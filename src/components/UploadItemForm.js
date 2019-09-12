@@ -69,7 +69,6 @@ const UploadItemForm = props => {
     xhr.onreadystatechange = function (e) {
       if (xhr.readyState === 4 && xhr.status === 200) {
         // file uplodaed successfully
-        debugger
         let res = JSON.parse(xhr.responseText)
         let url = res.secure_url
         let tokens = url.split('/')

@@ -41,6 +41,7 @@ class Outfit extends React.Component {
       // if the ootd is stored in local storage, get the date it was stored and then check to see if the date is less than today's date
       ootd_date = ootd.pop()
       ootd = ootd.filter(i => i !== null)
+      ootd = ootd.filter(i => i !== undefined)
 
       if (ootd_date < new Date()) {
         // generate a new ootd if the stored ootd is more than a day old
@@ -100,6 +101,7 @@ class Outfit extends React.Component {
 
     // remove any null values in case there are missing categories of items
     ootd = ootd.filter(i => i !== null)
+    ootd = ootd.filter(i => i !== undefined)
     this.setState({ outfit: ootd })
 
     // store the ootd in local storage for 24 hours

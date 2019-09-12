@@ -20,7 +20,7 @@ const Weather = ({ data }) => {
               <td>Low: {data.day.apparentTemperatureLow}&deg;F</td>
             </tr>
             <tr>
-              <td>{data.current.precipProbability}% chance of rain</td>
+              <td>{data.day.precipProbability * 100}% chance of rain</td>
             </tr>
           </tbody>
         </table>
