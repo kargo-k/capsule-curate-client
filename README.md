@@ -2,8 +2,6 @@
 [Capsule Curate](https://capsule-curate-client.herokuapp.com) is a tool for building and visualizing your own capsule wardrobe, which is a minimalist technique for tidying your closet and honing in on your personal style.  View the [walkthrough video](https://youtu.be/wRQVGnccpMM
 ) or check out the [About page](https://capsule-curate-client.herokuapp.com/about) to find out more.
 
-![Image of Capsule Curate](https://kargostack.com/images/curate.gif)
-
 ## Stack
 - React.js with implementation of React-Redux and Routers
 - Bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
