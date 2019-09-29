@@ -107,24 +107,30 @@ const UploadItemForm = props => {
         <label>Category:
         <select name='item_category2' defaultValue='Select a Category'>
             <option disabled>Select a Category </option>
+            <option value="accessories">Accessories</option>
             <option value="bottoms">Bottoms</option>
-            <option value="top">Tops</option>
             <option value="one piece">One Pieces</option>
             <option value="outerwear">Outerwear</option>
+            <option value="shoes">Shoes</option>
+            <option value="top">Tops</option>
           </select>
         </label>
 
         <label>Subcategory:
         <select name='item_category' defaultValue='Select a Subcategory'>
             <option disabled>Select a Subcategory </option>
+            <option value="accessories">Accessories</option>
+            <option value="bag">Bags</option>
             <option value="denim">Denim</option>
             <option value="dress">Dresses</option>
+            <option value="jewelery">Jewelry</option>
             <option value="shorts">Shorts</option>
             <option value="one piece">One Pieces</option>
             <option value="outerwear">Outerwear</option>
             <option value="pants">Pants</option>
             <option value="romper">Rompers</option>
             <option value="top">Shirt/Blouse</option>
+            <option value="shoes">Shoes</option>
             <option value="sweater">Sweaters</option>
             <option value="tee">Tees</option>
           </select>

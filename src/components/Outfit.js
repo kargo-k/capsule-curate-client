@@ -70,6 +70,11 @@ class Outfit extends React.Component {
     let n_two_piece_outfits = bottoms.length * tops.length
     let sweaters = items.filter(i => i.category === 'sweater')
     let outerwear = items.filter(i => i.category2 === 'outerwear')
+
+    let jewelery = items.filter(i => i.category === 'jewelery')
+    let bags = items.filter(i => i.category === 'bag')
+    let shoes = items.filter(i => i.category2 === 'shoes')
+
     let total_outfits = one_piece_outfits.length + n_two_piece_outfits
     let ootd = []
 
@@ -103,6 +108,10 @@ class Outfit extends React.Component {
         ootd.push(rain_gear[Math.floor(Math.random() * rain_gear.length)])
       }
     }
+
+    ootd.push(jewelery[Math.floor(Math.random() * jewelery.length)])
+    ootd.push(bags[Math.floor(Math.random() * bags.length)])
+    ootd.push(shoes[Math.floor(Math.random() * shoes.length)])
 
     // remove any null values in case there are missing categories of items
     ootd = ootd.filter(i => i !== null)

@@ -19,11 +19,14 @@ const Browse = props => {
           onChange={props.onSelect}
         >
           <option value="">Search by Category</option>
+          <option value="accessories">Accessories</option>
           <option value="bottoms">Bottoms</option>
           <option value="denim">Denim</option>
           <option value="one piece">Dresses/Rompers</option>
+          <option value="jewelery">Jewelery</option>
           <option value="outerwear">Outerwear</option>
           <option value="pants">Pants</option>
+          <option value="shoes">Shoes</option>
           <option value="shorts">Skirts/Shorts</option>
           <option value="sweater">Sweaters</option>
           <option value="tee">Tees</option>
