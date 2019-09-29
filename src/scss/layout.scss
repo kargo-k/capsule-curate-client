@@ -99,10 +99,9 @@ div.main {
     flex-direction: row;
     position: relative;
     img {
-      width: auto;
+      width: 160px;
       max-height: 200px;
-      min-height: 100px;
-      // TODO - media queries for resizing?
+      object-fit: cover;
     }
   }
 }

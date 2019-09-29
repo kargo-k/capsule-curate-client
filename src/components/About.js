@@ -28,7 +28,7 @@ const About = () => {
       <h1>Capsule Guidelines</h1>
       <ul>
         <li>Typically contains about 35 items of clothing.  36 is what Capsule Curate recommends.</li>
-        <li>Count main pieces of clothing including tops, bottoms, sweaters, outwear, and dresses</li>
+        <li>Count main pieces of clothing including tops, bottoms, sweaters, outerwear, and dresses</li>
         <li>Does not include workout clothing (but does include those yoga leggings you wear out running errands), underwear, shoes, purses, or accessories</li>
         <li>Stick to a cohesive color palette to maximize the number of outfits that can be composed</li>
         <li>Only wear the clothing in your capsule for the given season</li>

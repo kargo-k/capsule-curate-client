@@ -110,7 +110,7 @@ const UploadItemForm = props => {
             <option value="bottoms">Bottoms</option>
             <option value="top">Tops</option>
             <option value="one piece">One Pieces</option>
-            <option value="outerwear">Outwear</option>
+            <option value="outerwear">Outerwear</option>
           </select>
         </label>
 
@@ -121,7 +121,7 @@ const UploadItemForm = props => {
             <option value="dress">Dresses</option>
             <option value="shorts">Shorts</option>
             <option value="one piece">One Pieces</option>
-            <option value="outerwear">Outwear</option>
+            <option value="outerwear">Outerwear</option>
             <option value="pants">Pants</option>
             <option value="romper">Rompers</option>
             <option value="top">Shirt/Blouse</option>

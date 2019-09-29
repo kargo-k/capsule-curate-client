@@ -125,13 +125,14 @@ h1, h2, h3 {
       height: 100%;
     }
     cursor: zoom-in;
+    .subtext {
+      color: $color-light
+    }
   }
   .text {
     padding: 10px;
   }
 }
-
-
 
 #item-details {
   border: 1px $color-med solid;
@@ -155,6 +156,12 @@ h1, h2, h3 {
     }
     #ootd-container {
       background: $color-med;
+      .slider {
+        display: none;
+      }
+      :hover {
+        cursor: auto;
+      }
     }
   }
   #active-right {
@@ -239,6 +246,7 @@ h1, h2, h3 {
     min-width: 15vw;
     max-width: 40vw;
     height: auto;
+    
   }
   div.right {
     min-width: 40%;
